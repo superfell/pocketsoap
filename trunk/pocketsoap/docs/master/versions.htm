@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<Title>Versions</Title>
+<link rel="STYLESHEET" type="text/css" href="styles.css">
+</HEAD>
+<BODY>
+<h1>PocketSOAP Versions</h1>
+
+PocketSOAP is available in two major versions, a Win32 build that runs on the vast majority of Win32 platforms, 
+and a pocketPC build that runs on pocketPC devices [aka WinCE].
+
+<h2>Win 32</h2>
+<table>
+<tr>
+<th>Platform</th>
+<th>Notes</th>
+</tr>
+<tr>
+<td>Windows 2000 / XP / 2003</td>
+<td></td>
+</tr>
+<tr>
+<td>NT 4.0</td>
+<td>Hasn't been tested on anything earlier than Service Pack 6</td>
+</tr>
+<tr>
+<td>Win ME</td>
+<td></td>
+</tr>
+<tr>
+<td>Win 98 [all versions]</td>
+<td>
+SSL support requires additional installs from Microsoft, see <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;Q276245">this Knowledge Base</a> article.
+</td>
+</tr>
+<tr>
+<td>Win 95 OSR2</td>
+<td>
+Requires DCOM 95 1.2 or later.
+SSL support requires additional installs from Microsoft, see <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;Q276245">this Knowledge Base</a> article.
+</td>
+</tr>
+<tr>
+<td>Win 95 pre OSR2</td>
+<td>
+Will not run. This is because pocketSOAP uses a locale aware API for type conversions that was
+introduced with OSR2. <a href="mailto:sf@zaks.demon.co.uk?subject=Win95 support for pocketSOAP">Let me know</a> 
+if this is a serious issue, and i'll look into changing this.
+</td>
+</tr>
+</table>
+
+<BR><BR>
+<h2>pocketPC</h2>
+<table>
+<tr>
+<th>Platform</th>
+<th>Notes</th>
+</tr>
+<tr>
+<td>Pocket PC 2003</td>
+<td>Runs on real PocketPC 2003 devices, I currently test with a Toshiba e355 running PocketPC 2003.</td>
+</tr>
+<tr>
+<td>Pocket PC 2003 Emulator</td>
+<td>There's current no EVC4 based build, so its not possible to run it on the PPC2003 emulator.</td>
+</tr>
+<tr>
+<td>Pocket PC 2002</td>
+<td>Runs on real PocketPC 2002 devices, I currently test with an iPaq running PocketPC 2002, with a CF wireless card.</td>
+</tr>
+<tr>
+<td>Pocket PC 2002 Emulator</td>
+<td>There are binaries but no installer for the PPC emulator. I don't normally test with the emulator as it is both flakey and behaves differently to a real PocketPC device.</td>
+</tr>
+
+<tr>
+<td>Pocket PC</td>
+<td>An Installer that includes binaries for MIPS, ARM &amp; SH3. is available.</td>
+</tr>
+
+<tr>
+<td>Pocket PC Emulator</td>
+<td>There are binaries but no installer for the PPC emulator. I don't normally test with the emulator as it is both flakey and behaves differently to a real PocketPC device.</td>
+</tr>
+
+<tr>
+<td>WIN CE 2.x</td>
+<td>There have been reports of pocketSOAP sucessfuly running on some WIN CE 2.x devices. It is unlikely that the source code will build correctly with
+the WIN CE 2.x development tools.</td>
+</tr>
+
+</table>
+<BR><BR><BR>
+<h3>Copyright</h3>
+<p>Copyright &copy; Simon Fell, 2000-2004. All rights reserved.<br>
+
+</BODY>
+</HTML>

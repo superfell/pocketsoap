@@ -1,0 +1,110 @@
+// <<CLASS>>.cpp : Implementation of <<CLASS>>
+
+#include "stdafx.h"
+#include "<<PROJECT>>.h"
+#include "<<CLASS>>.h"
+
+// ITypesInit
+// We implement this optional interface, so that the serializerFactory will tell us about the XML<->COM mapping it used
+// in deciding to create us. This lets us find out the XMLType that we're going to serialize, so that we can put out
+// the xsi:type='foo' attribute when we do the serialization
+//
+STDMETHODIMP <<CLASS>>::Initialize( /*[in]*/ BSTR xmlType, /*[in]*/ BSTR xmlTypeNamespace, /*[in]*/ VARIANT comType )
+{
+	m_type = xmlType ;
+	m_typeNS = xmlTypeNamespace ;
+
+	// the COMType in this case is the ProgID of the object we're going to deserialize
+	CComVariant v ;
+	_HR(v.ChangeType(VT_BSTR, &comType ));
+	m_comType = v.bstrVal ;
+	return S_OK ;
+}
+
+STDMETHODIMP <<CLASS>>::Child ( long id, VARIANT_BOOL ready, /*[in]*/ ISOAPNode * childNode )
+{
+	if (VARIANT_TRUE == ready)
+		return NewNode(childNode, childNode);
+	return S_OK;
+}
+
+STDMETHODIMP <<CLASS>>::ChildReady ( long id, /*[in]*/ ISOAPNode * childNode )
+{
+	return NewNode(childNode, childNode);
+}
+
+STDMETHODIMP <<CLASS>>::ChildRef(BSTR href, /*[in]*/ ISOAPNode * hrefNode )
+{
+	m_refs.push_back(RefItem(href, hrefNode));
+	return S_OK;
+}
+
+STDMETHODIMP <<CLASS>>::Ref( BSTR id, /*[in]*/ ISOAPNode * idNode )
+{
+	for ( RefItems::iterator it = m_refs.begin(); it != m_refs.end() ; )
+	{
+		if ( wcscmp(it->href, id) == 0 )
+		{
+			_HR(NewNode(it->node, idNode));
+			m_refs.erase(it++);
+		} 
+		else
+		{
+			it++;
+		}
+	}
+	return S_OK;
+}
+
+HRESULT <<CLASS>>::NewNode(ISOAPNode * nameNode, ISOAPNode *dataNode)
+{
+	CComBSTR name, ns;
+	_HR(nameNode->get_Name(&name));
+	_HR(nameNode->get_Namespace(&ns));
+	return NewNode(name, ns, dataNode);
+}
+
+STDMETHODIMP <<CLASS>>::End()
+{
+	m_obj.Release();
+	m_refs.clear();
+	return S_OK;
+}
+
+HRESULT <<CLASS>>::CreateObject()
+{
+	m_obj.Release();
+	return m_obj.CoCreateInstance(m_comType);
+}
+
+void <<CLASS>>::AddXsiType(ISerializerContext * ctx, ISerializerOutput * dest)
+{
+	if ( m_type.Length() ) 
+	{
+		// pocketSOAP supports multiple schema versions, so we need to find out what the correct
+		// namespace for xsi is, based on the primarySchema used during serialization, we can get
+		// this via the ISerializerContext interface
+		CComPtr<ISerializerFactory> sf ;
+		ctx->get_SerializerFactory(&sf) ;
+		CComBSTR xsi ;
+		sf->XsiForPrimaryNS(&xsi) ;
+		static CComBSTR type (OLESTR("type")) ;
+		// now we have all the info namespaceURI for xsi, the 'type', the namespace URI for the value, and the actual type value
+		// write it out as a QName attribute, the OutputStream will allocate namespace prefix's as needed
+		dest->QNameAttribute ( type, xsi, m_type, m_typeNS ) ;
+	}
+}
+
+// ISoapSerializer
+// We implement this interface, as we can serialize from COM to SOAP
+// The value to be serialized is in val
+// ISerializerContent allows us to find out other information about the current serialization, like current Namespace <-> prefix mappings
+// ISerializerOutput is our interface to the serialization stream, we make calls on this interface to build the serialized representation
+STDMETHODIMP <<CLASS>>::Serialize( /*[in]*/ VARIANT * val, /*[in]*/ ISerializerContext * ctx, /*[in]*/ ISerializerOutput * dest ) 
+{	
+	// at this point, the serialization stream contains ....<prefix:elementName 
+	// if we need to addd any attributes to this element, we shoud do it now
+	// add the xsi:type='xsd:foo' attribute if we know the type info
+	AddXsiType(ctx,dest);
+	
+	

@@ -1,0 +1,625 @@
+<Library>
+<Description>
+<![CDATA[
+This library allows you to generate and parse SOAP attachments 
+using either DIME or SOAP with Attachments.<br><br>
+This implementation conforms to the following specifications.
+<ul>
+<li><a href="http://msdn.microsoft.com/library/en-us/dnglobspec/html/draft-nielsen-dime-02.txt">DIME</a>
+<li><a href="http://msdn.microsoft.com/library/en-us/dnglobspec/html/draft-nielsen-dime-soap-01.txt">WS-Attachments</a>
+<li><a href="http://www.w3.org/TR/SOAP-attachments">SOAP Messages with Attachments</a>
+</ul>
+]]>
+</Description>
+<CoClasses>
+<CoClass name="CoAttachmentManager">
+<Short>The main object, this manages the request &amp; response attachments for a particular request.</Short>
+<Links/>
+<ProgID>pocketSOAP.Attachments</ProgID>
+<Description>The main object, this manages the request &amp; response attachments for a particular request. Use this object to control
+the attachments format, access the collection of attachments for the request, and the collection of attachments returned from the server.
+You can also control memory useage policy, by altering the DiskThreshold property</Description>
+<HowToInstantiate>This is a standard COM object, use CreateObject("PocketSOAP.Attachments") or similar</HowToInstantiate>
+<SampleCode>
+[VBScript]
+' create and initialize the SOAP envelope
+set e = CreateObject("pocketSOAP.Envelope.2")
+e.setMethod "doImage", "urn:AttachmentService"
+
+' create the attachments object, and switch to MIME formatted attachments
+set a = CreateObject("pocketSOAP.Attachments")
+a.format = formatMime
+
+' create the parameter that has the attachment attached to it
+set n = e.parameters.create("gif", empty)
+
+' create the attachment, and create a reference between the attachment and the parameter
+n.href = a.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif").Uri
+
+' set the required SOAPAction, then give the transport object, to the attachments object
+t.Soapaction = "urn:AttachmentService/doImage"
+set a.Transport = t 
+
+' now we call send/receive/parse through the attachments object, so that it can 
+' inject/extract the attachments before sending them through the transport
+a.Send "http://interop.xmlbus.com:7002/xmlbus/container/AttachmentApp/AttachmentAppService/AttachmentAppPort/", e.Serialize
+
+' parse the results
+e.parse a
+
+' find the response attachment
+set theAttachment = a.response.find(e.parameters.item(0).href)
+if theAttachment.Located == attInMemory then
+	theAttachment.Save "c:\xmlbus.gif"
+end if
+msgbox "the attachment is saved to " &amp; theAttachment.Body
+</SampleCode>
+</CoClass>
+<CoClass name="CoSoapAttachment">
+<Short>A single attachment object</Short>
+<Links/>
+<ProgID>Attachments.Attachment</ProgID>
+<Description>This represents a single request or response attachment.</Description>
+<HowToInstantiate>Although it can be created directly, typically you create new attachments via the Create method on the request attachments collection</HowToInstantiate>
+<SampleCode>
+' create the attachments object, and switch to MIME formatted attachments
+set a = CreateObject("pocketSOAP.Attachments")
+a.format = formatMime
+
+' create the parameter that has the attachment attached to it
+set n = e.parameters.create("gif", empty)
+
+' create the attachment, and create a reference between the attachment and the parameter
+n.href = a.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif").Uri
+</SampleCode>
+</CoClass>
+</CoClasses>
+<Interfaces>
+<Interface name="IPartPayload">
+<Short>This interface provides standardized access to the attachment data.</Short>
+<Links/>
+<Methods>
+<Method name="Lock">
+<Short>Locks the attachment data, the attachment size shouldn't change once its been locked</Short>
+<Links/>
+<Parameters/>
+<Description>Locks the attachment data, so that its size can't change.</Description>
+<ReturnValue></ReturnValue>
+<SampleCode></SampleCode>
+</Method>
+<Method name="Unlock">
+<Short>Unlocks the attachment data, once all the locks are removed, the attachment size can change.</Short>
+<Links/>
+<Parameters/>
+<Description>Unlocks the attachment data, once all the locks are removed, the attachment size can change.</Description>
+<ReturnValue></ReturnValue>
+<SampleCode></SampleCode>
+</Method>
+<Method name="Size">
+<Short>Returns the size of the attachment data in bytes.</Short>
+<Links/>
+<Parameters>
+<Parameter name="cb">A DWORD pointer that recieves the attachment size</Parameter>
+</Parameters>
+<Description>Returns the size of the attachment data in bytes.</Description>
+<ReturnValue></ReturnValue>
+<SampleCode></SampleCode>
+</Method>
+</Methods>
+<Description>This interface provides standardized access to the attachment data.</Description>
+<WhenToImpl>Implement this interface if you are providing new types of attachment source.</WhenToImpl>
+<WhenToCall>The existing attachments serialization &amp; deserialization code will call this interface as needed.</WhenToCall>
+</Interface>
+<Interface name="IPartPayloadProvider">
+<Short>A factory interface for generating PartPayload implementations</Short>
+<Links/>
+<Methods>
+<Method name="PartPayload">
+<Short>Returns a new PartPayload instance for the attachment.</Short>
+<Links/>
+<Parameters>
+<Parameter name="payload">The created instance of the IPartPayload interface</Parameter>
+</Parameters>
+<Description>This serialization code uses this interface to get a PartPayload instance, this allows the Attachment object to support
+additional alternative attachment sources in the future.</Description>
+<ReturnValue>A new Instance of the IPartPaylaod interface</ReturnValue>
+<SampleCode>
+</SampleCode>
+</Method>
+</Methods>
+<Description>This serialization code uses this interface to get a PartPayload instance, this allows the Attachment object to support
+additional alternative attachment sources in the future.</Description>
+<WhenToImpl>If you create new types of attachment objects, they should implement this interface to allow the attachments code access to the
+attachment data.</WhenToImpl>
+<WhenToCall>You shouldn't need to call this directly, the attachments serializer will call this as required.</WhenToCall>
+</Interface>
+<Interface name="ISoapAttachmentFormat">
+<Short>Controls the attachment format</Short>
+<Links/>
+<Methods>
+<Method name="Format">
+<Short>Change the attachment format between DIME and SwA</Short>
+<Links/>
+<Parameters/>
+<Description>This property allows you to change the attachment format between DIME and SwA</Description>
+<ReturnValue></ReturnValue>
+<SampleCode>
+' create the attachments object, and switch to MIME formatted attachments
+set a = CreateObject("pocketSOAP.Attachments")
+a.format = formatMime
+
+' create the parameter that has the attachment attached to it
+set n = e.parameters.create("gif", empty)
+
+' create the attachment, and create a reference between the attachment and the parameter
+n.href = a.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif").Uri
+</SampleCode>
+</Method>
+</Methods>
+<Description>Controls the attachment format</Description>
+<WhenToImpl>Implement this if you are writing an attachment object, or collection that supports multiple serialized formats</WhenToImpl>
+<WhenToCall>Call this to specify what the attachment format should be. Typically this is the first call you make to the attachments object
+once you've created it.</WhenToCall>
+</Interface>
+<Interface name="ISoapAttachment">
+<Short>Common information about a single attachment</Short>
+<Links/>
+<Methods>
+<Method name="Initialize">
+<Short>Initializes the attachment to a known state &amp; values</Short>
+<Links/>
+<Parameters>
+<Parameter name="body">The attachment body, this can either by a fileName for a disk based attachment, or an array of bytes for an in memory attachment.</Parameter>
+<Parameter name="typeNameFormat">The format that the typeName parameter is specified in, this is typically tnfMediaType (for MIME media types) or tnfAbsoluteURI for URI based type identifiers in DIME (DIME also supports MIME media types)</Parameter>
+<Parameter name="TypeName">The actual typeName of the attachment, the format of which is dependent upon the typeNameFormat parameters, e.g. for a media type it could be "text/plain" or "image/gif". For an absoluteURI typeName, it should be the full absolute URI e.g. "http://schemas.xmlsoap.org/soap/envelope/"</Parameter>
+</Parameters>
+<Description>Initializes the attachment to a known state &amp; values</Description>
+<ReturnValue></ReturnValue>
+<SampleCode>
+dim a
+set a = CreateObject("Attachments.Attachment")
+a.Initialize "c:\myPicture.gif", tnfMediaType, "image/gif"
+
+' note that the Create method on the attachments collection, calls initialize, so you can also do
+dim mgr, a
+set mgr = CreateObject("PocketSOAP.Attachments")
+set a = mgr.Request.Create ( "c:\myPicture.gif", tnfMediaType, "image/gif" )
+
+</SampleCode>
+</Method>
+<Method name="Body">
+<Short>The attachment data</Short>
+<Links/>
+<Parameters/>
+<Description>This contains the actual attachment data, for small attachments contained within memory, this is an array of bytes, for large file based
+attachments, this is the fileName of the attachment. You can use the Located property to see if the attachment is in memory or on disk.</Description>
+<ReturnValue>An array of bytes containing the attachment data, or the fileName of the attachment</ReturnValue>
+<SampleCode>
+[VBScript]
+' create and initialize the SOAP envelope
+set e = CreateObject("pocketSOAP.Envelope.2")
+e.setMethod "doImage", "urn:AttachmentService"
+
+' create the attachments object, and switch to MIME formatted attachments
+set a = CreateObject("pocketSOAP.Attachments")
+a.format = formatMime
+
+' create the parameter that has the attachment attached to it
+set n = e.parameters.create("gif", empty)
+
+' create the attachment, and create a reference between the attachment and the parameter
+n.href = a.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif").Uri
+
+' set the required SOAPAction, then give the transport object, to the attachments object
+t.Soapaction = "urn:AttachmentService/doImage"
+set a.Transport = t 
+
+' now we call send/receive/parse through the attachments object, so that it can 
+' inject/extract the attachments before sending them through the transport
+a.Send "http://interop.xmlbus.com:7002/xmlbus/container/AttachmentApp/AttachmentAppService/AttachmentAppPort/", e.Serialize
+
+' parse the results
+e.parse a
+
+' find the response attachment
+set theAttachment = a.response.find(e.parameters.item(0).href)
+if theAttachment.Located == attInMemory then
+	msgbox "the attachment is " &amp; Ubound(theAttachment.Body) &amp; " bytes"
+	theAttachment.Save "c:\xmlbus.gif"
+end if
+msgbox "the attachment is saved to " &amp; theAttachment.Body
+</SampleCode>
+</Method>
+<Method name="TypeNameFormat">
+<Short>The format that the TypeName property takes.</Short>
+<Links/>
+<Parameters/>
+<Description>This is the format that the TypeName property takes, this is typically tnfMedia type to indicate that the TypeName is a MIME media type or
+tnfAbsoluteURI to indicate that the TypeName is an AbsoluteURI as detailed in the DIME specification.</Description>
+<ReturnValue></ReturnValue>
+<SampleCode>
+' create the attachment, and create a reference between the attachment and the parameter
+set a = mgr.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif")
+
+if a.TypeNameFormat = tnfMediaType then
+	wscript.echo "media type = " &amp; a.TypeName
+end if
+
+</SampleCode>
+</Method>
+<Method name="TypeName">
+<Short>The Type of the attachment</Short>
+<Links/>
+<Parameters/>
+<Description>The type of the attachment, the format of which depends on what the TypeNameFormat property is set to, typically this is either a MIME media type
+such as text/plain, image/gif, text/xml or an AbsoluteURI type identifier, as detailed in the DIME specification, such as "http://schemas.xmlsoap.org/soap/envelope/"</Description>
+<ReturnValue>The current typeName of the attachment as a string</ReturnValue>
+<SampleCode>
+' create the attachment, and create a reference between the attachment and the parameter
+set a = mgr.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif")
+
+if a.TypeNameFormat = tnfMediaType then
+	wscript.echo "media type = " &amp; a.TypeName
+end if
+</SampleCode>
+</Method>
+<Method name="ContentId">
+<Short>
+The Identifier for this attachment, by default this is generated by the attachment object as needed.
+</Short>
+<Links/>
+<Parameters/>
+<Description>The Identifier for this attachment, by default this is generated by the attachment object as needed. 
+Typically this is either the stringied GUID part of a DIME Idenifier URI (.e.g 0F7CE2D4-5999-4a10-8BF7-23535D45BB76) or a
+MIME content-Id ( e.g. 0F7CE2D4-5999-4a10-8BF7-23535D45BB77@swa.pocketsoap.com). Ususally you use the URI to
+identify the attachement, as it contains the correct URI schema for the format in use.</Description>
+<ReturnValue>A string representation of the identifier</ReturnValue>
+<SampleCode>
+' create the attachment, and create a reference between the attachment and the parameter
+set a = mgr.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif")
+wscript.echo "Attachment ContentId is " &amp; a.ContentId
+</SampleCode>
+</Method>
+<Method name="Located">
+<Short>Indicates where the attachment data is currently located</Short>
+<Links/>
+<Parameters/>
+<Description>Indicates where the attachment data is currently located, this can either be InMemory (as a byte array), or OnDisk as a disk file.</Description>
+<ReturnValue>Values from the AttachmentLocation enumeration, attOnDisk or attInMemory</ReturnValue>
+<SampleCode>
+' create and initialize the SOAP envelope
+set e = CreateObject("pocketSOAP.Envelope.2")
+e.setMethod "doImage", "urn:AttachmentService"
+
+' create the attachments object, and switch to MIME formatted attachments
+set a = CreateObject("pocketSOAP.Attachments")
+a.format = formatMime
+
+' create the parameter that has the attachment attached to it
+set n = e.parameters.create("gif", empty)
+
+' create the attachment, and create a reference between the attachment and the parameter
+n.href = a.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif").Uri
+
+' set the required SOAPAction, then give the transport object, to the attachments object
+t.Soapaction = "urn:AttachmentService/doImage"
+set a.Transport = t 
+
+' now we call send/receive/parse through the attachments object, so that it can 
+' inject/extract the attachments before sending them through the transport
+a.Send "http://interop.xmlbus.com:7002/xmlbus/container/AttachmentApp/AttachmentAppService/AttachmentAppPort/", e.Serialize
+
+' parse the results
+e.parse a
+
+' find the response attachment
+set theAttachment = a.response.find(e.parameters.item(0).href)
+' if the attachment was small enough to stay in memory, force it to be saved to disk
+if theAttachment.Located == attInMemory then
+	theAttachment.Save "c:\xmlbus.gif"
+end if
+msgbox "the attachment is saved to " &amp; theAttachment.Body
+</SampleCode>
+</Method>
+<Method name="Uri">
+<Short>The Uri identifier for this attachment</Short>
+<Links/>
+<Parameters/>
+<Description>This is the Uri identifier for this attachment, this is an absolute URI built from the ContentID. For SwA attachments, it
+uses the cid: URI schema (e.g. cid:0F7CE2D4-5999-4a10-8BF7-23535D45BB77@swa.pocketsoap.com) and for DIME attachments it uses the 
+UUID scheme ( e.g. uuid:0F7CE2D4-5999-4a10-8BF7-23535D45BB77)</Description>
+<ReturnValue>A string containing the absolute URI identifier for this attachment</ReturnValue>
+<SampleCode>
+' create the attachment
+set a = mgr.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif")
+wscript.echo a.Uri
+</SampleCode>
+</Method>
+<Method name="Save">
+<Short>Saves an in memory attachment to the specified disk file</Short>
+<Links/>
+<Parameters>
+<Parameter name="fileName">The fileName where to save the attachment to. If the file already exists, it will be overwritten.</Parameter>
+</Parameters>
+<Description>Saves an in memory attachment to disk, and then free's the memory for the memory attachment. So, it converts an in memory attachment
+into a on disk attachment. If the specified file already exists, it will be overwritten.</Description>
+<ReturnValue>Throws an error if the attachment isn't an in memory attachment.</ReturnValue>
+<SampleCode>
+' parse the results
+e.parse a
+
+' find the response attachment
+set theAttachment = a.response.find(e.parameters.item(0).href)
+' if the attachment was small enough to stay in memory, force it to be saved to disk
+if theAttachment.Located == attInMemory then
+	theAttachment.Save "c:\xmlbus.gif"
+end if
+msgbox "the attachment is saved to " &amp; theAttachment.Body
+</SampleCode>
+</Method>
+</Methods>
+<Description>This interface provides the primary means for manipulating a single attachment object.</Description>
+<WhenToImpl>There is a standard implementation of this, you shouldn't need to implement this youself.</WhenToImpl>
+<WhenToCall>Call this interface to manipulate a particular attachment, either one being created to send with the request, or one returned from the server.</WhenToCall>
+</Interface>
+<Interface name="ISoapAttachments">
+<Short>This interface represents a collection of attachments.</Short>
+<Links/>
+<Methods>
+<Method name="_NewEnum">
+<Short>Returns a standard COM enumerator.</Short>
+<Links/>
+<Parameters/>
+<Description>Returns a standard COM enumerator, this allows you to do "for each attachment in mgr.response" in VB[Script]</Description>
+<ReturnValue>a new COM enumerator object instance</ReturnValue>
+<SampleCode>
+dim mgr,a 
+set mgr = CreateObject("PocketSOAP.Attachments")
+...
+e.parse mgr
+for each a in mgr.Response
+	wscript.echo a.TypeName
+	wscript.echo a.Uri
+next
+</SampleCode>
+</Method>
+<Method name="Count">
+<Short>The current number of attachments in the collection</Short>
+<Links/>
+<Parameters/>
+<Description>Returns the number of attachments in the collection. Note that for the Response collection, this count will include the 
+attachment that contains the SOAP message.</Description>
+<ReturnValue>The number of attachments in the collection</ReturnValue>
+<SampleCode>
+dim mgr,a 
+set mgr = CreateObject("PocketSOAP.Attachments")
+...
+e.parse mgr
+wscript.echo "Response contains " &amp; mgr.Response.Count &amp; " attachments"
+</SampleCode>
+</Method>
+<Method name="Item">
+<Short>Returns a particular attachment from the collection</Short>
+<Links/>
+<Parameters/>
+<Description>Accesses a particular attachment object from the collection. The index is zero based.</Description>
+<ReturnValue>returns the requested attachment or E_INVALIDARG, if the specified index is outside the bounds of the collection</ReturnValue>
+<SampleCode>
+dim mgr, a 
+set mgr = CreateObject("PocketSOAP.Attachments")
+...
+e.parse mgr
+wscript.echo "Response contains " &amp; mgr.Response.Count &amp; " attachments"
+if mgr.Response.Count > 0 then
+	set firstAttachment = mgr.Response.Item(0)
+	wscript.echo firstAttachment.TypeName
+end if
+</SampleCode>
+</Method>
+<Method name="Find">
+<Short>Searches the collection for a specific attachment, based on its Id.</Short>
+<Links/>
+<Parameters>
+<Parameter name="uri">The Uri (for DIME) or Content-ID (for MIME) of the attachment to find.</Parameter>
+<Parameter name="attachment">The found attachment</Parameter>
+</Parameters>
+<Description>This searches the attachments collection for a specific attachment, based on its Identifier. This is used to find
+attachments that are referenced from the SOAP message.</Description>
+<ReturnValue>The found attachment, or the E_INVALIDARG error, if no attachment can be found with that Id.</ReturnValue>
+<SampleCode>
+' create and initialize the SOAP envelope
+set e = CreateObject("pocketSOAP.Envelope.2")
+e.setMethod "doImage", "urn:AttachmentService"
+
+' create the attachments object, and switch to MIME formatted attachments
+set a = CreateObject("pocketSOAP.Attachments")
+a.format = formatMime
+
+' create the parameter that has the attachment attached to it
+set n = e.parameters.create("gif", empty)
+
+' create the attachment, and create a reference between the attachment and the parameter
+n.href = a.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif").Uri
+
+' set the required SOAPAction, then give the transport object, to the attachments object
+t.Soapaction = "urn:AttachmentService/doImage"
+set a.Transport = t 
+
+' now we call send/receive/parse through the attachments object, so that it can 
+' inject/extract the attachments before sending them through the transport
+a.Send "http://interop.xmlbus.com:7002/xmlbus/container/AttachmentApp/AttachmentAppService/AttachmentAppPort/", e.Serialize
+
+' parse the results
+e.parse a
+
+' find the response attachment
+set theAttachment = a.response.find(e.parameters.item(0).href)
+if theAttachment.Located == attInMemory then
+	theAttachment.Save "c:\xmlbus.gif"
+end if
+msgbox "the attachment is saved to " &amp; theAttachment.Body
+</SampleCode>
+</Method>
+<Method name="Append">
+<Short>Adds the Attachment object to the end of the collection.</Short>
+<Links/>
+<Parameters>
+<Parameter name="newNode">the Attachment object to add to the collection</Parameter>
+</Parameters>
+<Description>Adds an attachment object to the end of the collection.</Description>
+<ReturnValue></ReturnValue>
+<SampleCode>
+' take the attachment from this response, and send it in the next request
+dim mgr, a, e
+e.parse mgr
+set a = mgr.Response.Find(e.parameters.item(0).href)
+
+set mgr = CreateObject("pocketSOAP.Attachments")
+mgr.Request.Append a
+</SampleCode>
+</Method>
+<Method name="Clear">
+<Short>Empties the collection</Short>
+<Links/>
+<Parameters/>
+<Description>Removes all attachments from the collection</Description>
+<ReturnValue></ReturnValue>
+<SampleCode>
+mgr.Request.Clear
+</SampleCode>
+</Method>
+<Method name="Create">
+<Short>Creates a new Attachment, and appends it to the collection</Short>
+<Links/>
+<Parameters>
+<Parameter name="src">The attachment source or body, this can be either a fileName or an array of bytes.</Parameter>
+<Parameter name="tnf">The typeNameFormat of the typeName (typically tnfMediaType or tnfAbsoluteURI)</Parameter>
+<Parameter name="TypeName">The typeName of the attachment, e.g. text/plain , image/gif</Parameter>
+<Parameter name="attachment">The newly created attachment object.</Parameter>
+</Parameters>
+<Description>This creates a new attachment object, initializes it with the specified info, and appends it to the end of the collection.</Description>
+<ReturnValue>returns the newly created attachment object.</ReturnValue>
+<SampleCode>
+' create the attachment, and create a reference between the attachment and the parameter
+set newAtt = a.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif")
+</SampleCode>
+</Method>
+</Methods>
+<Description>This interface represents a collection of attachments.</Description>
+<WhenToImpl>There's a standard implementation of this interface provided, you shouldn't need to implement it.</WhenToImpl>
+<WhenToCall>Call this interface to create and access attachments stored in either the Request or Response collections.</WhenToCall>
+</Interface>
+<Interface name="IAttachmentManger">
+<Short>This manages the attachments for a particular request/response exchange.</Short>
+<Links/>
+<Methods>
+<Method name="DiskThreshold">
+<Short>The point where a received attachment is switch from in memory to on disk.</Short>
+<Links/>
+<Parameters/>
+<Description>This property controls the point at which a received attachment is swapped from being kept in memory, to being streamed to disk. 
+This allows you to tune memory load/performace for your specific application. The threshold is specified in Bytes and defaults 1Mb.</Description>
+<ReturnValue>returns the current disk Threshold in bytes.</ReturnValue>
+<SampleCode>
+dim mgr 
+set mgr = CreateObject("pocketSOAP.Attachments")
+' switch to disk when the attachment gets to 64k in size.
+mgr.DiskThreshold = 1024 * 64
+</SampleCode>
+</Method>
+<Method name="Transport">
+<Short>The transport instance to send the attachments over.</Short>
+<Links/>
+<Parameters/>
+<Description>Use this property to specify which transport to send the attachments over. currently only the HTTP transport supports attachments</Description>
+<ReturnValue>The transport object</ReturnValue>
+<SampleCode>
+dim mgr, t
+set mgr = CreateObject("pocketSOAP.Attachments")
+set t = CreateObject("PocketSOAP.HTTPTransport")
+t.SetProxy "proxy.corp.net", 7575
+t.ProxyAuthentication "MyUserName", "secret"
+set mgr.Transport = t 
+
+mgr.Send "http://services.anothercorp.com/soap.asp", e.serialize
+e.parse mgr
+....
+</SampleCode>
+</Method>
+<Method name="Request">
+<Short>The collection of attachments that are for the outgoing request message</Short>
+<Links/>
+<Parameters/>
+<Description>An attachments collection, with all the attachments that form part of the request.</Description>
+<ReturnValue>An attachments collection object</ReturnValue>
+<SampleCode>
+' create and initialize the SOAP envelope
+set e = CreateObject("pocketSOAP.Envelope.2")
+e.setMethod "doImage", "urn:AttachmentService"
+
+' create the attachments object, and switch to MIME formatted attachments
+set a = CreateObject("pocketSOAP.Attachments")
+a.format = formatMime
+
+' create the parameter that has the attachment attached to it
+set n = e.parameters.create("gif", empty)
+
+' create the attachment, and create a reference between the attachment and the parameter
+n.href = a.Request.Create ("c:\picture.gif", tnfMediaType, "image/gif").Uri
+</SampleCode>
+</Method>
+<Method name="Response">
+<Short>The collection of attachments that were in the response.</Short>
+<Links/>
+<Parameters/>
+<Description>An attachments collection, that consists of all the attachments the server returned.</Description>
+<ReturnValue>An attachments collection object.</ReturnValue>
+<SampleCode>
+mgr.send "http://services.foo.org", e.serialize
+e.parse mgr
+
+' the response SOAP message contains a href to an attachment, find it in the response collection
+set resAtt = mgr.Response.find ( e.parameters.item(0).href )
+wscript.echo resAtt.TypeName
+</SampleCode>
+</Method>
+</Methods>
+<Description>This manages the attachments for a particular request/response exchange.</Description>
+<WhenToImpl>There is a standard implementation of this.</WhenToImpl>
+<WhenToCall>Call this interface to create attachments for a request, and to examine attachments returned as part of the response.</WhenToCall>
+</Interface>
+<Interface name="IAttachmentMangerDisp">
+<Short>The scripting version of the IAttachmentManager interface</Short>
+<Links/>
+<Methods>
+<Method name="Send">
+<Short>Sends the SOAP Envelope and any attachments to the specified endpoint</Short>
+<Links/>
+<Parameters>
+<Parameter name="endpoint">The endpoint URL to send the request to (e.g. http://soap.4s4c.com/dime/sf.soap)</Parameter>
+<Parameter name="Envelope">The SOAP envelope to send (typically generated by calling the Serialize method on the envelope object</Parameter>
+</Parameters>
+<Description>Sends the SOAP Envelope and any attachments to the specified endpoint</Description>
+<ReturnValue></ReturnValue>
+<SampleCode></SampleCode>
+</Method>
+<Method name="Receive">
+<Short>Retreives the response from the server.</Short>
+<Links/>
+<Parameters>
+<Parameter name="characterEncoding">The transport provided characterEncoding string (e.g. utf-8, us-ascii)</Parameter>
+<Parameter name="Envelope">An array of bytes containing the response envelope</Parameter>
+</Parameters>
+<Description>Retreives the response from the server, extracts any attachments, as well at the SOAP message. If the transport has overridden the 
+character encoding that the Envelope is in, it will set the characterEncoding value accordingly.</Description>
+<ReturnValue></ReturnValue>
+<SampleCode></SampleCode>
+</Method>
+</Methods>
+<Description>This is an internal interface used to drive the scripting interface to the attachments manager. Early bound client code (
+such as VB and C++) should QueryInterface the attachments maanger for the ISOAPTransport object, and call Send/Receieve on the resulting interface.</Description>
+<WhenToImpl>There is a standard implementation of this interface</WhenToImpl>
+<WhenToCall>You can't call this interface directly. Its definition is used to control the implementation of the IDispatch interface.</WhenToCall>
+</Interface>
+</Interfaces>
+</Library>

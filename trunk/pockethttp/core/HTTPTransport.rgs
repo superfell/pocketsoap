@@ -1,0 +1,26 @@
+HKCR
+{
+	Pocket.HTTP.1 = s 'PocketHTTP Class'
+	{
+		CLSID = s '{F16C67B8-CBA8-413c-9BEA-844161D2B880}'
+	}
+	Pocket.HTTP = s 'PocketHTTP Class'
+	{
+		CLSID = s '{F16C67B8-CBA8-413c-9BEA-844161D2B880}'
+		CurVer = s 'Pocket.HTTP.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {F16C67B8-CBA8-413c-9BEA-844161D2B880} = s 'PocketHTTP Class'
+		{
+			ProgID = s 'Pocket.HTTP.1'
+			VersionIndependentProgID = s 'Pocket.HTTP'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{AF2EB73C-E028-4307-BE71-E6C40306AD63}'
+		}
+	}
+}

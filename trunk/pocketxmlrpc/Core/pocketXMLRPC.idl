@@ -1,0 +1,110 @@
+/*
+The contents of this file are subject to the Mozilla Public License
+Version 1.1 (the "License"); you may not use this file except in
+compliance with the License. You may obtain a copy of the License at
+http://www.mozilla.org/MPL/
+
+Software distributed under the License is distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+License for the specific language governing rights and limitations
+under the License.
+
+The Original Code is pocketXML-RPC.
+
+The Initial Developer of the Original Code is Simon Fell.
+Portions created by Simon Fell are Copyright (C) 2002-2003
+Simon Fell. All Rights Reserved.
+
+Contributor(s):
+*/
+
+// pocketXMLRPC.idl : IDL source for pocketXMLRPC.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (pocketXMLRPC.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(B1199012-3642-4e8b-9857-99DDBDD3CCF8),
+	version(1.0),
+	helpstring("PocketXmlRpc 1.2.1 Type Library")
+]
+library PocketXmlRpc
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		object,
+		uuid(C9C202DB-B191-4100-AE35-017957189EA4),
+		oleautomation,
+		helpstring("IXmlRpcFactory Interface"),
+		pointer_default(unique)
+	]
+	interface IXmlRpcFactory : IUnknown
+	{
+			[id(1), helpstring("method Proxy")] HRESULT Proxy(	[in]					BSTR endpointURL, 
+																[in, defaultvalue(L"")] BSTR methodPrefix,
+																[in, defaultvalue(L"")] BSTR serverUsername,
+																[in, defaultvalue(L"")] BSTR serverPassword, 
+																[in, defaultvalue(L"")] BSTR httpProxyServer, 
+																[in, defaultvalue(0)]	long httpProxyPort, 
+																[in, defaultvalue(L"")] BSTR proxyUsername, 
+																[in, defaultvalue(L"")] BSTR proxyPassword, 
+																[in, defaultvalue(15)]  long timeout,
+																[out,retval] IDispatch ** Proxy);
+	};
+
+	[
+		object,
+		uuid(D509317A-AC5B-4A6D-B2E7-5B9230457967),
+		oleautomation,
+		helpstring("IXmlRpcStruct Interface"),
+		pointer_default(unique)
+	]
+	interface IXmlRpcStruct : IUnknown
+	{
+		// the struct object has a dynamically constructed dispatch inteface, but we also provide this to make life
+		// easier on languages that are dispatch friendly
+		[propget] HRESULT Value([in] BSTR name, [out,retval] VARIANT * val ) ;
+		[propput] HRESULT Value([in] BSTR name, [in] VARIANT val ) ;
+	};
+
+	[
+		uuid(6A672318-E09E-4384-986C-A940895BC133),
+		helpstring("XML-RPC Struct Class")
+	]
+	coclass CoXmlRpcStruct
+	{
+		[default] interface IXmlRpcStruct;
+	};
+
+	[
+		uuid(4E9DF249-1EE6-4328-8D67-6749F9193107),
+		helpstring("XML-RPC Factory Class")
+	]
+	coclass CoFactory
+	{
+		[default] interface IXmlRpcFactory;
+		interface IXmlRpcFactory2 ;
+	};
+
+	[
+		object,
+		uuid(82704188-C59A-4410-87CB-6090F7AEA080),
+		oleautomation,
+		helpstring("IXmlRpcFactory Interface"),
+		pointer_default(unique)
+	]
+	interface IXmlRpcFactory2 : IXmlRpcFactory
+	{
+			[id(2), helpstring("method ProxyForTransport")] 
+			HRESULT ProxyForTransport(	[in] BSTR endpointURL, 
+										[in] BSTR methodPrefix,
+										[in] IDispatch * pTransportObject,
+										[out,retval] IDispatch ** Proxy);
+	};
+};

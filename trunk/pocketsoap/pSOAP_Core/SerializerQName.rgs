@@ -1,0 +1,25 @@
+HKCR
+{
+	pocketSOAP.SerializerQName.1 = s 'PocketSOAP QName Serializer Class'
+	{
+		CLSID = s '{AADA0D4D-C243-46fa-919E-1467C268EB63}'
+	}
+	pocketSOAP.SerializerQName = s 'PocketSOAP QName Serializer Class'
+	{
+		CLSID = s '{AADA0D4D-C243-46fa-919E-1467C268EB63}'
+		CurVer = s 'pocketSOAP.SerializerQName.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {AADA0D4D-C243-46fa-919E-1467C268EB63} = s 'PocketSOAP QName Serializer Class'
+		{
+			ProgID = s 'pocketSOAP.SerializerQName.1'
+			VersionIndependentProgID = s 'pocketSOAP.SerializerQName'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{1259E267-74E3-4d78-B08E-DB9F9F785E04}'
+		}
+	}
+}

@@ -1,0 +1,84 @@
+/*
+The contents of this file are subject to the Mozilla Public License
+Version 1.1 (the "License"); you may not use this file except in
+compliance with the License. You may obtain a copy of the License at
+http://www.mozilla.org/MPL/
+
+Software distributed under the License is distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+License for the specific language governing rights and limitations
+under the License.
+
+The Original Code is pocketSOAP.
+
+The Initial Developer of the Original Code is Simon Fell.
+Portions created by Simon Fell are Copyright (C) 2000
+Simon Fell. All Rights Reserved.
+
+Contributor(s):
+*/
+
+// psProxy.idl : IDL source for psProxy.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (psProxy.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(5EFEB44A-D904-40BC-8D93-030766464C72),
+	oleautomation,
+	helpstring("IProxyFactory Interface"),
+	pointer_default(unique)
+]
+interface IProxyFactory : IUnknown
+{
+	[helpstring("Create a new SOAP proxy for a soap service running at endpointURL")] 
+
+	HRESULT CreateProxy (	[in]								BSTR		endpointURL,
+							[in, defaultvalue("")]				VARIANT		methodNameURI,
+							[in, defaultvalue("$uri#$method")]	VARIANT		SOAPActionPattern,
+							[out,retval]						IDispatch	**Proxy );
+};
+
+[
+	object,
+	uuid(191891C9-FF92-4756-9503-E698BFA6B33A),
+	oleautomation,
+	helpstring("IProxyFactory2 Interface"),
+	pointer_default(unique)
+]
+interface IProxyFactory2 : IUnknown
+{
+	[helpstring("Create a new SOAP proxy for a soap service running at endpointURL")] 
+
+	HRESULT CreateProxy (	[in]								BSTR		endpointURL,
+							[in, defaultvalue("")]				VARIANT		methodNameURI,
+							[in, defaultvalue("$uri#$method")]	VARIANT		SOAPActionPattern,
+							[in, defaultvalue("")]				VARIANT		transport,	// either a progID, or a transport object
+							[out,retval]						IDispatch	**Proxy );
+};
+
+[
+	uuid(87DFB82A-6F3E-4A15-803B-73A1154D1A7C),
+	version(1.0),
+	helpstring("PocketSOAP SOAPProxy 1.5 Type Library")
+]
+library PSPROXYLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(344D4164-EF4E-48D7-BE76-13F0B5F13798),
+		helpstring("Factory Class")
+	]
+	coclass CoSoapFactory
+	{
+		[default] interface IProxyFactory;
+		interface IProxyFactory2 ;
+	};
+};

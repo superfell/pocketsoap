@@ -1,0 +1,26 @@
+HKCR
+{
+	PocketXMLRPC.Struct.1 = s 'XML-RPC Struct Class'
+	{
+		CLSID = s '{6A672318-E09E-4384-986C-A940895BC133}'
+	}
+	PocketXMLRPC.Struct = s 'XML-RPC Struct Class'
+	{
+		CLSID = s '{6A672318-E09E-4384-986C-A940895BC133}'
+		CurVer = s 'PocketXMLRPC.Struct.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {6A672318-E09E-4384-986C-A940895BC133} = s 'XML-RPC Struct Class'
+		{
+			ProgID = s 'PocketXMLRPC.Struct.1'
+			VersionIndependentProgID = s 'PocketXMLRPC.Struct'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{636DBBB5-B919-4C43-AAD5-32378A97C05B}'
+		}
+	}
+}
