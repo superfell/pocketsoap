@@ -1,0 +1,26 @@
+HKCR
+{
+	PocketXMLRPC.Factory.1 = s 'Factory Class'
+	{
+		CLSID = s '{4E9DF249-1EE6-4328-8D67-6749F9193107}'
+	}
+	PocketXMLRPC.Factory = s 'Factory Class'
+	{
+		CLSID = s '{4E9DF249-1EE6-4328-8D67-6749F9193107}'
+		CurVer = s 'PocketXMLRPC.Factory.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {4E9DF249-1EE6-4328-8D67-6749F9193107} = s 'Factory Class'
+		{
+			ProgID = s 'PocketXMLRPC.Factory.1'
+			VersionIndependentProgID = s 'PocketXMLRPC.Factory'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{636DBBB5-B919-4C43-AAD5-32378A97C05B}'
+		}
+	}
+}

@@ -1,0 +1,156 @@
+<Library>
+<Description>The Win32 version of pocketSOAP includes a proxy object that makes making SOAP calls even easier in those environments that support named parameters [such as VB &amp; VBA/Office]</Description>
+<CoClasses>
+<CoClass name="CoSoapFactory">
+<Short>You use this object to create new proxy objects for specific SOAP servers.</Short>
+<Links/>
+<ProgID>pocketsoap.Factory.1</ProgID>
+<Description>
+You use this object to create new proxy objects for specific SOAP servers.</Description>
+<HowToInstantiate>
+Use the standard language feature for creating COM objects [CreateObject in VBScript, CreateObject or new in VB, or CoCreateInstance in C++]
+</HowToInstantiate>
+<SampleCode><![CDATA[
+Dim pf As Object, sp As Object
+Set pf = CreateObject("pocketsoap.Factory")
+Set sp = pf.CreateProxy("http://services.xmethods.net/soap", "urn:xmethods-delayed-quotes")
+lres.AddItem txtTicker.Text + vbTab & sp.getQuote(symbol:=txtTicker.Text)
+]]>
+</SampleCode>
+</CoClass>
+</CoClasses>
+<Interfaces>
+<Interface name="IProxyFactory">
+<Short>
+Use this interface to create new proxy objects. This is a leggacy interface, included for backward compatibility only, new applications should
+use IProxyFactory2 instead.</Short>
+<Links/>
+<Methods>
+<Method name="CreateProxy">
+<Short>
+This creates a new proxy object, based on the parameters.</Short>
+<Links/>
+<Parameters>
+<Parameter name="endpointURL">This is the URL of the SOAP server to call.</Parameter>
+<Parameter name="methodNameURI">This is the namespace URI for the methodName element [the actual method name is populated by the resulting proxy object based on the name of the method called against it.</Parameter>
+<Parameter name="SOAPActionPattern">This is either a direct string value that represents the value for the SOAPAction header, or if the SOAPAction header
+is defined in terms of other parameters [as is the case for many SOAP servers], you can specify the a pattern for the SOAPAction and the proxy will
+expand the pattern into the SOAPAction for each call.</Parameter>
+<Parameter name="Proxy">
+The resulting SOAP Proxy object.</Parameter>
+</Parameters>
+<Description>
+This creates a new proxy object, based on the parameters. Once created calls to the proxy object are automatically translated into SOAP calls.
+<br/><br/>
+the expandable parts of the SOAPAction pattern are<br/>
+$url the SOAP endpoint URL <br/>
+$uri the methodname URI <br/>
+$method the name of the method being called <br/>
+</Description>
+<ReturnValue>
+An IDispatch interface pointer to the newly created proxy object is returned.
+</ReturnValue>
+<SampleCode>
+<![CDATA[
+Dim pf As Object, sp As Object
+Set pf = CreateObject("pocketsoap.Factory")
+
+' a simple proxy configuration
+Set sp = pf.CreateProxy("http://services.xmethods.net/soap", "urn:xmethods-delayed-quotes")
+Msgbox sp.getQuote(symbol:="INTC")
+' getQuote becomes the methodName in the SOAP request, and it will have a single parameter "symbol" with the value "INTC"
+' the result of the SOAP call is passed back as the result of the method, and so the quote value for INTC gets displayed in the message box
+
+' this uses a SOAPAction pattern, to generate the correct SOAPAction for different methods
+' you will have to check the document for the server you are calling to work out the correct pattern.
+set sp = pf.CreateProxy("http://example.org/", "http://soap.example.org/", "$uri$method"
+
+' this generates a SOAPAction header of http://soap.example.org/getQuote
+sp.getQuote(ticker:="MSFT")
+
+' this generates a SOAPAction header of http://soap.example.org/buyStock
+sp.buyStock(ticker:="MSFT", shares:=200)
+
+]]>
+</SampleCode>
+</Method>
+</Methods>
+<Description>Use this interface to create new proxy objects. This is a leggacy interface, included for backward compatibility only, new applications should
+use IProxyFactory2 instead.
+</Description>
+<WhenToImpl>The CoSoapFactory object provides a standard implementation of this interface</WhenToImpl>
+<WhenToCall>Call this interface to create new proxy objects</WhenToCall>
+</Interface>
+
+<Interface name="IProxyFactory2">
+<Short>Use this interface to create new proxy objects.</Short>
+<Links/>
+<Methods>
+<Method name="CreateProxy">
+<Short>
+This creates a new proxy object, based on the parameters.</Short>
+<Links/>
+<Parameters>
+<Parameter name="endpointURL">This is the URL of the SOAP server to call.</Parameter>
+<Parameter name="methodNameURI">This is the namespace URI for the methodName element [the actual method name is populated by the resulting proxy object based on the name of the method called against it.</Parameter>
+<Parameter name="SOAPActionPattern">This is either a direct string value that represents the value for the SOAPAction header, or if the SOAPAction header
+is defined in terms of other parameters [as is the case for many SOAP servers], you can specify the a pattern for the SOAPAction and the proxy will
+expand the pattern into the SOAPAction for each call.</Parameter>
+<Parameter name="transport">This allows you to specify the transport to use when making calls. If you leave this as the default then the standard 
+pocketSOAP HTTP transport will be used. You can pick a different transport by passing in its Prog-ID here. Or you already have an instance of the
+transport object created, you can pass a ISOAPTransport interface pointer.</Parameter>
+<Parameter name="Proxy">
+The resulting SOAP Proxy object.</Parameter>
+</Parameters>
+<Description>
+This creates a new proxy object, based on the parameters. Once created calls to the proxy object are automatically translated into SOAP calls.
+<br/><br/>
+the expandable parts of the SOAPAction pattern are<br/>
+$url the SOAP endpoint URL <br/>
+$uri the methodname URI <br/>
+$method the name of the method being called <br/>
+</Description>
+<ReturnValue>
+An IDispatch interface pointer to the newly created proxy object is returned.
+</ReturnValue>
+<SampleCode>
+<![CDATA[
+Dim pf As Object, sp As Object
+Set pf = CreateObject("pocketsoap.Factory")
+
+' a simple proxy configuration
+Set sp = pf.CreateProxy("http://services.xmethods.net/soap", "urn:xmethods-delayed-quotes")
+Msgbox sp.getQuote(symbol:="INTC")
+' getQuote becomes the methodName in the SOAP request, and it will have a single parameter "symbol" with the value "INTC"
+' the result of the SOAP call is passed back as the result of the method, and so the quote value for INTC gets displayed in the message box
+
+' this uses a SOAPAction pattern, to generate the correct SOAPAction for different methods
+' you will have to check the document for the server you are calling to work out the correct pattern.
+set sp = pf.CreateProxy("http://example.org/", "http://soap.example.org/", "$uri$method"
+
+' this generates a SOAPAction header of http://soap.example.org/getQuote
+sp.getQuote(ticker:="MSFT")
+
+' this generates a SOAPAction header of http://soap.example.org/buyStock
+sp.buyStock(ticker:="MSFT", shares:=200)
+
+' use a preconfigured transport object, instead of the default
+dim t
+set t = CreateObject("pocketSOAP.HTTPTransport.2")
+t.SetProxy "proxy.domain.com", 8080
+t.ProxyAuthentication "simon", "password"
+Set sp = pf.CreateProxy("http://services.xmethods.net/soap", "urn:xmethods-delayed-quotes", "", t)
+' this call goes through the configured transport object, and so uses the authenticated proxy server.
+Msgbox sp.getQuote(symbol:="INTC")
+]]>
+</SampleCode>
+</Method>
+</Methods>
+<Description>Use this interface to create new proxy objects. 
+</Description>
+<WhenToImpl>The CoSoapFactory object provides a standard implementation of this interface</WhenToImpl>
+<WhenToCall>Call this interface to create new proxy objects</WhenToCall>
+</Interface>
+</Interfaces>
+</Library>
+

@@ -1,0 +1,1174 @@
+/*
+The contents of this file are subject to the Mozilla Public License
+Version 1.1 (the "License"); you may not use this file except in
+compliance with the License. You may obtain a copy of the License at
+http://www.mozilla.org/MPL/
+
+Software distributed under the License is distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+License for the specific language governing rights and limitations
+under the License.
+
+The Original Code is pocketSOAP.
+
+The Initial Developer of the Original Code is Simon Fell.
+Portions created by Simon Fell are Copyright (C) 2000-2003
+Simon Fell. All Rights Reserved.
+
+Contributor(s):
+*/
+
+// pSOAP.idl : IDL source for pSOAP.dll
+//
+
+import "oaidl.idl";
+
+#include <winerror.h>	// for MAKE_HRESULT
+
+// ******************************************************************************************************************************
+// Standard transport interfaces
+// ******************************************************************************************************************************
+
+[
+	object,
+	uuid(95B904E8-8E1A-40a3-A229-E5E8606D6D3F),
+	oleautomation,
+	helpstring("ISOAPTransport Interface"),
+	pointer_default(unique)
+]
+interface ISOAPTransport : IUnknown
+{
+	[helpstring("method Send")]    HRESULT Send    ( [in] BSTR endpoint, [in] BSTR Envelope);
+	[helpstring("method Receive")] HRESULT Receive ( [in,out] BSTR * characterEncoding, [out,retval] SAFEARRAY(BYTE) * Envelope);
+};
+
+[
+	object,
+	uuid(C2F39358-2B60-4fda-B6FC-E95DCC4E9C9B),
+	oleautomation,
+	helpstring("IHTTPTransport Interface"),
+	pointer_default(unique)
+]
+interface IHTTPTransport : ISOAPTransport
+{
+	[propget] HRESULT SOAPAction ( [out,retval] BSTR * soapAction ) ;
+	[propput] HRESULT SOAPAction ( [in] BSTR soapAction ) ;
+};
+
+[
+	object,
+	uuid(326EBA3F-7120-4528-AF62-03EABD4E00AA),
+	oleautomation,
+	helpstring("IHTTPTransportAdv Interface"),
+	pointer_default(unique)
+]
+interface IHTTPTransportAdv : IHTTPTransport
+{
+	[propput, helpstring("send/receive timeout in milliseconds")]	  HRESULT Timeout ( [in] long timeOut )   ;
+	[propget, helpstring("send/receive timeout in milliseconds")]	  HRESULT Timeout ( [out,retval] long * timeOut ) ;
+	[helpstring("Enable proxy support via this server / port")]		  HRESULT SetProxy( [in] BSTR ProxyServer, [in] short ProxyPort ) ;
+	[helpstring("Disable proxy usage")]								  HRESULT NoProxy () ;
+	[helpstring("Set the authentication credentials")]				  HRESULT Authentication      ( [in] BSTR username, [in] BSTR password ) ;
+	[helpstring("Sets the authentication credentials for the proxy")] HRESULT ProxyAuthentication ( [in] BSTR username, [in] BSTR password ) ;
+
+	[propget, helpstring("returned HTTP Status Code")]				  HRESULT StatusCode ( [out,retval] short * statusCode ) ;
+	[propget, helpstring("max number of redirects to follow")]		  HRESULT MaxRedirectDepth ( [out,retval] short * depth ) ;
+	[propput, helpstring("max number of redirects to follow")]		  HRESULT MaxRedirectDepth ( [in] short depth ) ;
+};
+
+// ******************************************************************************************************************************
+// SOAP Interfaces
+// ******************************************************************************************************************************
+
+interface ISerializerContext ;
+interface INodeSerializer ;
+interface ISerializerFactory ;
+interface ISerializerFactoryConfig ;
+interface ISOAPNode ;
+interface ISOAPNodes ;
+
+[
+	object,
+	uuid(2B7B7EEE-1082-4b51-8519-E7185BE79FF2),
+	oleautomation,
+	helpstring("ISOAPNamespaces Interface"),
+	pointer_default(unique)
+]
+interface ISOAPNamespaces : IUnknown
+{
+	HRESULT GetPrefixForURI ( [in] BSTR NamespaceURI, [out,retval] BSTR * prefix ) ;
+	HRESULT GetURIForPrefix ( [in] BSTR prefix,		  [out,retval] BSTR * NamespaceURI ) ;
+};
+
+[
+	object,
+	uuid(8B2091B1-DCF9-44a7-A50B-F02971A01BF1),
+	oleautomation,
+	helpstring("ISOAPEnvelope Interface"),
+	pointer_default(unique)
+]
+interface ISOAPEnvelope : IUnknown
+{
+	[propget, helpstring("property ThrowFaults")]	HRESULT ThrowFaults		([out, retval] VARIANT_BOOL *pVal);
+	[propput, helpstring("property ThrowFaults")]	HRESULT ThrowFaults		([in] VARIANT_BOOL newVal);
+	[propget, helpstring("property URI")]			HRESULT URI				([out, retval] BSTR *pVal);
+	[propput, helpstring("property URI")]			HRESULT URI				([in] BSTR newVal);
+	[propget, helpstring("property MethodName")]	HRESULT MethodName		([out, retval] BSTR *pVal);
+	[propput, helpstring("property MethodName")]	HRESULT MethodName		([in] BSTR newVal);
+	[propget, helpstring("property EncodingStyle")] HRESULT EncodingStyle	([out, retval] BSTR *pVal);
+	[propput, helpstring("property EncodingStyle")] HRESULT EncodingStyle	([in] BSTR newVal);
+
+	[helpstring("sets the methodName and URI")]		HRESULT SetMethod ( [in] BSTR methodName, [in] BSTR methodNameNamespaceURI ) ;
+
+	// BSTR, SAFEARRAY(BYTE), ISOAPTransport[2], (I[Sequential]Stream todo)
+	[helpstring("method Parse")]					HRESULT Parse			([in] VARIANT Envelope, [in,defaultvalue(L"")] BSTR characterEncoding );
+	[helpstring("method Serialize")]				HRESULT Serialize		([out,retval] BSTR * soapMsg);
+
+	[propget] HRESULT Headers    ( [out,retval] ISOAPNodes ** Nodes ) ;
+	[propget] HRESULT Body		 ( [out,retval] ISOAPNodes ** Nodes ) ;
+	[propget] HRESULT Parameters ( [out,retval] ISOAPNodes ** Nodes ) ;
+
+	[propget]		HRESULT SerializerFactory ( [out,retval]	ISerializerFactoryConfig ** sf ) ;
+	[propputref]	HRESULT SerializerFactory ( [in]			ISerializerFactoryConfig * sf  ) ;
+};
+
+[
+	object,
+	uuid(3D9E9EC5-16DB-48f3-A60B-50F76F45785D),
+	oleautomation,
+	helpstring("ISOAPNode Interface"),
+	pointer_default(unique)
+]
+interface ISOAPNode : IUnknown
+{
+	[propget, helpstring("property Name")]				HRESULT Name		( [out, retval] BSTR *pVal);
+	[propput, helpstring("property Name")]				HRESULT Name		( [in] BSTR newVal);
+	[propget, helpstring("property Namespace")]			HRESULT Namespace	( [out, retval] BSTR *pVal);
+	[propput, helpstring("property Namespace")]			HRESULT Namespace	( [in] BSTR newVal);
+
+	[propget, helpstring("property Type")]				HRESULT Type		(  [out, retval] BSTR *pVal);
+	[propput, helpstring("property Type")]				HRESULT Type		(  [in] BSTR newVal);
+	[propget, helpstring("property Namespace of type")]	HRESULT TypeNS		(  [out, retval] BSTR *pVal);
+	[propput, helpstring("property Namespace of type")]	HRESULT TypeNS		(  [in] BSTR newVal);
+
+	[propget, helpstring("property Value")]				HRESULT Value		( [out, retval] VARIANT *pVal);
+	[propput, helpstring("property Value")]				HRESULT Value		( [in] VARIANT newVal);
+
+	// this allows us to de-serialize a node as an arbitary simple type [only works with simple types]
+	[propget, helpstring("property ValueAs")]			HRESULT ValueAs		( [in] BSTR Type, [in] BSTR TypeNS, [out, retval] VARIANT *pVal );
+	[propputref]										HRESULT SerializerFactory ( [in] ISerializerFactoryConfig * sf  ) ;
+
+	[propget] HRESULT root			 ( [out,retval] VARIANT_BOOL * IsRoot ) ;
+	[propget] HRESULT id			 ( [out,retval] BSTR * id ) ;
+	[propget] HRESULT href			 ( [out,retval] BSTR * href ) ;
+	[propget] HRESULT actor			 ( [out,retval] BSTR * actorURI ) ;
+	[propget] HRESULT mustUnderstand ( [out,retval] VARIANT_BOOL * MustUnderstand ) ;
+	[propget] HRESULT offset		 ( [out,retval] BSTR * offset ) ;
+	[propget] HRESULT position		 ( [out,retval] BSTR * postion ) ;
+	[propget] HRESULT nil			 ( [out,retval] VARIANT_BOOL * IsNil ) ;
+
+	[propput] HRESULT root			 ( [in] VARIANT_BOOL	IsRoot ) ;
+	[propput] HRESULT id			 ( [in] BSTR			id ) ;
+	[propput] HRESULT href			 ( [in] BSTR			href ) ;
+	[propput] HRESULT actor			 ( [in] BSTR			actorURI ) ;
+	[propput] HRESULT mustUnderstand ( [in] VARIANT_BOOL	MustUnderstand ) ;
+	[propput] HRESULT offset		 ( [in] BSTR			offset ) ;
+	[propput] HRESULT position		 ( [in] BSTR			postion ) ;
+	[propput] HRESULT nil			 ( [in] VARIANT_BOOL	IsNil ) ;
+
+	[propget] HRESULT Nodes ( [out,retval] ISOAPNodes ** ppNodes ) ;
+};
+
+[
+	object,
+	uuid(059F284A-C198-4c6e-9E3B-2F45ACBE7F12),
+	oleautomation,
+	helpstring("ISOAPNodes Interface"),
+	pointer_default(unique)
+]
+interface ISOAPNodes : IUnknown
+{
+	[propget, id(DISPID_NEWENUM), helpstring("property _NewEnum")] HRESULT _NewEnum([out, retval] IUnknown **pVal);
+	[propget] HRESULT Item			( [in] long idx,  [out,retval] ISOAPNode ** node ) ;
+	[propget] HRESULT ItemByName	( [in] BSTR Name, [in,defaultvalue(L"")] BSTR Namespace, [out,retval] ISOAPNode ** node ) ;
+	[propget] HRESULT Count			( [out,retval] long * Count ) ;
+			  HRESULT Append		( [in] ISOAPNode * newNode);
+			  HRESULT Clear			( );
+			  HRESULT Create		(	[in] BSTR Name, 
+										[in] VARIANT Val, 
+										[in,defaultvalue(L"")] BSTR Namespace,
+										[in,defaultvalue(L"")] BSTR Type, 
+										[in,defaultvalue(L"")] BSTR TypeNamespace,
+										[out,retval] ISOAPNode ** newNode ) ;
+};
+
+[
+	object,
+	uuid(12EC9252-557C-4869-9A1D-4A7AAA41562B),
+	oleautomation,
+	helpstring("ISerializerOutput Interface"),
+	pointer_default(unique)
+]
+interface ISerializerOutput : IUnknown
+{
+	HRESULT StartElement   ( [in] BSTR Name, [in] BSTR Namespace ) ;
+	HRESULT EndElement     ( [in] BSTR Name, [in] BSTR Namespace ) ;
+
+	HRESULT Attribute      ( [in] BSTR Name, [in] BSTR Namespace, [in] BSTR value ) ;
+	HRESULT QNameAttribute ( [in] BSTR Name, [in] BSTR Namespace, [in] BSTR value, [in] BSTR valueNamespace ) ;
+
+	HRESULT SerializeNode  ( [in] ISOAPNode * n ) ;
+	HRESULT SerializeValue ( [in] VARIANT * v, [in] BSTR Name, [in] BSTR NameNS ) ;
+
+	HRESULT WriteText			( [in] BSTR text ) ; // this gets escaped automatically
+	HRESULT WriteTextNoEncoding	( [in] BSTR text ) ; // just blindly appends it, make sure its safe
+};
+
+[
+	object,
+	uuid(C5997F73-9C61-4158-B93A-F1895D4CEEE7),
+	oleautomation,
+	helpstring("ISerializerContext Interface"),
+	pointer_default(unique)
+]
+interface ISerializerContext : IUnknown
+{
+	[propget] HRESULT Namespaces		( [out,retval] ISOAPNamespaces ** ns ) ;
+	[propget] HRESULT SerializerFactory ( [out,retval] ISerializerFactory ** sf ) ;
+};
+
+[
+	object,
+	uuid(04066DA1-3767-4388-BC1B-70B5C67123E1),
+	oleautomation,
+	helpstring("ITypesInit Interface"),
+	pointer_default(unique)
+]
+interface ITypesInit : IUnknown
+{
+	// implement this interface if you want the serializerFactory to notify you
+	// about the type mappings its created you for
+	HRESULT Initialize ( [in] BSTR xmlType, [in] BSTR xmlTypeNamespace, [in] VARIANT comType ) ;
+};
+
+[
+	object,
+	uuid(6EE30C35-DBDB-44e4-852A-6F0636F7D827),
+	oleautomation,
+	helpstring("ISOAPSerializer Interface"),
+	pointer_default(unique)
+]
+interface ISoapSerializer : IUnknown
+{
+	HRESULT Serialize ( [in] VARIANT * val, [in] ISerializerContext * ctx, [in] ISerializerOutput * dest ) ;
+};
+
+[
+	object,
+	uuid(CDED1874-8B34-4026-8774-44A7DCB41624),
+	oleautomation,
+	helpstring("ISoapDeSerializerAttributes Interface"),
+	pointer_default(unique)
+]
+interface ISoapDeSerializerAttributes : IUnknown
+{
+	HRESULT Exists ( [in] BSTR Name, [in] BSTR Namespace, [out,retval] VARIANT_BOOL * Exists ) ;
+	HRESULT Value  ( [in] BSTR Name, [in] BSTR Namespace, [out,retval] BSTR * val ) ;
+};
+
+[
+	object,
+	uuid(EE9D8ADF-1996-4ffd-BE39-DF9E65783AB1),
+	oleautomation,
+	helpstring("ISoapDeSerializer Interface"),
+	pointer_default(unique)
+]
+interface ISoapDeSerializer : IUnknown
+{
+	HRESULT Start		( [in] ISOAPNode * node, [in] BSTR ElementName, [in] ISoapDeSerializerAttributes * Attributes, [in] ISOAPNamespaces * ns ) ;
+
+	HRESULT Child		( [in] long id, [in] VARIANT_BOOL ready, [in] ISOAPNode * childNode ) ;
+	HRESULT ChildReady  ( [in] long id, [in] ISOAPNode * childNode ) ;
+
+	HRESULT ChildRef	( [in] BSTR href, [in] ISOAPNode * hrefNode ) ;	// this is the imediate node with the href in
+	HRESULT	Ref			( [in] BSTR id,   [in] ISOAPNode * idNode ) ;	// this is the node that the href points at
+
+	HRESULT	Characters	( [in] BSTR charData ) ;
+	HRESULT End			( ) ;
+};
+
+[
+	object,
+	uuid(FDA0F674-DF3F-496b-B314-3E8D87C260FA),
+	oleautomation,
+	helpstring("ISerializerFactory Interface"),
+	pointer_default(unique), local
+]
+interface ISerializerFactory : IUnknown
+{
+	HRESULT SerializerForValue ( [in] VARIANT * v,   [out,retval] ISoapSerializer ** s ) ;
+	HRESULT SerializerForNode  ( [in] ISOAPNode * n, [out,retval] ISoapSerializer ** s ) ;
+	HRESULT ReturnSerializer   ( [in] ISoapSerializer * s ) ;
+
+	HRESULT DeserializerForType		( [in] BSTR XmlType,	 [in] BSTR XmlTypeNamespace, [in] VARIANT_BOOL IsArray, [out,retval] ISoapDeSerializer ** s ) ;
+	HRESULT DeserializerForElement	( [in] BSTR elementName, [in] BSTR elementNamespace, [in] VARIANT_BOOL IsArray, [out,retval] ISoapDeSerializer ** s ) ;
+	HRESULT ReturnDeSerializer      ( [in] ISoapDeSerializer * s ) ;
+
+	HRESULT XsiForPrimaryNS ( [out,retval] BSTR * uri ) ;
+
+	// is the specified type one of the "anyType" types defined in XSD ?
+	HRESULT IsAnyType ( [in] BSTR XmlType, [in] BSTR XmlTypeNamespace, [out,retval] VARIANT_BOOL * IsAnyType ) ;
+
+	// given two Xml types, is the de-serialized COM type equivilant ?
+	HRESULT AreEqualComTypes ( [in] BSTR XmlTypeA, [in] BSTR XmlTypeNSA, [in] BSTR XmlTypeB, [in] BSTR XmlTypeNSB, [out,retval] VARIANT_BOOL * Match ) ;
+
+	// what's the COM type for a specific XML type
+	HRESULT FindComType ( [in] BSTR XmlType, [in] BSTR XmlTypeNamespace, [out,retval] VARIANT * comType ) ;
+};
+
+[
+	object,
+	uuid(DDE93C43-9D84-4474-A307-E31A4F5393F7),
+	oleautomation,
+	helpstring("ISerializerFactoryConfig Interface"),
+	pointer_default(unique)
+]
+interface ISerializerFactoryConfig : IUnknown
+{
+	HRESULT ElementMapping	( [in] BSTR ElementName,  [in] BSTR ElementNamespace, [in] BSTR Type, [in] BSTR TypeNamespace ) ;
+	HRESULT Deserializer	( [in] BSTR Type, [in] BSTR TypeNamespace, [in] VARIANT_BOOL ArrayOf, [in] VARIANT ComType, [in] BSTR ProgID ) ;
+	HRESULT Serializer		( [in] VARIANT ComType, [in] BSTR Type, [in] BSTR TypeNamespace, [in] BSTR ProgID ) ;
+
+	// where multiple serializers / type mappings are available for serialization, this is used in preference
+	[propget] HRESULT PrimarySchema	 ( [out,retval] BSTR * uri ) ;
+	[propput] HRESULT PrimarySchema  ( [in] BSTR uri ) ;
+
+	[propget] HRESULT RootFirst		 ( [out,retval] VARIANT_BOOL * rootFirst ) ;
+	[propput] HRESULT RootFirst		 ( [in] VARIANT_BOOL rootFirst ) ;
+
+	// to start with this just allows you to switch between sfcNormal & sfcScripting
+	// later versions will allow you to load a custom config from an XML file.
+	HRESULT SetConfig ( [in] VARIANT config ) ;
+};
+
+[
+	object,
+	uuid(55DA1181-49F5-429e-B70D-ADA9FF7CEC98),
+	oleautomation,
+	helpstring("ISwATransport Interface, This interface indicates that the transport supports handling SOAP with Attachments (MIME)"),
+	pointer_default(unique)
+]
+interface ISwATransport : IUnknown
+{
+	[propget] HRESULT ContentType ( [out,retval] BSTR * contentType ) ;
+	[propput] HRESULT ContentType ( [in]		 BSTR   contentType ) ;
+
+	[helpstring("method Send, This sends a raw payload, with no transcoding applied to it")] 
+	HRESULT Send ( [in] BSTR endpoint, [in] VARIANT Payload ); // expected to be BSTR | [VT_ARRAY | VT_UI1] | IStreamReader 
+	HRESULT Receive ( [in,out] BSTR* characterEncoding, [out,retval] IUnknown ** responseStream ) ;
+};
+
+[
+	object,
+	uuid(278B4636-7600-494f-B9F9-FD3C3062CA84),
+	oleautomation,
+	helpstring("ISOAPNode2 Interface"),
+	pointer_default(unique)
+]
+interface ISOAPNode2 : ISOAPNode
+{
+	[propget] HRESULT EncodingStyle ( [out,retval] BSTR * encStyle ) ;
+	[propput] HRESULT EncodingStyle ( [in]		   BSTR   encStyle ) ;
+} ;
+
+[
+	object,
+	uuid(00F1C051-C42C-4ebc-A0D6-FE26980BC6B0),
+	oleautomation,
+	helpstring("ISerializerFactoryPool Interface"),
+	pointer_default(unique), local
+]
+interface ISerializerFactoryPool : IUnknown
+{
+	HRESULT Reset() ;
+};
+
+[
+	object,
+	uuid(D82EB643-14C9-48f4-A13B-995B6F8CB06D),
+	oleautomation,
+	helpstring("ISerializerFactoryConfig2 Interface"),
+	pointer_default(unique)
+]
+interface ISerializerFactoryConfig2 : ISerializerFactoryConfig
+{
+	// this allows you to specify a child [element for now, possibly attribute in the future]
+	// type within a specific type. This gets around the fact the ElementMapping is global
+	// so not allowing you to have different elements with the same name, of the same type.
+	HRESULT LocalTypeMapping ( [in] BSTR ParentXmlType, [in] BSTR ParentXmlTypeNS, [in] BSTR ChildName,  [in] BSTR ChildNamespace, [in] BSTR Type, [in] BSTR TypeNamespace ) ;
+} ;
+
+[
+	object,
+	uuid(52021ABB-8796-4394-8BF7-91B837A9D79D),
+	oleautomation,
+	helpstring("ISerializerFactory2 Interface"),
+	pointer_default(unique), local
+]
+interface ISerializerFactory2 : ISerializerFactory
+{
+	HRESULT DeserializerForChild	( [in] BSTR ParentType, [in] BSTR ParentTypeNS, [in] BSTR elementName, [in] BSTR elementNamespace, [in] VARIANT_BOOL IsArray, [in,out] BSTR * XmlType, [in,out] BSTR * XmlTypeNS, [out,retval] ISoapDeSerializer ** s ) ;
+} ;
+
+[
+	object,
+	uuid(038D5938-2E2E-4f88-9476-8FFB04AE7501),
+	oleautomation,
+	helpstring("ISOAPTransportTimeout Interface"),
+	pointer_default(unique), 
+]
+interface ISOAPTransportTimeout : ISOAPTransport
+{
+	[propput, helpstring("send/receive timeout in milliseconds")]	  HRESULT Timeout ( [in] long timeOut )   ;
+	[propget, helpstring("send/receive timeout in milliseconds")]	  HRESULT Timeout ( [out,retval] long * timeOut ) ;
+} ;
+
+[
+	object,
+	uuid(F09C7B38-7DC3-4a3e-B6BC-EF09FE98B1CF),
+	oleautomation,
+	helpstring("ISerializerFactoryPool2 Interface"),
+	pointer_default(unique), local
+]
+interface ISerializerFactoryPool2 : ISerializerFactoryPool
+{
+	HRESULT Fetch ( [in] REFCLSID clsid, [out,retval] IUnknown ** ppUnk ) ;
+};
+
+[
+	object,
+	uuid(A0F644A2-9A8B-4317-A353-6EF9C42F5840),
+	oleautomation,
+	helpstring("IXmlQName Interface"),
+	pointer_default(unique)
+]
+interface IXmlQName : IUnknown
+{
+	[propget, helpstring("property Name")]		HRESULT Name([out, retval] BSTR *pVal);
+	[propput, helpstring("property Name")]		HRESULT Name([in] BSTR newVal);
+	[propget, helpstring("property Namespace")] HRESULT Namespace([out, retval] BSTR *pVal);
+	[propput, helpstring("property Namespace")] HRESULT Namespace([in] BSTR newVal);
+	[helpstring("method Set")]					HRESULT Set([in] BSTR Name, [in] BSTR Namespace);
+};
+
+[
+	object,
+	uuid(CCFC68CD-DCD8-4369-A0AB-2FCC805E3BB0),
+	oleautomation,
+	helpstring("ISOAPNode3 Interface"),
+	pointer_default(unique)
+]
+interface ISOAPNode3 : ISOAPNode2
+{
+	[propget, helpstring("this property is set if the root attribute was explicitly set in the XML")] 
+	HRESULT explicitRoot ( [out,retval] VARIANT_BOOL * explicitRoot ) ;
+
+	[propput, helpstring("this property is set if the root attribute was explicitly set in the XML")] 
+	HRESULT explicitRoot ( [in]		  VARIANT_BOOL   explicitRoot ) ;
+} ;
+
+[
+	object,
+	uuid(1999232F-D5BA-428B-82C2-A2D6DE9B6778),
+	oleautomation,
+	helpstring("IInterfaceFinder Interface"),
+	pointer_default(unique)
+]
+interface IInterfaceFinder : IUnknown
+{
+	[helpstring("This tries to find the default IID for a particular progID or clsid")]
+	HRESULT DefaultIID([in] BSTR theClass, [out,retval] BSTR * iid ) ;
+};
+
+[
+	object,
+	uuid(5B62D729-6CEC-49b7-9BDD-844DCE42E842),
+	oleautomation,
+	helpstring("ISimpleSoapSerializer Interface"),
+	pointer_default(unique)
+]
+interface ISimpleSoapSerializer : IUnknown
+{
+	[helpstring("This interface is used to serialize simple types [i.e. no element content]")]
+	HRESULT Serialize ( [in] VARIANT * val, [in] ISerializerContext * ctx, [in] BSTR * dest ) ;
+};
+
+[
+	object,
+	uuid(F9799A1A-F2F7-4dd6-AAA2-C0CA597B6412),
+	oleautomation,
+	helpstring("ISimpleSoapDeserializer Interface"),
+	pointer_default(unique)
+]
+interface ISimpleSoapDeSerializer : IUnknown
+{
+	[helpstring("This interface is used to deserialize simple types [i.e. no element content]")]
+	HRESULT Deserialize ( [in] BSTR characters, [in] ISOAPNamespaces * ns, [in] VARIANT * dest ) ;
+};
+
+[
+	object,
+	uuid(8DBA86E6-08D1-4510-989A-76A0596E5488),
+	oleautomation,
+	helpstring("ISerializerOutput2 Interface"),
+	pointer_default(unique)
+]
+interface ISerializerOutput2 : ISerializerOutput
+{
+	HRESULT SerializeAttribute ( [in] VARIANT * value, [in] BSTR Name, [in] BSTR Namespace ) ;
+} ;
+
+[
+	object,
+	uuid(2F26011E-67AC-4bc4-8187-431FD8E61B27),
+	oleautomation,
+	helpstring("ISoapDeSerializerAttributes2 Interface"),
+	pointer_default(unique)
+]
+interface ISoapDeSerializerAttributes2 : ISoapDeSerializerAttributes
+{
+	[helpstring("Deserialize an attribute value as a particular XSD type")]
+	HRESULT ValueAs ( [in] BSTR Name, [in] BSTR Namespace, [in] BSTR XmlType, [in] BSTR TypeNamespace, [out,retval] VARIANT * value ) ;
+} ;
+
+[
+	object,
+	uuid(B32E88A3-9C49-4a35-87EA-9D81A3C0F1E1),
+	oleautomation,
+	helpstring("ISerializerFactory Interface"),
+	pointer_default(unique), local
+]
+interface ISerializerFactoryEx : IUnknown
+{
+	HRESULT SerializerForValue ( [in] VARIANT * v,   [in] BSTR ParentType,  [in] BSTR ParentTypeNS, [in] BSTR name, [in] BSTR Namespace, [out] BSTR * type, [out] BSTR * typeNamespace, [out,retval] ISoapSerializer ** s ) ;
+	HRESULT SerializerForNode  ( [in] ISOAPNode * n, [in] BSTR ParentType,  [in] BSTR ParentTypeNS, [out] BSTR * type, [out] BSTR * typeNamespace, [out,retval] ISoapSerializer ** s ) ;
+	HRESULT ReturnSerializer   ( [in] ISoapSerializer * s ) ;
+
+	HRESULT DeserializerForType		( [in] BSTR XmlType,	 [in] BSTR XmlTypeNamespace, [in] VARIANT_BOOL IsArray, [out,retval] ISoapDeSerializer ** s ) ;
+	HRESULT DeserializerForElement	( [in] BSTR ParentType,  [in] BSTR ParentTypeNS,     [in] BSTR elementName,     [in] BSTR elementNamespace, [in] VARIANT_BOOL IsArray, [out] BSTR * XmlType, [out] BSTR * XmlTypeNS, [out,retval] ISoapDeSerializer ** s ) ;
+	HRESULT ReturnDeSerializer      ( [in] ISoapDeSerializer * s ) ;
+
+	// given a parent type and sub element, find its registered type
+	HRESULT FindType ( [in] BSTR ParentType,  [in] BSTR ParentTypeNS, [in] BSTR elementName, [in] BSTR elementNamespace, [out] BSTR * XmlType, [out] BSTR * XmlTypeNS ) ;
+
+	HRESULT XsiForPrimaryNS ( [out,retval] BSTR * uri ) ;
+
+	// is the specified type one of the "anyType" types defined in XSD ?
+	HRESULT IsAnyType ( [in] BSTR XmlType, [in] BSTR XmlTypeNamespace, [out,retval] VARIANT_BOOL * IsAnyType ) ;
+
+	// given two Xml types, is the de-serialized COM type equivilant ?
+	HRESULT AreEqualComTypes ( [in] BSTR XmlTypeA, [in] BSTR XmlTypeNSA, [in] BSTR XmlTypeB, [in] BSTR XmlTypeNSB, [out,retval] VARIANT_BOOL * Match ) ;
+
+	// what's the COM type for a specific XML type
+	HRESULT FindComType ( [in] BSTR XmlType, [in] BSTR XmlTypeNamespace, [out,retval] VARIANT * comType ) ;
+};
+
+[
+	object,
+	uuid(114BD3E3-983B-4509-8DD7-42DC36F4D262),
+	local,
+	helpstring("IStreamReader Interface"),
+	pointer_default(unique)
+]
+interface IStreamReader : IUnknown
+{
+	// todo, response stream isn't resetabble, split into 2 interfaces
+	HRESULT Read(	void *pv,			// Pointer to buffer into which the stream is read
+					ULONG cb,			// Specifies the number of bytes to read
+					ULONG *pcbRead );	// Pointer to location that contains actual
+										// number of bytes read
+
+	HRESULT Reset() ;					// resets the current position in the stream back to the begining.
+} ;
+
+[
+	object,
+	uuid(D74864A2-6351-445c-ACD0-2DE2508C8E8C),
+	oleautomation,
+	helpstring("IHTTPTransportAdv Interface"),
+	pointer_default(unique)
+]
+interface IHTTPTransportAdv2 : IHTTPTransportAdv
+{
+	[propget, helpstring("get named option value")] HRESULT Option ( [in] BSTR optionName, [out,retval] VARIANT * pVal ) ;
+	[propput, helpstring("set named option value")] HRESULT Option ( [in] BSTR optionName, [in] VARIANT val ) ;
+};
+
+[
+	object,
+	uuid(A27B2876-2E26-449e-A5B8-1D086A710787),
+	oleautomation,
+	helpstring("ISoapDeSerializerDefaultHandler Interface"),
+	pointer_default(unique)
+]
+interface ISoapDeSerializerDefaultHandler : IUnknown
+{
+	// this is a signaling interface, that the default de-serializer class implements
+};
+
+[
+	object,
+	uuid(CC263B9C-4C97-4539-8D9D-50EC5C7FAA17),
+	oleautomation,
+	helpstring("ISerializerFactoryConfig3 Interface"),
+	pointer_default(unique)
+]
+interface ISerializerFactoryConfig3 : ISerializerFactoryConfig2
+{
+	HRESULT understoodHeader ( [in] BSTR NamespaceURI, [in] BSTR localName ) ;
+} ;
+
+[
+	object,
+	uuid(E57AC401-CC12-45e0-B5AC-085EBE1D2C54),
+	oleautomation,
+	helpstring("ISerializerFactoryHeaders Interface"),
+	pointer_default(unique)
+]
+interface ISerializerFactoryHeaders : IUnknown
+{
+	HRESULT isUnderstood ( [in] BSTR NamespaceURI, [in] BSTR localName, [out,retval] VARIANT_BOOL *understood ) ;
+} ;
+
+[
+	object,
+	uuid(7C0183C2-8598-4cdf-923F-40A5576F39C2),
+	oleautomation,
+	helpstring("ISOAPNode12 Interface"),
+	pointer_default(unique)
+]
+interface ISOAPNode12 : IUnknown
+{
+	[propget] HRESULT role  ( [out,retval] BSTR * role ) ;
+	[propput] HRESULT role  ( [in] BSTR newRole ) ;
+
+	[propget] HRESULT relay ( [out,retval] VARIANT_BOOL *relay) ;
+	[propput] HRESULT relay ( [in] VARIANT_BOOL relay) ;
+
+	[propget] HRESULT ref   ( [out,retval] BSTR * ref ) ;
+	[propput] HRESULT ref   ( [in] BSTR ref ) ;
+} ;
+
+[
+	object,
+	uuid(C6118D9E-9F46-400e-A09B-7D9F01C6A593),
+	oleautomation,
+	helpstring("ISOAPNodeDisp Interface"),
+	pointer_default(unique)
+]
+interface ISOAPNodeDisp : IUnknown
+{
+	// this interface is used to drive the IDispatch implementation only
+	[propget, helpstring("property Name")]				HRESULT Name		( [out, retval] BSTR *pVal);
+	[propput, helpstring("property Name")]				HRESULT Name		( [in] BSTR newVal);
+	[propget, helpstring("property Namespace")]			HRESULT Namespace	( [out, retval] BSTR *pVal);
+	[propput, helpstring("property Namespace")]			HRESULT Namespace	( [in] BSTR newVal);
+
+	[propget, helpstring("property Type")]				HRESULT Type		(  [out, retval] BSTR *pVal);
+	[propput, helpstring("property Type")]				HRESULT Type		(  [in] BSTR newVal);
+	[propget, helpstring("property Namespace of type")]	HRESULT TypeNS		(  [out, retval] BSTR *pVal);
+	[propput, helpstring("property Namespace of type")]	HRESULT TypeNS		(  [in] BSTR newVal);
+
+	[propget, helpstring("property Value")]				HRESULT Value		( [out, retval] VARIANT *pVal);
+	[propput, helpstring("property Value")]				HRESULT Value		( [in] VARIANT newVal);
+
+	// this allows us to de-serialize a node as an arbitary simple type [only works with simple types]
+	[propget, helpstring("property ValueAs")]			HRESULT ValueAs		( [in] BSTR Type, [in] BSTR TypeNS, [out, retval] VARIANT *pVal );
+	[propputref]										HRESULT SerializerFactory ( [in] ISerializerFactoryConfig * sf  ) ;
+
+	[propget] HRESULT root			 ( [out,retval] VARIANT_BOOL * IsRoot ) ;
+	[propget] HRESULT id			 ( [out,retval] BSTR * id ) ;
+	[propget] HRESULT href			 ( [out,retval] BSTR * href ) ;
+	[propget] HRESULT actor			 ( [out,retval] BSTR * actorURI ) ;
+	[propget] HRESULT mustUnderstand ( [out,retval] VARIANT_BOOL * MustUnderstand ) ;
+	[propget] HRESULT offset		 ( [out,retval] BSTR * offset ) ;
+	[propget] HRESULT position		 ( [out,retval] BSTR * postion ) ;
+	[propget] HRESULT nil			 ( [out,retval] VARIANT_BOOL * IsNil ) ;
+
+	[propput] HRESULT root			 ( [in] VARIANT_BOOL	IsRoot ) ;
+	[propput] HRESULT id			 ( [in] BSTR			id ) ;
+	[propput] HRESULT href			 ( [in] BSTR			href ) ;
+	[propput] HRESULT actor			 ( [in] BSTR			actorURI ) ;
+	[propput] HRESULT mustUnderstand ( [in] VARIANT_BOOL	MustUnderstand ) ;
+	[propput] HRESULT offset		 ( [in] BSTR			offset ) ;
+	[propput] HRESULT position		 ( [in] BSTR			postion ) ;
+	[propput] HRESULT nil			 ( [in] VARIANT_BOOL	IsNil ) ;
+
+	[propget] HRESULT Nodes ( [out,retval] ISOAPNodes ** ppNodes ) ;
+
+	[propget] HRESULT EncodingStyle ( [out,retval] BSTR * encStyle ) ;
+	[propput] HRESULT EncodingStyle ( [in]		   BSTR   encStyle ) ;
+
+	[propget, helpstring("this property is set if the root attribute was explicitly set in the XML")] 
+	HRESULT explicitRoot ( [out,retval] VARIANT_BOOL * explicitRoot ) ;
+
+	[propput, helpstring("this property is set if the root attribute was explicitly set in the XML")] 
+	HRESULT explicitRoot ( [in]		  VARIANT_BOOL   explicitRoot ) ;
+
+	[propget] HRESULT role  ( [out,retval] BSTR * role ) ;
+	[propput] HRESULT role  ( [in] BSTR newRole ) ;
+
+	[propget] HRESULT relay ( [out,retval] VARIANT_BOOL *relay) ;
+	[propput] HRESULT relay ( [in] VARIANT_BOOL relay) ;
+
+	[propget] HRESULT ref   ( [out,retval] BSTR * ref ) ;
+	[propput] HRESULT ref   ( [in] BSTR ref ) ;
+} ;
+
+[
+	object,
+	uuid(6DBEBD71-F91F-4924-AB0E-DB37DD38DA76),
+	oleautomation,
+	helpstring("ISOAPEnvelope2 Interface"),
+	pointer_default(unique)
+]
+interface ISOAPEnvelope2 : ISOAPEnvelope
+{
+	[propget] HRESULT EnvelopeVersion ( [out,retval] BSTR * envelopeVersionUri ) ;
+	[propput] HRESULT EnvelopeVersion ( [in] BSTR envelopeVersionUri ) ;
+};
+
+[
+	object,
+	uuid(9A8E7E4D-59B3-4f55-B587-1EA048AA9C65),
+	oleautomation,
+	helpstring("ISerializerContext2 Interface"),
+	pointer_default(unique)
+]
+interface ISerializerContext2 : ISerializerContext
+{
+	[propget] HRESULT EnvelopeVersion ( [out,retval] BSTR * envelopeVersionUri ) ;
+};
+
+[
+	object,
+	uuid(9AD41BB8-76A9-4ee0-9463-5BF578BA78DC),
+	local,
+	helpstring("IClassFactoryVersion Interface"),
+	pointer_default(unique)
+]
+interface IClassFactoryVersion : IUnknown
+{
+	HRESULT setVersion ( const wchar_t * envURI ) ;
+};
+
+[
+	object,
+	uuid(9DDD12DF-404B-45dd-B982-251A30D29079),
+	oleautomation,
+	helpstring("ISOAPTransport2 Interface"),
+	pointer_default(unique)
+]
+interface ISOAPTransport2 : IUnknown
+{
+	[helpstring("method Send")]    HRESULT Send    ( [in] BSTR endpoint, [in] VARIANT env );
+	[helpstring("method Receive")] HRESULT Receive ( [in,out] BSTR * characterEncoding, [out,retval] IUnknown ** responseStream );
+};
+
+[
+	object,
+	uuid(F63C057A-DB72-4a35-B5C3-2FCFCEA5BB8B),
+	oleautomation,
+	helpstring("IHTTPTransportDisp Interface"),
+	pointer_default(unique)
+]
+interface IHTTPTransportDisp : IUnknown
+{
+	// this interface drives the IDispath implementation only
+	[helpstring("method Send")]    HRESULT Send    ( [in] BSTR endpoint, [in] VARIANT Envelope);
+	[helpstring("method Receive")] HRESULT Receive ( [in,out] BSTR * characterEncoding, [out,retval] SAFEARRAY(BYTE) * Envelope);
+
+	[propget] HRESULT SOAPAction ( [out,retval] BSTR * soapAction ) ;
+	[propput] HRESULT SOAPAction ( [in] BSTR soapAction ) ;
+
+	[propput, helpstring("send/receive timeout in milliseconds")]	  HRESULT Timeout ( [in] long timeOut )   ;
+	[propget, helpstring("send/receive timeout in milliseconds")]	  HRESULT Timeout ( [out,retval] long * timeOut ) ;
+	[helpstring("Enable proxy support via this server / port")]		  HRESULT SetProxy( [in] BSTR ProxyServer, [in] short ProxyPort ) ;
+	[helpstring("Disable proxy usage")]								  HRESULT NoProxy () ;
+	[helpstring("Set the authentication credentials")]				  HRESULT Authentication      ( [in] BSTR username, [in] BSTR password ) ;
+	[helpstring("Sets the authentication credentials for the proxy")] HRESULT ProxyAuthentication ( [in] BSTR username, [in] BSTR password ) ;
+
+	[propget, helpstring("returned HTTP Status Code")]				  HRESULT StatusCode ( [out,retval] short * statusCode ) ;
+	[propget, helpstring("max number of redirects to follow")]		  HRESULT MaxRedirectDepth ( [out,retval] short * depth ) ;
+	[propput, helpstring("max number of redirects to follow")]		  HRESULT MaxRedirectDepth ( [in] short depth ) ;
+
+	[propget, helpstring("get named option value")] HRESULT Option ( [in] BSTR optionName, [out,retval] VARIANT * pVal ) ;
+	[propput, helpstring("set named option value")] HRESULT Option ( [in] BSTR optionName, [in] VARIANT val ) ;
+};
+
+[
+	object,
+	uuid(81E713C6-BC0B-4853-82BA-27D341CA358A),
+	oleautomation,
+	helpstring("IxsdLong Interface"),
+	pointer_default(unique)
+]
+interface IXsdLong : IUnknown
+{
+	[propget] HRESULT String ( [out,retval] BSTR * pVal);
+	[propput] HRESULT String ( [in] BSTR val);
+
+	[propget] HRESULT HiDWord ( [out,retval] long * pVal);
+	[propput] HRESULT HiDWord ( [in] long val);
+
+	[propget] HRESULT LoDWord ( [out,retval] long * pVal);
+	[propput] HRESULT LoDWord ( [in] long val);
+
+	HRESULT Register([in] ISerializerFactoryConfig * cfgFactory );
+};
+
+[
+	object,
+	uuid(679E93E6-4DCE-44d2-8413-523737980E4E),
+	oleautomation,
+	helpstring("INoMultirefSerializer Interface"),
+	pointer_default(unique)
+]
+interface INoMultirefSerializer : IUnknown
+{
+	// this is a signalling interface that a value object can implement to indicate that it doesn't want
+	// a multi-ref serialization, even though its an object (useful for objects that wrap primitive types)
+};
+
+[
+	uuid(1259E267-74E3-4d78-B08E-DB9F9F785E04),
+	version(1.0),
+	helpstring("PocketSOAP 1.5.4 Type Library")
+]
+library PocketSOAP
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	typedef enum sfConfigOptions
+	{
+		sfcNormal_11    = 0,
+		sfcScripting_11 = 1,
+		sfcNormal_12	= 2,
+		sfcScripting_12 = 3
+	} sfConfigOptions ;
+
+	[
+		uuid(E2E0FB24-E58F-458f-84E0-6E09D2D51511),
+		helpstring("PocketSOAP Envelope Class")
+	]
+	coclass CoEnvelope
+	{
+		[default] interface ISOAPEnvelope;
+		interface ISOAPNamespaces ;
+		interface ISOAPEnvelope2 ;
+	};
+	
+	[
+		uuid(D76BA06F-ABF3-4c1f-BDC9-1848D4E3CF2B),
+		helpstring("PocketSOAP HTTP Transport Class")
+	]
+	coclass HTTPTransport
+	{
+		[default] interface IHTTPTransportAdv;
+		interface IHTTPTransport ;
+		interface ISOAPTransport ;
+		interface ISOAPTransport2 ;
+		interface ISwATransport ;
+		interface ISOAPTransportTimeout ;
+		interface IHTTPTransportAdv2 ;
+	};
+
+	[
+		uuid(FDC424A3-5917-4DC9-9437-445E057C653B),
+		helpstring("PocketSOAP Node Class")
+	]
+	coclass CoSoapNode
+	{
+		[default] interface ISOAPNode;
+		interface ISOAPNode2 ;
+		interface ISOAPNode3 ;
+		interface ISOAPNode12 ;
+	};
+	
+	[
+		uuid(31D91001-A499-4B2D-81C3-01D6C1D807CC),
+		helpstring("PocketSOAP SerializerFactory Class")
+	]
+	coclass CoSerializerFactory
+	{
+		[default] interface ISerializerFactory;
+		interface ISerializerFactoryConfig;
+		interface ISerializerFactoryConfig2;
+		interface ISerializerFactory2 ;
+		interface ISerializerFactoryPool ;
+		interface ISerializerFactoryPool2 ;
+		interface ISerializerFactoryEx ;
+		interface ISerializerFactoryConfig3 ;
+	};
+
+	[
+		uuid(B592E789-D9D1-4df7-82E8-8CE1B7C2EB1D),
+		helpstring("PocketSOAP Simple Serializer Class")
+	]
+	coclass CoSerializerSimple
+	{
+		interface ISoapSerializer;
+		interface ISoapDeSerializer ;
+		interface ITypesInit;
+		interface ISimpleSoapSerializer ;
+	};
+	[
+		uuid(B222F5CC-03BF-48b9-8DDE-ABD3CD2F3746),
+		helpstring("PocketSOAP Array Serializer Class")
+	]
+	coclass CoSerializerArray
+	{
+		interface ISoapSerializer;
+		interface ITypesInit;
+	};
+	[
+		uuid(73232559-F147-4227-8AB3-A9829F8EFA4B),
+		helpstring("PocketSOAP Array Deserializer Class")
+	]
+	coclass CoDeserializerArray
+	{
+		interface ISoapDeSerializer ;
+		interface ITypesInit;
+	};
+
+	[
+		uuid(B37A49AA-5E39-46DE-8821-0457B8E04915),
+		helpstring("PocketSOAP Node Serializer Class")
+	]
+	coclass CoSerializerNode
+	{
+		interface ISoapSerializer;
+		interface ISoapDeSerializer ;
+		interface ITypesInit;
+		interface ISoapDeSerializerDefaultHandler;
+	};
+
+	[
+		uuid(C72F722F-3507-498a-BD07-1859E4F34F44),
+		helpstring("PocketSOAP Base64 Serializer Class")
+	]
+	coclass CoSerializerB64
+	{
+		interface ISoapSerializer;
+		interface ISoapDeSerializer ;
+		interface ITypesInit;
+		interface ISimpleSoapSerializer ;
+	};
+
+	[
+		uuid(E30300FB-873B-4B3F-90B0-3124E105534F),
+		helpstring("PocketSOAP Date Serializer Class")
+	]
+	coclass CoSerializerDate
+	{
+		interface ISoapSerializer;
+		interface ISoapDeSerializer ;
+		interface ITypesInit;
+		interface ISimpleSoapSerializer ;
+	};
+
+	[
+		uuid(8D6E70D8-88B1-4946-BD1F-1B40E08400A9),
+		helpstring("PocketSOAP PropertyBag Serializer Class")
+	]
+	coclass CoSerializerPB
+	{
+		interface ISoapSerializer;
+		interface ISoapDeSerializer ;
+		interface ITypesInit;
+	};
+
+	[
+		uuid(03A14C6C-E848-4f53-9C5B-6C18E4E4054E),
+		helpstring("PocketSOAP Boolean Serializer Class")
+	]
+	coclass CoSerializerBoolean
+	{
+		interface ISoapSerializer;
+		interface ISoapDeSerializer ;
+		interface ISimpleSoapSerializer ;
+	};
+
+
+	typedef [public, v1_enum] enum pocketSOAPErrors
+	{
+		[helpstring("Received a SOAP Fault from the Server")]					
+		E_SOAPFAULT			= MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4201),
+
+		[helpstring("The SOAP Fault message is missing a faultcode element")]	
+		E_NOFAULTCODE		= MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4202),
+
+		[helpstring("The SOAP Fault message is missing a faultstring element")] 
+		E_NOFAULTSTRING		= MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4203),
+
+		[helpstring("The SOAP Header must be understood, and we don't uderstand it")] 
+		E_DONT_UNDERSTAND	= MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4204),
+
+		[helpstring("Attempt to set position outside of valid range for array")]
+		E_INVALID_ARRAY_POS = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4210),
+
+		[helpstring("Invalid format for array Co-ordinates missing expected [")]
+		E_ARRAY_COORD_FORMAT= MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4211),
+
+		[helpstring("Unable to locate suitable de-serializer for Xml Type")]
+		E_NO_DESERIALIZER   = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4220),
+
+		[helpstring("Unable to locate suitable serializer for Com Type")]
+		E_NO_SERIALIZER     = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4230),
+
+		[helpstring("Can only serialize simple types to attribute values")]
+		E_ATTR_SIMPLE_ONLY  = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4231),
+
+		[helpstring("Deserializer does not support deserializing simple types")]
+		E_DESER_NO_SIMPLE   = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4232),
+
+		[helpstring("Error from parser")]
+		E_PARSE_ERROR       = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4240),
+
+		[helpstring("Unknown primary schema specified")]
+		E_UNKNOWN_PRIMARYSCHEMA = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4250),
+
+		[helpstring("Invalid lexical representation of type")]
+		E_INVALID_LEX_REP   = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4260)
+
+	} pocketSOAPErrors ;
+
+	typedef [public, v1_enum] enum pocketSOAPHttpErrors
+	{
+		[helpstring("An SSL related failure")]					
+		E_SSL_FAILURE		= MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4301),
+
+		[helpstring("An error occurred whilst compressing the request")]
+		E_DEFLATE_FAILURE 	= MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4302),
+
+		[helpstring("An error occurred whilst un-compressing the response")]
+		E_INFLATE_FAILURE 	= MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x4303)
+
+	} pocketSOAPHttpErrors ;
+
+	[
+		uuid(2612DD54-2419-4b72-97A7-998671467174),
+		helpstring("PocketSOAP RawTCP Transport class")
+	]
+	coclass RawTcpTransport
+	{		
+		[default] interface ISOAPTransport;
+		interface ISOAPTransportTimeout ;
+	};
+
+	[
+		uuid(7DEA5180-9CC9-4415-A7FD-B2B28934EA34),
+		helpstring("PocketSOAP SerializerNull Class")
+	]
+	coclass CoSerializerNull
+	{
+		[default] interface ISoapDeSerializer ;
+	};
+
+	[
+		uuid(18FB571B-A3EA-49EF-AB56-755A1D946E75),
+		helpstring("PocketSOAP SerializerHexBin Class")
+	]
+	coclass CoSerializerHexBin
+	{
+		interface ISoapSerializer;
+		interface ISoapDeSerializer ;
+		interface ISimpleSoapSerializer ;
+	};
+
+	[
+		uuid(5A2BDD61-1F23-4D26-9755-53483E53E01B),
+		helpstring("PocketSOAP QName Class")
+	]
+	coclass CoQName
+	{
+		[default] interface IXmlQName;
+	};
+
+	[
+		uuid(AADA0D4D-C243-46fa-919E-1467C268EB63),
+		helpstring("PocketSOAP SerializerQName Class")
+	]
+	coclass CoSerializerQName
+	{
+		interface ISoapSerializer;
+		interface ISoapDeSerializer ;
+		interface ISimpleSoapSerializer ;
+	};
+
+	[
+		uuid(150616B2-DF3C-4683-8DE2-D6A414EC5AF2),
+		helpstring("PocketSOAP InterfaceFinder Class")
+	]
+	coclass CoInterfaceFinder
+	{
+		[default] interface IInterfaceFinder;
+	};
+
+	[
+		uuid(E47F015A-A65F-4d72-A047-AABED585817C),
+		helpstring("PocketSOAP SOAP 1.2 Array Serializer Class")
+	]
+	coclass CoSerializerArray12
+	{
+		interface ISoapSerializer;
+		interface ITypesInit;
+	};
+
+	[
+		uuid(0F888E86-086B-4402-9B79-EBB8FA9EA46F),
+		helpstring("PocketSOAP SOAP 1.2 Array Deserializer Class")
+	]
+	coclass CoDeserializerArray12
+	{
+		interface ISoapDeSerializer ;
+		interface ITypesInit;
+	};
+
+	[
+		uuid(F8AF8269-905E-4dbe-B28C-B30DA00432BE),
+		helpstring("PocketSOAP SOAP 1.2 Envelope Class")
+	]
+	coclass CoEnvelope12
+	{
+		[default] interface ISOAPEnvelope;
+		interface ISOAPNamespaces ;
+		interface ISOAPEnvelope2 ;
+	};
+
+	[
+		uuid(12E55486-6263-45DB-BD95-79646E37BB9E),
+		helpstring("PocketSOAP 1.2 XSD:long Class")
+	]
+	coclass CoXsdLong
+	{
+		[default] interface IxsdLong;
+	};
+
+	[
+		uuid(CD6E6523-3143-4f86-9168-B4D1C7A27DA9),
+		helpstring("PocketSOAP XSD:long Deserializer Class")
+	]
+	coclass CoDeserializerXsdLong
+	{
+		interface ISoapDeSerializer ;
+	};
+
+
+	interface ISerializerOutput2 ;
+	interface ISoapDeSerializerAttributes2 ;
+	interface ISerializerContext2 ;
+	interface IHTTPTransportDisp ;
+	interface ISOAPNodeDisp ;
+};

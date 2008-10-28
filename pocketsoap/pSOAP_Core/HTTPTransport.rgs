@@ -1,0 +1,26 @@
+HKCR
+{
+	PocketSOAP.HTTPTransport.2 = s 'HTTPTransport Class'
+	{
+		CLSID = s '{D76BA06F-ABF3-4c1f-BDC9-1848D4E3CF2B}'
+	}
+	PocketSOAP.HTTPTransport = s 'HTTPTransport Class'
+	{
+		CLSID = s '{D76BA06F-ABF3-4c1f-BDC9-1848D4E3CF2B}'
+		CurVer = s 'PocketSOAP.HTTPTransport.2'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {D76BA06F-ABF3-4c1f-BDC9-1848D4E3CF2B} = s 'HTTPTransport Class'
+		{
+			ProgID = s 'PocketSOAP.HTTPTransport.2'
+			VersionIndependentProgID = s 'PocketSOAP.HTTPTransport'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{1259E267-74E3-4d78-B08E-DB9F9F785E04}'
+		}
+	}
+}

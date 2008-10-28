@@ -1,0 +1,25 @@
+HKCR
+{
+	pocketSOAP.SerializerHexBin.1 = s 'SerializerHexBin Class'
+	{
+		CLSID = s '{18FB571B-A3EA-49EF-AB56-755A1D946E75}'
+	}
+	pocketSOAP.SerializerHexBin = s 'SerializerHexBin Class'
+	{
+		CLSID = s '{18FB571B-A3EA-49EF-AB56-755A1D946E75}'
+		CurVer = s 'pocketSOAP.SerializerHexBin.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {18FB571B-A3EA-49EF-AB56-755A1D946E75} = s 'SerializerHexBin Class'
+		{
+			ProgID = s 'pocketSOAP.SerializerHexBin.1'
+			VersionIndependentProgID = s 'pocketSOAP.SerializerHexBin'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{1259E267-74E3-4d78-B08E-DB9F9F785E04}'
+		}
+	}
+}

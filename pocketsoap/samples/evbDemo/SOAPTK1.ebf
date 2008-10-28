@@ -1,0 +1,480 @@
+VERSION 5.00
+Begin VB.Form frmSOAPTK1 
+   Appearance      =   0  'Flat
+   BackColor       =   &H80000005&
+   Caption         =   "Pocket SOAP Demo"
+   ClientHeight    =   4500
+   ClientLeft      =   60
+   ClientTop       =   840
+   ClientWidth     =   3810
+   ForeColor       =   &H80000008&
+   ScaleHeight     =   4500
+   ScaleWidth      =   3810
+   ShowOK          =   -1  'True
+   SIPBehavior     =   1  'vbSIPAutomatic
+   Begin VBCE.Frame Frame1 
+      Height          =   615
+      Left            =   2040
+      TabIndex        =   12
+      Top             =   2040
+      Width           =   1335
+      _cx             =   2355
+      _cy             =   1085
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Caption         =   "Options"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      ClipControls    =   -1  'True
+      Begin VBCE.CheckBox chkShowXML 
+         Height          =   255
+         Left            =   120
+         TabIndex        =   6
+         Top             =   240
+         Width           =   1095
+         _cx             =   1931
+         _cy             =   450
+         BackColor       =   -2147483643
+         Caption         =   "Show XML"
+         Enabled         =   -1  'True
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   -2147483640
+         Alignment       =   0
+         Value           =   0
+      End
+   End
+   Begin VB.Line Line1 
+      X1              =   0
+      X2              =   3600
+      Y1              =   345
+      Y2              =   345
+   End
+   Begin VBCE.TextBox txtTranslate 
+      Height          =   495
+      Left            =   120
+      TabIndex        =   3
+      Top             =   2160
+      Width           =   1815
+      _cx             =   3201
+      _cy             =   873
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   "Some text to translate"
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   -1  'True
+      PasswordChar    =   ""
+      ScrollBars      =   0
+   End
+   Begin VBCE.ComboBox cmbTranslate 
+      Height          =   300
+      Left            =   120
+      TabIndex        =   2
+      Top             =   1800
+      Width           =   1935
+      List            =   "SOAPTK1.frx":0000
+      ItemData        =   "SOAPTK1.frx":0028
+      _cx             =   3413
+      _cy             =   529
+      BackColor       =   -2147483643
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   "Combo1"
+      IntegralHeight  =   -1  'True
+      Locked          =   0   'False
+      Sorted          =   0   'False
+      Style           =   2
+   End
+   Begin VBCE.Label Label4 
+      Height          =   255
+      Left            =   120
+      TabIndex        =   11
+      Top             =   1440
+      Width           =   2055
+      _cx             =   3625
+      _cy             =   450
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Sample 3. Translate"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.CommandButton btnGetUTC 
+      Height          =   375
+      Left            =   2400
+      TabIndex        =   1
+      Top             =   960
+      Width           =   855
+      _cx             =   1508
+      _cy             =   661
+      BackColor       =   12632256
+      Caption         =   "Get"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Style           =   0
+   End
+   Begin VBCE.Label Label3 
+      Height          =   405
+      Left            =   120
+      TabIndex        =   10
+      Top             =   960
+      Width           =   2175
+      _cx             =   3836
+      _cy             =   714
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Sample 2. Get UTC time from U.S. Naval observatory"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.Label Label10 
+      Height          =   195
+      Left            =   120
+      TabIndex        =   9
+      Top             =   2880
+      Width           =   1095
+      _cx             =   1931
+      _cy             =   344
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Listener URL:"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.CommandButton btnGetServerTime 
+      Height          =   375
+      Left            =   2400
+      TabIndex        =   0
+      Top             =   480
+      Width           =   855
+      _cx             =   1508
+      _cy             =   661
+      BackColor       =   12632256
+      Caption         =   "Get"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Style           =   0
+   End
+   Begin VBCE.CommandButton btnTranslate 
+      Height          =   375
+      Left            =   2400
+      TabIndex        =   4
+      Top             =   1440
+      Width           =   855
+      _cx             =   1508
+      _cy             =   661
+      BackColor       =   12632256
+      Caption         =   "Translate"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Style           =   0
+   End
+   Begin VBCE.Label Label2 
+      Height          =   255
+      Left            =   120
+      TabIndex        =   8
+      Top             =   600
+      Width           =   2055
+      _cx             =   3625
+      _cy             =   450
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Sample 1. Get Server Time"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.TextBox txtListener 
+      Height          =   255
+      Left            =   120
+      TabIndex        =   5
+      Top             =   3120
+      Width           =   3255
+      _cx             =   5741
+      _cy             =   450
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   "http://www.soaptoolkit.com/soapdemo/services.asp"
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   0   'False
+      PasswordChar    =   ""
+      ScrollBars      =   0
+   End
+   Begin VBCE.Label lblHeading 
+      Height          =   255
+      Left            =   120
+      TabIndex        =   7
+      Top             =   75
+      Width           =   3135
+      _cx             =   5530
+      _cy             =   450
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "SOAP Toolkit 1.0 December Demo"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483635
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+End
+Attribute VB_Name = "frmSOAPTK1"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+'******************************************************************************
+' Implements the Pocket SOAP sample form
+'******************************************************************************
+' FileName:  PSOAP.ebf
+' Creator:   Christian Forsberg
+' Created:   2001-03-27
+'******************************************************************************
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+' 00.01.000 011112 SZF Modified for PocketSOAP 1.1
+' 00.02.000 030525 SZF Unhooked from GUI as soaptoolkit.com no longer active
+'******************************************************************************
+Option Explicit
+Private Sub Form_Load()
+
+' Initialization.
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+    
+  ' Fill translate combo
+  cmbTranslate.AddItem "English to French"
+  cmbTranslate.AddItem "English to German"
+  cmbTranslate.AddItem "English to Italian"
+  cmbTranslate.AddItem "English to Portuguese"
+  cmbTranslate.AddItem "English to Spanish"
+  cmbTranslate.AddItem "French to English"
+  cmbTranslate.AddItem "French to Italian"
+  cmbTranslate.AddItem "French to German"
+  cmbTranslate.AddItem "German to English"
+  cmbTranslate.AddItem "German to French"
+  cmbTranslate.AddItem "Italian to English"
+  cmbTranslate.AddItem "Italian to French"
+  cmbTranslate.AddItem "Italian to Spanish"
+  cmbTranslate.AddItem "Portuguese to English"
+  cmbTranslate.AddItem "Spanish to English"
+  cmbTranslate.AddItem "Spanish to Italian"
+  cmbTranslate.ListIndex = 0
+  
+End Sub
+
+Private Sub btnGetServerTime_Click()
+
+' Call SOAP sample ServerTime service/method.
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+  Dim ls As String
+  
+  ' Make SOAP call
+  ls = SOAPCall(txtListener.Text, "GetServerTime", 0, chkShowXML.Value = 1, "")
+  
+  ' Show result
+  MsgBox "ServerTime = " & ls
+
+End Sub
+
+Private Sub btnGetUTC_Click()
+
+' Call SOAP sample UTC service/method.
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+  Dim ls As String
+  
+  ' Make SOAP call
+  ls = SOAPCall(txtListener.Text, "GetUTCTime", 0, chkShowXML.Value = 1, "")
+  
+  ' Show result
+  MsgBox "UTC Time = " & ls
+
+End Sub
+
+Private Sub btnTranslate_Click()
+
+' Call SOAP sample Translate service/method.
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+  Dim lavParam(2, 2) As Variant
+  Dim ls As String
+  Dim i As Integer
+
+  ' Set parameters
+  lavParam(0, 0) = "iLanguage": lavParam(0, 1) = CStr(cmbTranslate.ListIndex)
+  lavParam(1, 0) = "strMessage": lavParam(1, 1) = txtTranslate.Text
+  
+  ' Make SOAP call
+  ls = SOAPCall(txtListener.Text, "Translate", lavParam, chkShowXML.Value = 1, "")
+  
+  ' Show result
+  MsgBox "Translation = " & ls
+  
+End Sub
+
+Private Sub Form_OKClick()
+  
+' Hide this form.
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+  
+  Me.Hide
+
+End Sub
+
+

@@ -1,0 +1,25 @@
+HKCR
+{
+	PocketSOAP.SerializerNull.1 = s 'SerializerNull Class'
+	{
+		CLSID = s '{7DEA5180-9CC9-4415-A7FD-B2B28934EA34}'
+	}
+	PocketSOAP.SerializerNull = s 'SerializerNull Class'
+	{
+		CLSID = s '{7DEA5180-9CC9-4415-A7FD-B2B28934EA34}'
+		CurVer = s 'PocketSOAP.SerializerNull.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {7DEA5180-9CC9-4415-A7FD-B2B28934EA34} = s 'SerializerNull Class'
+		{
+			ProgID = s 'PocketSOAP.SerializerNull.1'
+			VersionIndependentProgID = s 'PocketSOAP.SerializerNull'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{1259E267-74E3-4d78-B08E-DB9F9F785E04}'
+		}
+	}
+}

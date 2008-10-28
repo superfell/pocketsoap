@@ -1,0 +1,299 @@
+VERSION 5.00
+Begin VB.Form Form1 
+   Appearance      =   0  'Flat
+   BackColor       =   &H80000005&
+   Caption         =   "Form1"
+   ClientHeight    =   3615
+   ClientLeft      =   60
+   ClientTop       =   840
+   ClientWidth     =   3480
+   ForeColor       =   &H80000008&
+   ScaleHeight     =   3615
+   ScaleWidth      =   3480
+   ShowOK          =   -1  'True
+   Begin VBCE.ListBox List1 
+      Height          =   2955
+      Left            =   120
+      TabIndex        =   2
+      Top             =   480
+      Width           =   3255
+      List            =   "frmTest.frx":0000
+      ItemData        =   "frmTest.frx":0028
+      _cx             =   5741
+      _cy             =   5212
+      BackColor       =   -2147483643
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Columns         =   0
+      IntegralHeight  =   -1  'True
+      MultiSelect     =   0
+      Sorted          =   0   'False
+   End
+   Begin VBCE.Label lres 
+      Height          =   255
+      Left            =   1080
+      TabIndex        =   1
+      Top             =   120
+      Width           =   2415
+      _cx             =   4260
+      _cy             =   450
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Label1"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.CommandButton frmTest 
+      Height          =   255
+      Left            =   120
+      TabIndex        =   0
+      Top             =   120
+      Width           =   855
+      _cx             =   1508
+      _cy             =   450
+      BackColor       =   12632256
+      Caption         =   "Run"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Style           =   0
+   End
+End
+Attribute VB_Name = "Form1"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Private tc As Integer
+Private fc As Integer
+
+Const RADIO_URL = "http://coldcut.simonathome.com:5335/RPC2"
+Const DOTNET_URL = "http://coldcut.simonathome.com/xmlrpc/echo.ashx"
+Const PROXY_SERVER = "coldcut"
+Const PROXY_PORT = 7070
+
+Private Sub Form_OKClick()
+    App.End
+End Sub
+
+Private Sub logres(ByVal txt As String)
+    List1.AddItem txt
+End Sub
+
+Private Sub frmTest_Click()
+    tc = 0
+    fc = 0
+    List1.Clear
+    lres.ForeColor = vbWhite
+    lres.Caption = "Running ... "
+    Dim f
+    Set f = CreateObject("pocketXMLRPC.Factory")
+
+'    test_radio f
+    test_dotnet f
+    
+    If fc > 0 Then
+        lres.ForeColor = vbRed
+    Else
+        lres.ForeColor = vbGreen
+    End If
+    lres.Caption = fc & " failed out of " & tc & " tests"
+End Sub
+
+Function test_dotnet(ByVal f)
+    logres "Testing against XML-RPC.NET"
+    
+    Dim rpc As Object
+    Set rpc = f.Proxy(DOTNET_URL, "interopEchoTests.", , , PROXY_SERVER, PROXY_PORT)
+
+    testS rpc, "hello World !"
+    testS rpc, ""
+    testS rpc, "<g>"
+    testI rpc, -1
+    testI rpc, 0
+    testI rpc, 42
+    testF rpc, 42.42
+    testB rpc, False
+    testB rpc, True
+    testD rpc, Now
+    testD rpc, DateAdd("m", -7, Now)
+    testSA rpc, Array("a", "b", "c", "d")
+    testIA rpc, Array(1, 2, 3, 4)
+    testFA rpc, Array(42.42, 43.43, 44.44)
+    testBA rpc, Array(False, True, False)
+    testDA rpc, Array(Now, DateAdd("m", -7, Now), Now)
+    testStr rpc, makeStruct(1, 42.42, "foo")
+    testStrA rpc, Array(makeStruct(1, 42.42, "foo"), makeStruct(-1, 0.1, "bar"))
+End Function
+
+Function test_radio(f)
+    logres "Testing against Radio"
+    
+    Dim rpc As Object
+    Set rpc = f.Proxy(RADIO_URL, "interopEchoTests.", , , PROXY_SERVER, PROXY_PORT)
+
+    testS rpc, "hello World !"
+    testS rpc, ""
+    testS rpc, "<g>"
+    testI rpc, -1
+    testI rpc, 0
+    testI rpc, 42
+    testF rpc, 42.42
+    testSA rpc, Array("a", "b", "c", "d")
+    testIA rpc, Array(1, 2, 3, 4)
+    testFA rpc, Array(42.42, 43.43, 44.44)
+    testStr rpc, makeStruct(1, 42.42, "foo")
+    testStrA rpc, Array(makeStruct(1, 42.42, "foo"), makeStruct(-1, 0#, "bar"))
+End Function
+
+Function makeStruct(ByVal i As Long, ByVal f As Double, ByVal s As String)
+    Dim xs As Object
+    Set xs = CreateObject("pocketXMLRPC.Struct")
+    xs.varInt = i
+    xs.varFloat = f
+    xs.varString = s
+    Set makeStruct = xs
+End Function
+
+Function testStr(rpc, s)
+    tc = tc + 1
+    Dim r As Object
+    Set r = rpc.echoStruct(s)
+    If strCheck("echoStruct", r, s) Then
+        logres "echoStruct passed"
+    Else
+        fc = fc + 1
+    End If
+End Function
+
+Function strCheck(tn, r, s) As Boolean
+    If (r.varInt <> s.varInt) Or (r.varFloat <> s.varFloat) Or (r.varString <> s.varString) Then
+        logres tn & " failed"
+        strCheck = False
+    Else
+        strCheck = True
+    End If
+End Function
+
+Function testStrA(rpc, s)
+    tc = tc + 1
+    Dim r, i
+    r = rpc.echoStructArray(s)
+    For i = LBound(r) To UBound(r)
+        If Not strCheck("echoStructArray", r(i), s(i)) Then
+            fc = fc + 1
+            Exit Function
+        End If
+    Next
+    logres "echoStructArray passed"
+End Function
+
+Function testS(rpc, s)
+    check "echoString", rpc.echoString(s), s
+End Function
+
+Function testI(rpc, s)
+    check "echoInteger", rpc.echoInteger(s), s
+End Function
+
+Function testF(rpc, s)
+    check "echoFloat", rpc.echoFloat(s), s
+End Function
+
+Function testB(rpc, s)
+    check "echoBoolean", rpc.echoBoolean(s), s
+End Function
+
+Function testD(rpc, s)
+    check "echoDate", rpc.echoDate(s), s
+End Function
+
+Function testSA(rpc, s)
+    checkArray "echoStringArray", rpc.echoStringArray(s), s
+End Function
+
+Function testIA(rpc, s)
+    checkArray "echoIntegerArray", rpc.echoIntegerArray(s), s
+End Function
+
+Function testFA(rpc, s)
+    checkArray "echoFloatArray", rpc.echoFloatArray(s), s
+End Function
+
+Function testBA(rpc, s)
+    checkArray "echoBoolArray", rpc.echoBooleanArray(s), s
+End Function
+
+Function testDA(rpc, s)
+    checkArray "echoDateArray", rpc.echoDateArray(s), s
+End Function
+
+Function testBin(rpc, s)
+    checkArray "echoBase64", rpc.echoBase64(s), s
+End Function
+
+Function check(tn, r, s)
+    tc = tc + 1
+    If r <> s Then
+        logres tn & " failed got '" & r & "' expecting '" & r & "'"
+        fc = fc + 1
+    Else
+        logres tn & " passed"
+    End If
+End Function
+
+Function checkArray(tn, r, s)
+    Dim i
+    tc = tc + 1
+    If UBound(r) <> UBound(s) Then
+        logres tn & " failed : array bounds mismatch"
+        fc = fc + 1
+    Else
+        For i = LBound(r) To UBound(r)
+            If r(i) <> s(i) Then
+                logres tn & " failed : mismatch at index " & i & " got '" & r(i) & "' expecting '" & s(i) & "'"
+                fc = fc + 1
+                Exit Function
+            End If
+        Next
+    End If
+    logres tn & " passed"
+End Function
+
+Private Sub Form_Load()
+    lres.Caption = ""
+End Sub
+
+

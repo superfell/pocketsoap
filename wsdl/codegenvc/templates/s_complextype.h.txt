@@ -1,0 +1,63 @@
+// <<CLASS>>.h : Declaration of the <<CLASS>>
+// this is a custom serializer class
+
+#ifndef __<<CLASS>>_H_
+#define __<<CLASS>>_H_
+
+#include "resource.h"       // main symbols
+/////////////////////////////////////////////////////////////////////////////
+// <<CLASS>>
+
+class ATL_NO_VTABLE <<CLASS>> : 
+	public CComObjectRootEx<CComMultiThreadModel>,
+	public CComCoClass<<<CLASS>>, &CLSID_<<CLASS>>>,
+	public ISoapSerializer,
+	public ISoapDeSerializer,
+	public ITypesInit 
+{
+public:
+
+DECLARE_REGISTRY_RESOURCEID(IDR_<<CLASS_UPPER>>)
+DECLARE_PROTECT_FINAL_CONSTRUCT()
+
+BEGIN_COM_MAP(<<CLASS>>)
+	COM_INTERFACE_ENTRY(ISoapSerializer)
+	COM_INTERFACE_ENTRY(ISoapDeSerializer)
+	COM_INTERFACE_ENTRY(ITypesInit)
+END_COM_MAP()
+
+// ITypesInit
+	STDMETHOD(Initialize)( /*[in]*/ BSTR xmlType, /*[in]*/ BSTR xmlTypeNamespace, /*[in]*/ VARIANT comType ) ;
+
+// ISoapSerializer
+	STDMETHOD(Serialize)( /*[in]*/ VARIANT * val, /*[in]*/ ISerializerContext * ctx, /*[in]*/ ISerializerOutput * dest ) ;
+
+// ISoapDeSerializer
+	STDMETHOD(Start)        ( /*[in]*/ ISOAPNode * node, /*[in]*/ BSTR ElementName, /*[in]*/ ISoapDeSerializerAttributes * Attributes, /*[in]*/ ISOAPNamespaces * ns ) ;
+	STDMETHOD(Child)		( long id, VARIANT_BOOL ready, /*[in]*/ ISOAPNode * childNode ) ;
+	STDMETHOD(ChildReady)	( long id, /*[in]*/ ISOAPNode * childNode ) ;
+	STDMETHOD(ChildRef)		( BSTR href, /*[in]*/ ISOAPNode * hrefNode ) ;
+	STDMETHOD(Ref)			( BSTR id,	 /*[in]*/ ISOAPNode * idNode ) ;
+	STDMETHOD(Characters)	( /*[in]*/ BSTR charData ) ;
+	STDMETHOD(End)			() ;
+
+private:
+	class RefItem
+	{
+	public:
+		RefItem(BSTR href, ISOAPNode * node) : href(href), node(node) { }
+		CComBSTR	href;
+		CComPtr<ISOAPNode> node;
+	};
+	
+	typedef std::vector<RefItem> RefItems;
+	
+	CComBSTR m_type, m_typeNS, m_comType ;
+	CComPtr<I<<SERIALIZEE>>> 	m_obj;
+	RefItems					m_refs;	
+	
+	void 	 AddXsiType(ISerializerContext * ctx, ISerializerOutput * dest);
+	HRESULT  NewNode(ISOAPNode *nameNode, ISOAPNode *dataNode);
+	HRESULT  NewNode(BSTR name, BSTR namespaceURI, ISOAPNode *node);
+	HRESULT  CreateObject();
+};

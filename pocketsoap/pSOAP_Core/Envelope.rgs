@@ -1,0 +1,48 @@
+HKCR
+{
+	pocketSOAP.Envelope.12 = s 'PocketSOAP SOAP 1.2 Envelope Class'
+	{
+		CLSID = s '{F8AF8269-905E-4dbe-B28C-B30DA00432BE}'
+	}
+	pocketSOAP.Envelope.11 = s 'PocketSOAP SOAP 1.1 Envelope Class'
+	{
+		CLSID = s '{E2E0FB24-E58F-458f-84E0-6E09D2D51511}'
+	}
+	pocketSOAP.Envelope.2 = s 'PocketSOAP SOAP 1.1 Envelope Class'
+	{
+		CLSID = s '{E2E0FB24-E58F-458f-84E0-6E09D2D51511}'
+	}
+	pocketSOAP.Envelope = s 'PocketSOAP SOAP 1.1 Envelope Class'
+	{
+		CLSID = s '{E2E0FB24-E58F-458f-84E0-6E09D2D51511}'
+		CurVer = s 'pocketSOAP.Envelope.11'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {E2E0FB24-E58F-458f-84E0-6E09D2D51511} = s 'PocketSOAP SOAP 1.1 Envelope Class'
+		{
+			ProgID = s 'PocketSOAP.Envelope.11'
+			VersionIndependentProgID = s 'PocketSOAP.Envelope'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{1259E267-74E3-4d78-B08E-DB9F9F785E04}'
+		}
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {F8AF8269-905E-4dbe-B28C-B30DA00432BE} = s 'PocketSOAP SOAP 1.2 Envelope Class'
+		{
+			ProgID = s 'PocketSOAP.Envelope.12'
+			VersionIndependentProgID = s 'PocketSOAP.Envelope'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{1259E267-74E3-4d78-B08E-DB9F9F785E04}'
+		}
+	}
+}

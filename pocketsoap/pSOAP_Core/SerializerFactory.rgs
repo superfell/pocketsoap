@@ -1,0 +1,26 @@
+HKCR
+{
+	pocketSOAP.SerializerFactory.1 = s 'pocketSOAP SerializerFactory Class'
+	{
+		CLSID = s '{31D91001-A499-4B2D-81C3-01D6C1D807CC}'
+	}
+	pocketSOAP.SerializerFactory = s 'pocketSOAP SerializerFactory Class'
+	{
+		CLSID = s '{31D91001-A499-4B2D-81C3-01D6C1D807CC}'
+		CurVer = s 'pocketSOAP.SerializerFactory.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {31D91001-A499-4B2D-81C3-01D6C1D807CC} = s 'pocketSOAP SerializerFactory Class'
+		{
+			ProgID = s 'pocketSOAP.SerializerFactory.1'
+			VersionIndependentProgID = s 'pocketSOAP.SerializerFactory'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{1259E267-74E3-4d78-B08E-DB9F9F785E04}'
+		}
+	}
+}

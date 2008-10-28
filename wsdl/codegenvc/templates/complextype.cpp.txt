@@ -1,0 +1,7 @@
+// <<CLASS>>.cpp : Implementation of <<CLASS>>
+// represents the <<XML_TYPE_NAME>> from the wsdl at <<WSDL_URL>>
+
+#include "stdafx.h"
+#include "<<PROJECT>>.h"
+#include "<<CLASS>>.h"
+

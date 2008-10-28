@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<Title>Data Types</Title>
+<link rel="STYLESHEET" type="text/css" href="styles.css">
+</HEAD>
+<BODY>
+<h1>Data Types</h1>
+
+PocketSOAP supports most of the types from XML Schema, these are mapped to the nearest matching COM type. You can override these mappings via the 
+SerializerFactory.
+
+<table>
+<tr>
+<th>Schema Type</th>
+<th>COM Type</th>
+<th>Notes</th>
+</tr>
+<tr>
+<td>string</td>
+<td>BSTR [VT_BSTR]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>char [VT_I1]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>short</td>
+<td>short [VT_I2]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>int</td>
+<td>long [VT_I4]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>long</td>
+<td>longlong [VT_I8]</td>
+<td>Note that many environments (including VB &amp; VBScript) don't support the VT_I8 type, you'll need to register your own mapping for xsd:long to a type that is supported in your environment</td>
+</tr>
+<tr>
+<td>unsignedByte</td>
+<td>byte [VT_UI1]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>unsignedShort</td>
+<td>unsigned short [VT_UI2]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>unsignedInt</td>
+<td>unsigned long [VT_UI4]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>unsignedLong</td>
+<td>unsigned longlong [VT_UI8]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>decimal</td>
+<td>VT_DECIMAL</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>float</td>
+<td>single [VT_R4]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>double</td>
+<td>double [VT_R8]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>VARIANT_BOOL [VT_BOOL]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>dateTime</td>
+<td>DATE [VT_DATE]</td>
+<td>As COM dates/times have no concept of timezone, pocketSOAP assumes date/times passed in are in UTC, and returns then in UTC.</td>
+</tr>
+<tr>
+<td>date</td>
+<td>DATE [VT_DATE]</td>
+<td></td>
+</tr>
+<tr>
+<td>time</td>
+<td>DATE [VT_DATE]</td>
+<td></td>
+</tr>
+<tr>
+<td>anyType</td>
+<td>VARIANT [VT_VARIANT]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>anyURI</td>
+<td>BSTR [VT_BSTR]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>base64Binary</td>
+<td>Byte Array [VT_UI1 | VT_ARRAY]</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>hexBinary</td>
+<td>Byte Array [VT_UI1 | VT_ARRAY]</td>
+<td>This is only registered for de-serialization for default. Call serializer to map VT_ARRAY | VT_UI1 to use this during serialization instead 
+of the base64Binary type</td>
+</tr>
+<tr>
+<td>QName</td>
+<td>pocketSOAP QName object</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+
+<BR>In addition arrays [single or multidimension] of the above types are supported. 
+
+<BR><BR>If the SerializerFactory is set to scripting mode, then
+the arrays are de-serialized into arrays of VARIANTs of the relevant type. 
+
+<BR><BR>In normal mode, arrays are de-serialized into arrays of the
+specific type, e.g. if you de-serialize an array with arrayType=&quot;xsd:string[3]&quot; then you'll get back an SAFEARRAY(BSTR) of
+the correct size.
+
+<BR><BR>The above Schema types are from the final recommendation for XML Schemas. In addition pocketSOAP supports the equivilent set of types from the 1999 Schmema
+working draft. [A number of servers only use the 1999 schema types, as that was the current version at the time the SOAP 1.1 specification was written]
+
+<BR><BR>During de-serialization any element containing a <b>xsi:nil='1'</b> attribute will be de-serialized to a Variant of type VT_NULL, 
+except for strings, which will be de-serialized to a Variant of type VT_BSTR with a NULL value.
+<BR><BR><BR>
+<h3>Copyright</h3>
+<p>Copyright &copy; Simon Fell, 2000-2004. All rights reserved.<br>
+
+</BODY>
+</HTML>

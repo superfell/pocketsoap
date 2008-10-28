@@ -1,0 +1,26 @@
+HKCR
+{
+	pocketSOAP.InterfaceFinder.1 = s 'pocketSOAP InterfaceFinder Class'
+	{
+		CLSID = s '{150616B2-DF3C-4683-8DE2-D6A414EC5AF2}'
+	}
+	pocketSOAP.InterfaceFinder = s 'pocketSOAP InterfaceFinder Class'
+	{
+		CLSID = s '{150616B2-DF3C-4683-8DE2-D6A414EC5AF2}'
+		CurVer = s 'pocketSOAP.InterfaceFinder.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {150616B2-DF3C-4683-8DE2-D6A414EC5AF2} = s 'pocketSOAP InterfaceFinder Class'
+		{
+			ProgID = s 'pocketSOAP.InterfaceFinder.1'
+			VersionIndependentProgID = s 'pocketSOAP.InterfaceFinder'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{1259E267-74E3-4d78-B08E-DB9F9F785E04}'
+		}
+	}
+}

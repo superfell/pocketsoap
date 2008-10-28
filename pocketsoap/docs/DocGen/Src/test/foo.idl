@@ -1,0 +1,62 @@
+
+//
+// This is a simple IDL file, used to test-drive the DocGen tool.
+//
+
+import "oaidl.idl"; // for wtypes, unknwn, etc
+
+
+//
+// interface IBar
+//
+[
+object, oleautomation, 
+uuid(B82FFC38-66aa-4c95-a570-01840b5ad0f4)
+]
+interface IBar : IUnknown
+   {
+   HRESULT QuackQuack([in] long i, [in] IUnknown* pUnk, [in,out] VARIANT* pVar);
+   };
+
+
+//
+// interface IFoo
+//
+[
+object, oleautomation, 
+uuid(B82FFC37-66aa-4c95-a570-01840b5ad0f4)
+]
+interface IFoo : IUnknown
+   {
+   [propget] HRESULT X([out,retval] VARIANT* pvX);
+   [propput] HRESULT X([in] VARIANT vX);
+   HRESULT Foo([in] BSTR sFoo);
+   HRESULT CreateBar([out,retval] IBar** ppBar);
+   };
+
+
+//
+// library FooLib
+//
+[
+uuid(b084c8bf-d71f-49e7-9dbd-8cac433b6522),
+version(1.0),
+helpstring("AcmeSoft Foo Object Library")
+]
+library FooLib
+   {
+   importlib("stdole32.tlb"); // for IUnknown, GUID, etc
+   
+
+  [ uuid(70eae9fa-ce78-4b47-8316-65e3af97a07d) ]
+   coclass Foo
+      {
+      [default] interface IFoo;
+      };
+
+   [ noncreatable, uuid(e20fc6e3-c79f-4c0a-84cb-b7ef77561028) ]
+   coclass Bar
+      {
+      interface IFoo;
+      };
+   };
