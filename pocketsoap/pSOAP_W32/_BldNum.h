@@ -5,4 +5,4 @@
 #define FILE_VERSION0 (1)
 #define FILE_VERSION1 (4)
 #define FILE_VERSION2 (3)
-#define BUILD_NUMBER (3522)
+#define BUILD_NUMBER (3548)

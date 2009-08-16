@@ -8,8 +8,8 @@
 ; there. If your Windows directory is not C:\windows, change it below.
 ;
 
-!define PS_BUILD  		"1.5.4" 	; Build/Release #.
-!define PS_BUILD_NAME 	"1.5.4"		; Build/Release friendly name
+!define PS_BUILD  		"1.5.5" 	; Build/Release #.
+!define PS_BUILD_NAME 	"1.5.5"		; Build/Release friendly name
 
 !include "MUI.nsh"
 

@@ -242,6 +242,10 @@ SOURCE=..\pSOAP_Core\Namespaces.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\pSOAP_Core\ParseHelpers.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\pSOAP_Core\pSOAP.cpp
 # End Source File
 # Begin Source File
@@ -387,6 +391,10 @@ SOURCE=..\pSOAP_Core\InterfaceFinder.h
 # Begin Source File
 
 SOURCE=..\pSOAP_Core\Namespaces.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\pSOAP_Core\ParseHelpers.h
 # End Source File
 # Begin Source File
 

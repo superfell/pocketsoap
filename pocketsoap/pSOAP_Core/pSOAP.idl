@@ -843,7 +843,7 @@ interface INoMultirefSerializer : IUnknown
 [
 	uuid(1259E267-74E3-4d78-B08E-DB9F9F785E04),
 	version(1.0),
-	helpstring("PocketSOAP 1.5.4 Type Library")
+	helpstring("PocketSOAP 1.5.5 Type Library")
 ]
 library PocketSOAP
 {

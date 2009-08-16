@@ -80,7 +80,7 @@ private:
 	HRESULT extractTime		( const WCHAR * p, SYSTEMTIME &tm, long &offsetMins ) ;
 	HRESULT extractDate		( const WCHAR * p, const WCHAR ** pStopped, SYSTEMTIME &tm ) ;
 
-	HRESULT SystemTimeToVariant ( SYSTEMTIME &tm, long offsetMins, VARIANT * dest ) ;
+	HRESULT SystemTimeToVariantWithOffset ( SYSTEMTIME &tm, long offsetMins, VARIANT * dest ) ;
 };
 
 #endif //__SERIALIZERDATE_H_
