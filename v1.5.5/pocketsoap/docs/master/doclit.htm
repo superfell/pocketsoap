@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<Title>Document/Literal style services</Title>
+<link rel="STYLESHEET" type="text/css" href="styles.css">
+</HEAD>
+<BODY>
+<h1>Document/Literal style services</h1>
+
+<p>There are many different styles of SOAP messages, the two most common today are <b>rpc/encoded</b> and <b>document/literal</b> (These catchy names are
+from the WSDL descriptions of these styles). By default PocketSOAP generates rpc/encoded style messages, this matches what the majority (at the time of press) 
+of Web Services use, however there is a trend towards moving to document/literal services, PocketSOAP also supports this style as well.</p>
+
+<p>There's no formal mapping for document/literal style SOAP between the SOAP messages and programming languages, all it says is that the SOAP message will
+conform to a particular XML Schema, many toolkits provide tools that will generate code for you that maps from the SOAP message to your programming lanuage
+types based on the XML Schema definition. PocketSOAP supports this as well, via the <a href="http://www.pocketsoap.com/wsdl/">WSDL Wizard</a>.</p>
+<p>However, ASP.NET is the primary toolkit that uses document/literal today, and it uses a mapping that is very similar to the rpc/encoded mapping (but different
+enough that if you send an rpc/encoded message, it will ignore the parameters you send and use defaults instead), Its possible to use PocketSOAP to generate
+requests for many document/literal style ASP.NET services without having to use the WSDL wizard, simply specify the methodNamespace URI when creating the
+parameters as well, e.g.</p>
+<pre>dim e
+set e = CreateObject("PocketSOAP.Envelope.2")
+e.EncodingStyle = "" 
+e.SetMethod "add", "http://complex.math.org/"
+e.Parameters.Create "a", 100, e.URI
+e.Parameters.Create "b", 100, e.URI
+
+' ... rest of normal transport code goes here
+</pre>
+<p>For more complex schema definitions, or for document/literal services not using ASP.NET, you can use the WSDL wizard to generate you custom types and 
+serializers for use with PocketSOAP from the WSDL / Schema definitions.
+<BR><BR><BR>
+<h3>Copyright</h3>
+<p>Copyright &copy; Simon Fell, 2000-2004. All rights reserved.<br>
+</BODY>
+</HTML>

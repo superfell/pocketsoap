@@ -1,0 +1,26 @@
+HKCR
+{
+	VcSerializerDemo.DataStruct.1 = s 'DataStruct Class'
+	{
+		CLSID = s '{2F9A4991-9B31-4FDB-9DE9-1766F9472534}'
+	}
+	VcSerializerDemo.DataStruct = s 'DataStruct Class'
+	{
+		CLSID = s '{2F9A4991-9B31-4FDB-9DE9-1766F9472534}'
+		CurVer = s 'VcSerializerDemo.DataStruct.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {2F9A4991-9B31-4FDB-9DE9-1766F9472534} = s 'DataStruct Class'
+		{
+			ProgID = s 'VcSerializerDemo.DataStruct.1'
+			VersionIndependentProgID = s 'VcSerializerDemo.DataStruct'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{D0AEDA84-0892-4B14-9E19-3E8FB2C182F1}'
+		}
+	}
+}

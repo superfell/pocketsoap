@@ -1,0 +1,9 @@
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" 
+	xmlns:enc="http://www.w3.org/2003/05/soap-encoding">
+ <env:Body>
+  <m:alert xmlns:m="http://example.org/alert" env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+   <m:msg enc:id='a'>Pick up Mary at school at 2pm</m:msg>
+   <m:msg enc:ref='a'/>
+  </m:alert>
+ </env:Body>
+</env:Envelope>

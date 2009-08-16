@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<Title>simple soap call</Title><link rel="STYLESHEET" type="text/css" href="styles.css">
+<style type="text/css">
+B.st {
+	color: darkred;
+	font-size:1.1em;
+}
+</style>
+</HEAD>
+<BODY>
+<h1>Your First SOAP call</h1>
+
+This introduces the basics, and shows how to make simple SOAP calls, we'll walk through calling 
+the <a href="http://www.xmethods.com/ve2/ViewListing.po;jsessionid=cfCSxd6XWt3B5BBXW644uK07(QHyMHiRM)?key=uuid:889A05A5-5C03-AD9B-D456-0E54A527EDEE" target="_blank">XMethods stock quote</a> service.
+
+<h2>Information needed</h2>
+Before writing the code to make the call, you'll typically need to collect the following information
+<ul>
+<li>The method name.
+<li>The namespace URI for the method name.
+<li>The parameter names and types.
+<li>The value of the SOAPAction header.
+<li>The URL where the service is running.
+</ul>
+
+<BR>
+Looking at the <a href="http://www.xmethods.com/ve2/ViewListing.po;jsessionid=cfCSxd6XWt3B5BBXW644uK07(QHyMHiRM)?key=uuid:889A05A5-5C03-AD9B-D456-0E54A527EDEE" target="_blank">description page</a> for the stock quote service,
+we can use the <b>View RPC Profile</b> link to find out the we need (go ahead and pop the RPC Profile Window up)
+
+<ul>
+<li>The method name is <b class="st">getQuote</b>
+<li>The namespace URI for the method name is <b class="st">urn:xmethods-delayed-quotes</b>
+<li>There is one parameter called <b class="st">symbol</b> of type <b class="st">string</b>
+<li>The SOAPAction header should be <b class="st">urn:xmethods-delayed-quotes#getQuote</b>
+<li>The URL where the service is running is <b class="st">http://64.124.140.30:9090/soap</b>
+</ul>
+
+<h2>Code</h2>
+Here's a sample to make the above call, this is in VBScript.<BR><BR>
+<pre class="sample">
+' Create a new envelope object, this is the core part of any pocketSOAP usage.
+dim env
+set env = CreateObject("pocketSOAP.Envelope.11")
+
+' set the methodName and methodname Namespace values
+env.SetMethod "getQuote", "urn:xmethods-delayed-quotes"
+
+' create the parameter, we'll ask for a quote for Salesforce.com [their ticker is CRM]
+env.Parameters.Create "symbol", "CRM"
+
+' now, we need to send the SOAP request to the endpoint, so we create a transport object
+dim http
+set http = CreateObject("pocketSOAP.HTTPTransport")
+
+' we need to set the SOAPAction header
+http.SOAPAction = "urn:xmethods-delayed-quotes#getQuote"
+' now we send the request, this takes the envelope object we've been working with
+' and serializes it out over the HTTP request
+http.Send "http://64.124.140.30:9090/soap", env
+
+' now, we need to parse the SOAP message we get as a response
+env.parse http
+
+' and now, extract the return value
+wscript.echo "Quote for CRM = " & env.Parameters.Item(0).Value
+</pre>
+
+Running this code generates this output [obviously the actual value will be different when you run it !]
+<pre class="sample">Microsoft (R) Windows Script Host Version 5.6
+Copyright (C) Microsoft Corporation 1996-2001. All rights reserved.
+
+Quote for CRM = 18.39
+</pre>
+Congratulations, you've just writen your first SOAP client, and not a single angle bracket in sight! 
+Simple eh ?, no messing around with XML, all the grungy stuff is safely hidden away !
+
+<h2>So what did we actually send to the XMethods server ?</h2>
+So, you want to see what the actual SOAP request/response messages look like, there's a couple of ways to do this, the easiest is to use
+a HTTP trace tool. Grab a copy of <a href="http://www.pocketsoap.com/tcptrace/pt.asp" target="_blank">ProxyTrace</a> this is a simple
+HTTP proxy server I wrote that shows the request/response going through it.
+<BR>
+<BR>
+Open the zip file, and drop proxyTrace.exe on your desktop an start it. You be prompted with a dialog box that asks &quot;Listen on Port #&quot;
+leave it on the default of 8080 and hit OK. Now go back to the above code and insert before the call the http.send this line
+<pre class="sample">http.SetProxy "localhost", 8080</pre>
+Re-running the script should give the same results, but now you'll see that proxyTrace has
+an item in the left hand list view. Click on the item in the list, the right hand view will change to show the request [at the top], and the response
+[at the bottom]
+<BR><BR>
+<img src="proxytrace.jpg" width="965" height="638" alt="" border="0">
+
+<BR><BR><BR>
+<h3>Copyright</h3>
+<p>Copyright &copy; Simon Fell, 2000-2004. All rights reserved.<br>
+
+</BODY>
+</HTML>

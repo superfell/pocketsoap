@@ -1,0 +1,9 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/">
+<SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<NS1:echoEnumResponse xmlns:NS1="urn:tests" xmlns:NS2="urn:WSdemo3Intf">
+<return xsi:type="NS2:TEnumTest">etSome</return>
+</NS1:echoEnumResponse>
+</SOAP-ENV:Body></SOAP-ENV:Envelope>
