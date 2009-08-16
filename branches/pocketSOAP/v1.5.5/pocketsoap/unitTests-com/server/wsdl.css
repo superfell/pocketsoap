@@ -1,0 +1,56 @@
+BODY
+{
+	font-family : "MS Sans Serif", Geneva, sans-serif;
+	color : black;
+	background-color : #fefeff;
+	margin:0px;
+}
+.subtext
+{
+	margin:12px;
+}
+H1
+{
+	background-color : #7F0000;
+	color:White;
+	padding:12px;
+	border-bottom-color : Black;
+	border-bottom-style : solid;
+	border-bottom-width : thin;
+}
+H2
+{
+	padding: 3px 3px 3px 12px;
+	border-top-color : black;
+	border-top-style : dotted;
+	border-top-width : 2px;
+	border-bottom-color : black;
+	border-bottom-style : dotted;
+	border-bottom-width : 2px;
+}
+.op
+{
+	margin-left:10%;
+	font-family : monospace;
+}
+.footer
+{
+	margin-top:10px;
+	color : #7F0000;
+	height:2px;
+}
+.footertext
+{
+	font-size:0.8em;
+	text-align: center;
+}
+.opname
+{
+	font-weight:bold;
+	color:navy;
+	background-color:#e0e0e0;
+}
+.ptype
+{
+	font-size:0.9em;
+}

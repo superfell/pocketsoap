@@ -1,0 +1,26 @@
+HKCR
+{
+	pocketSOAP.Attachments.1 = s 'Manager class'
+	{
+		CLSID = s '{C7899023-E487-4268-AE2A-4EC50136DAB3}'
+	}
+	pocketSOAP.Attachments = s 'Manager class'
+	{
+		CLSID = s '{C7899023-E487-4268-AE2A-4EC50136DAB3}'
+		CurVer = s 'pocketSOAP.Attachments.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {C7899023-E487-4268-AE2A-4EC50136DAB3} = s 'Manager class'
+		{
+			ProgID = s 'pocketSOAP.Attachments.1'
+			VersionIndependentProgID = s 'pocketSOAP.Attachments'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{0239859D-D1D7-4FBB-BB86-E5D4E8CBEFE3}'
+		}
+	}
+}

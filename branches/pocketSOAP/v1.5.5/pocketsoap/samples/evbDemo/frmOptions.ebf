@@ -1,0 +1,536 @@
+VERSION 5.00
+Begin VB.Form frmOptions 
+   Appearance      =   0  'Flat
+   BackColor       =   &H80000005&
+   Caption         =   "Options"
+   ClientHeight    =   3615
+   ClientLeft      =   60
+   ClientTop       =   345
+   ClientWidth     =   3480
+   ForeColor       =   &H80000008&
+   LockControls    =   -1  'True
+   ScaleHeight     =   3615
+   ScaleWidth      =   3480
+   ShowOK          =   -1  'True
+   SIPBehavior     =   1  'vbSIPAutomatic
+   Begin VBCE.Label Label9 
+      Height          =   180
+      Left            =   105
+      TabIndex        =   15
+      Top             =   0
+      Width           =   1515
+      _cx             =   2672
+      _cy             =   317
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Proxy Settings"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.Label Label8 
+      Height          =   180
+      Left            =   105
+      TabIndex        =   14
+      Top             =   1890
+      Width           =   1905
+      _cx             =   3360
+      _cy             =   317
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Authentication"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.Label Label7 
+      Height          =   180
+      Left            =   105
+      TabIndex        =   13
+      Top             =   2100
+      Width           =   1905
+      _cx             =   3360
+      _cy             =   317
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Username"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.TextBox txtUsername 
+      Height          =   270
+      Left            =   105
+      TabIndex        =   6
+      Top             =   2340
+      Width           =   1845
+      _cx             =   3254
+      _cy             =   476
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   ""
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   0   'False
+      PasswordChar    =   ""
+      ScrollBars      =   0
+   End
+   Begin VBCE.TextBox txtPassword 
+      Height          =   270
+      Left            =   2055
+      TabIndex        =   7
+      Top             =   2340
+      Width           =   1350
+      _cx             =   2381
+      _cy             =   476
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   ""
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   0   'False
+      PasswordChar    =   "*"
+      ScrollBars      =   0
+   End
+   Begin VBCE.Label Label6 
+      Height          =   180
+      Left            =   2070
+      TabIndex        =   12
+      Top             =   2115
+      Width           =   795
+      _cx             =   1402
+      _cy             =   317
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Password"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.Label Label5 
+      Height          =   180
+      Left            =   90
+      TabIndex        =   11
+      Top             =   1080
+      Width           =   1905
+      _cx             =   3360
+      _cy             =   317
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Proxy Authentication"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.Label Label4 
+      Height          =   180
+      Left            =   2055
+      TabIndex        =   10
+      Top             =   1305
+      Width           =   795
+      _cx             =   1402
+      _cy             =   317
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Password"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.TextBox txtProxyPassword 
+      Height          =   270
+      Left            =   2040
+      TabIndex        =   5
+      Top             =   1530
+      Width           =   1350
+      _cx             =   2381
+      _cy             =   476
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   ""
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   0   'False
+      PasswordChar    =   "*"
+      ScrollBars      =   0
+   End
+   Begin VBCE.TextBox txtProxyUsername 
+      Height          =   270
+      Left            =   90
+      TabIndex        =   4
+      Top             =   1530
+      Width           =   1845
+      _cx             =   3254
+      _cy             =   476
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   ""
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   0   'False
+      PasswordChar    =   ""
+      ScrollBars      =   0
+   End
+   Begin VBCE.Label Label3 
+      Height          =   180
+      Left            =   90
+      TabIndex        =   9
+      Top             =   1290
+      Width           =   1905
+      _cx             =   3360
+      _cy             =   317
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Username"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.Label Label2 
+      Height          =   180
+      Left            =   2610
+      TabIndex        =   8
+      Top             =   480
+      Width           =   795
+      _cx             =   1402
+      _cy             =   317
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Port"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.TextBox txtProxyPort 
+      Height          =   270
+      Left            =   2625
+      TabIndex        =   3
+      Top             =   735
+      Width           =   765
+      _cx             =   1349
+      _cy             =   476
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   ""
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   0   'False
+      PasswordChar    =   ""
+      ScrollBars      =   0
+   End
+   Begin VBCE.TextBox txtProxyServer 
+      Height          =   270
+      Left            =   90
+      TabIndex        =   2
+      Top             =   735
+      Width           =   2430
+      _cx             =   4286
+      _cy             =   476
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   ""
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   0   'False
+      PasswordChar    =   ""
+      ScrollBars      =   0
+   End
+   Begin VBCE.CheckBox chkNoProxy 
+      Height          =   240
+      Left            =   105
+      TabIndex        =   1
+      Top             =   210
+      Width           =   1095
+      _cx             =   1931
+      _cy             =   423
+      BackColor       =   -2147483643
+      Caption         =   "No Proxy"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      Value           =   1
+   End
+   Begin VBCE.Label Label1 
+      Height          =   180
+      Left            =   90
+      TabIndex        =   0
+      Top             =   480
+      Width           =   2310
+      _cx             =   4075
+      _cy             =   317
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Proxy Server (without http://)"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+End
+Attribute VB_Name = "frmOptions"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+'******************************************************************************
+' Implements the Pocket SOAP Transport options form
+'******************************************************************************
+' FileName:  frmOptions.ebf
+' Creator:   Rupak Ganguly
+' Created:   2001-11-01
+'******************************************************************************
+' Version   Date   Who Comment
+' 00.00.000 011101 RG  Created
+'******************************************************************************
+Option Explicit
+
+Private Sub chkNoProxy_Click()
+    Select Case chkNoProxy.Value
+        Case 0: ''' unchecked
+            txtProxyServer.Enabled = True
+            txtProxyPort.Enabled = True
+            txtProxyServer.BackColor = &H80000005 ''' windows back color
+            txtProxyPort.BackColor = &H80000005 ''' windows back color
+        Case 1: ''' checked
+            txtProxyServer.Enabled = False
+            txtProxyPort.Enabled = False
+            txtProxyServer.BackColor = &H80000011 ''' text disabled color
+            txtProxyPort.BackColor = &H80000011 ''' text disabled color
+        Case Else
+            txtProxyServer.Enabled = False
+            txtProxyPort.Enabled = False
+            txtProxyServer.BackColor = &H80000011 ''' text disabled color
+            txtProxyPort.BackColor = &H80000011 ''' text disabled color
+    End Select
+End Sub
+
+Private Sub Form_Load()
+    chkNoProxy_Click
+End Sub
+
+Private Sub Form_OKClick()
+
+    Dim retVal As Integer
+    ''' Update the program with the options selected
+    ''' Proxy Settings
+    If chkNoProxy.Value = 0 Then
+        retVal = pHTTP.SetProxy(txtProxyServer.Text, CInt(txtProxyPort.Text))
+    Else
+        retVal = pHTTP.NoProxy()
+    End If
+    
+    ''' Proxy Authentication
+    If txtProxyUsername.Text <> "" And txtProxyPassword.Text <> "" Then
+        retVal = pHTTP.ProxyAuthentication(txtProxyUsername.Text, txtProxyPassword.Text)
+    End If
+    
+    ''' Authentication
+    If txtUsername.Text <> "" And txtPassword.Text <> "" Then
+        retVal = pHTTP.Authentication(txtUsername.Text, txtPassword.Text)
+    End If
+    
+    Me.Hide
+End Sub

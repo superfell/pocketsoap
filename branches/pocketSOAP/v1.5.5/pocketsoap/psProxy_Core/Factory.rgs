@@ -1,0 +1,26 @@
+HKCR
+{
+	pocketsoap.Factory.1 = s 'Factory Class'
+	{
+		CLSID = s '{344D4164-EF4E-48D7-BE76-13F0B5F13798}'
+	}
+	pocketsoap.Factory = s 'Factory Class'
+	{
+		CLSID = s '{344D4164-EF4E-48D7-BE76-13F0B5F13798}'
+		CurVer = s 'pocketsoap.Factory.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {344D4164-EF4E-48D7-BE76-13F0B5F13798} = s 'Factory Class'
+		{
+			ProgID = s 'pocketsoap.Factory.1'
+			VersionIndependentProgID = s 'pocketsoap.Factory'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{87DFB82A-6F3E-4A15-803B-73A1154D1A7C}'
+		}
+	}
+}

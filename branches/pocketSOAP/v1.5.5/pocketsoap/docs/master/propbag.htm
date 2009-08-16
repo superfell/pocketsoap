@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<Title>Property Bag Serializer</Title><link rel="STYLESHEET" type="text/css" href="styles.css">
+</HEAD>
+<BODY>
+<h1>The PropertyBag Serializer</h1>
+
+PocketSOAP includes a serializer that will work with the standard COM property bag serialization model. This is what VB uses
+when you set a VB class to be Persistable. This make it easy to serialize VB objects to/from SOAP, in many cases this can
+save you from having to write a custom serializer.
+<p>See the <a href="thesamples.htm#propbag">samples page</a>, for the actual VB projects for the this code.</p>
+
+<h2>Sample</h2>
+So, we'll take our trusty address/phone sample from earlier, and use the property bag serializer to go to/from SOAP.
+
+<pre class="sample">
+&lt;address&gt;
+	&lt;number&gt;100&lt;/number&gt;
+	&lt;street&gt;Spear Street&lt;/street&gt;
+	&lt;city&gt;San Francisco&lt;/city&gt;
+	&lt;state&gt;CA&lt;/state&gt;
+	&lt;zip&gt;94107&lt;/zip&gt;
+	&lt;phone&gt;
+		&lt;area&gt;415&lt;/area&gt;
+		&lt;exchange&gt;343&lt;/exchange&gt;
+		&lt;number&gt;3000&lt;/number&gt;
+	&lt;/phone&gt;
+&lt;/address&gt;
+</pre>
+
+So, we have a simple telephone class with 3 data fields, set it to peristable, and write the persistance code to read/write the
+values to the property bag
+<pre class="sample">
+telephone.cls
+Option Explicit
+
+Public area As String
+Public exchange As String
+Public number As String
+
+Private Sub Class_ReadProperties(PropBag As PropertyBag)
+    area = PropBag.ReadProperty("area")
+    exchange = PropBag.ReadProperty("exchange")
+    number = PropBag.ReadProperty("number")
+End Sub
+
+Private Sub Class_WriteProperties(PropBag As PropertyBag)
+    PropBag.WriteProperty "area", area
+    PropBag.WriteProperty "exchange", exchange
+    PropBag.WriteProperty "number", number
+End Sub
+</pre>
+
+We do the same for address
+<pre class="sample">
+address.cls
+Option Explicit
+
+Public number As String
+Public street As String
+Public city As String
+Public state As String
+Public zip As String
+
+Public phone As telephone
+
+Private Sub Class_Initialize()
+    Set phone = New telephone
+End Sub
+
+Private Sub Class_ReadProperties(p As PropertyBag)
+    number = p.ReadProperty("number")
+    street = p.ReadProperty("street")
+    city = p.ReadProperty("city")
+    state = p.ReadProperty("state")
+    zip = p.ReadProperty("zip")
+    Set phone = p.ReadProperty("phone")
+End Sub
+
+Private Sub Class_WriteProperties(p As PropertyBag)
+    p.WriteProperty "number", number
+    p.WriteProperty "street", street
+    p.WriteProperty "city", city
+    p.WriteProperty "state", state
+    p.WriteProperty "zip", zip
+    p.WriteProperty "phone", phone
+End Sub
+</pre>
+
+<p>Note that we don't have to do anything special for the nested phone object.</p>
+
+<p>The default configuration for the serializer factory automatically maps the propertybag serializer to any object that can be serialized with it,
+so we don't need to do anything special for sending one of these.
+<pre class="sample">
+Dim e As CoEnvelope
+Set e = New CoEnvelope
+e.SetMethod "setaddress", "http://soap.address.org/"
+e.Parameters.Create "address", GetAddress
+MsgBox e.Serialize
+
+Private Function GetAddress() As address
+    Dim a As address
+    Set a = New address
+    a.Number = "100"
+    a.street = "Spear Street"
+    a.city = "San Francisco"
+    a.state = "CA"
+    a.zip = "94105"
+    a.phone.area = "415"
+    a.phone.exchange = "343"
+    a.phone.Number = "3000"
+    Set GetAddress = a
+End Function
+</pre>
+
+As the address and phone objects are persistable pocketSOAP will automatically serialize them with the property bag serializer, generating this SOAP message
+<pre class="sample">
+&lt;S:Envelope
+	S:encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+	xmlns:S='http://schemas.xmlsoap.org/soap/envelope/'
+	xmlns:E='http://schemas.xmlsoap.org/soap/encoding/'
+	xmlns:a='http://soap.address.org/'
+	xmlns:b='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:c='http://www.w3.org/2001/XMLSchema'&gt;
+&lt;S:Body&gt;
+ &lt;a:setaddress&gt;
+  &lt;address href='#a'/&gt;
+ &lt;/a:setaddress&gt;
+&lt;phone E:root='0' id='b'&gt;
+ &lt;area b:type='c:string'&gt;415&lt;/area&gt;
+ &lt;exchange b:type='c:string'&gt;343&lt;/exchange&gt;
+ &lt;number b:type='c:string'&gt;3000&lt;/number&gt;
+&lt;/phone&gt;
+&lt;address E:root='0' id='a'&gt;
+ &lt;number b:type='c:string'&gt;100&lt;/number&gt;
+ &lt;street b:type='c:string'&gt;Spear Street&lt;/street&gt;
+ &lt;city b:type='c:string'&gt;San Francisco&lt;/city&gt;
+ &lt;state b:type='c:string'&gt;CA&lt;/state&gt;
+ &lt;zip b:type='c:string'&gt;94105&lt;/zip&gt;
+ &lt;phone href='#b'/&gt;
+&lt;/address&gt;
+&lt;/S:Body&gt;&lt;/S:Envelope&gt;
+</pre>
+
+<p>De-serializing one is only slightly more complicated, we just need to register a propertybag deserializer to handle the particular types. In
+this particular case, there is no xsi:type, so we also register element -> type mappings as well.</p>
+<pre class="sample">
+Dim e As CoEnvelope
+Set e = New CoEnvelope
+Dim sf As ISerializerFactoryConfig
+Set sf = e.SerializerFactory
+sf.ElementMapping "phone", "", "phone", "http://apache.org/"
+sf.ElementMapping "address", "", "address", "http://apache.org/"
+sf.Deserializer "phone", "http://apache.org/", False, "ps.telephone", "pocketSOAP.SerializerPB.1"
+sf.Deserializer "address", "http://apache.org/", False, "ps.address", "pocketSOAP.SerializerPB.1"
+    
+e.SetMethod "setaddress", "http://soap.address.org/"
+e.Parameters.Create "address", GetAddress
+Dim s As String
+s = e.Serialize
+ 
+' parse the soap message we just generated   
+e.Parse s
+Dim a As address
+Set a = e.Parameters.Item(0).Value
+    
+res.Text = a.Number & " " & a.street & "," & vbCrLf
+res.Text = res.Text + a.city & "," & vbCrLf & a.state & " " & a.zip & vbCrLf
+res.Text = res.Text + a.phone.area & " " & a.phone.exchange & " " & a.phone.Number
+</pre>
+
+
+<BR><BR><BR>
+<h3>Copyright</h3>
+<p>Copyright &copy; Simon Fell, 2000-2004. All rights reserved.<br>
+
+</BODY>
+</HTML>

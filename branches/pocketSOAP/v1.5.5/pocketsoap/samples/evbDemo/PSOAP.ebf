@@ -1,0 +1,623 @@
+VERSION 5.00
+Object = "{F7DEA2C9-BA8F-446E-A292-B4840F3BD661}#1.0#0"; "mscemenubar.dll"
+Begin VB.Form frmPSOAP 
+   Appearance      =   0  'Flat
+   BackColor       =   &H80000005&
+   Caption         =   "Pocket SOAP Demo"
+   ClientHeight    =   3990
+   ClientLeft      =   60
+   ClientTop       =   840
+   ClientWidth     =   3810
+   ForeColor       =   &H80000008&
+   ScaleHeight     =   3990
+   ScaleWidth      =   3810
+   SIPBehavior     =   1  'vbSIPAutomatic
+   Begin MenuBarLib.MenuBar mnuBar 
+      Left            =   3000
+      Top             =   3480
+      _cx             =   1296
+      _cy             =   661
+      Enabled         =   -1  'True
+      NewButton       =   0   'False
+   End
+   Begin VBCE.TextBox txtWhoIsText 
+      Height          =   1095
+      Left            =   120
+      TabIndex        =   14
+      Top             =   2280
+      Width           =   3375
+      _cx             =   5953
+      _cy             =   1931
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   ""
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   -1  'True
+      PasswordChar    =   ""
+      ScrollBars      =   3
+   End
+   Begin VBCE.CheckBox chkShowXML 
+      Height          =   255
+      Left            =   2520
+      TabIndex        =   13
+      Top             =   45
+      Width           =   1020
+      _cx             =   1799
+      _cy             =   450
+      BackColor       =   -2147483643
+      Caption         =   "Show XML"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      Value           =   0
+   End
+   Begin VBCE.Label Label7 
+      Height          =   255
+      Left            =   120
+      TabIndex        =   12
+      Top             =   1935
+      Width           =   915
+      _cx             =   1614
+      _cy             =   450
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "4s4c: Whois"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.TextBox txtWhoIs 
+      Height          =   255
+      Left            =   1080
+      TabIndex        =   11
+      Top             =   1920
+      Width           =   1575
+      _cx             =   2778
+      _cy             =   450
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   "pocketsoap.com"
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   0   'False
+      PasswordChar    =   ""
+      ScrollBars      =   0
+   End
+   Begin VBCE.CommandButton btn4s4c 
+      Height          =   255
+      Left            =   2760
+      TabIndex        =   10
+      Top             =   1920
+      Width           =   735
+      _cx             =   1296
+      _cy             =   450
+      BackColor       =   12632256
+      Caption         =   "Get"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Style           =   0
+   End
+   Begin VBCE.Label Label6 
+      Height          =   255
+      Left            =   120
+      TabIndex        =   9
+      Top             =   1215
+      Width           =   885
+      _cx             =   1561
+      _cy             =   450
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "SOAP::Lite:"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.TextBox txtTranslate 
+      Height          =   255
+      Left            =   120
+      TabIndex        =   8
+      Top             =   1560
+      Width           =   2535
+      _cx             =   4471
+      _cy             =   450
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   "Hello world!"
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   0   'False
+      PasswordChar    =   ""
+      ScrollBars      =   0
+   End
+   Begin VBCE.CommandButton btnSoapLite 
+      Height          =   615
+      Left            =   2760
+      TabIndex        =   7
+      Top             =   1200
+      Width           =   735
+      _cx             =   1296
+      _cy             =   1085
+      BackColor       =   12632256
+      Caption         =   "Get"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Style           =   0
+   End
+   Begin VB.Line Line1 
+      X1              =   0
+      X2              =   3600
+      Y1              =   345
+      Y2              =   345
+   End
+   Begin VBCE.ComboBox cmbTranslate 
+      Height          =   300
+      Left            =   1080
+      TabIndex        =   3
+      Top             =   1200
+      Width           =   1575
+      List            =   "PSOAP.frx":0000
+      ItemData        =   "PSOAP.frx":0028
+      _cx             =   2778
+      _cy             =   529
+      BackColor       =   -2147483643
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   ""
+      IntegralHeight  =   -1  'True
+      Locked          =   0   'False
+      Sorted          =   0   'False
+      Style           =   2
+   End
+   Begin VBCE.CommandButton btnMSTK2 
+      Height          =   255
+      Left            =   2760
+      TabIndex        =   2
+      Top             =   480
+      Width           =   735
+      _cx             =   1296
+      _cy             =   450
+      BackColor       =   12632256
+      Caption         =   "Get"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Style           =   0
+   End
+   Begin VBCE.Label Label3 
+      Height          =   165
+      Left            =   120
+      TabIndex        =   6
+      Top             =   480
+      Width           =   2535
+      _cx             =   4471
+      _cy             =   291
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "MS SOAP TK2: VBXML Server Time"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.TextBox txtZipCode 
+      Height          =   255
+      Left            =   1800
+      TabIndex        =   0
+      Top             =   840
+      Width           =   615
+      _cx             =   1085
+      _cy             =   450
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Text            =   "94107"
+      Alignment       =   0
+      HideSelection   =   -1  'True
+      Locked          =   0   'False
+      MaxLength       =   0
+      MultiLine       =   0   'False
+      PasswordChar    =   ""
+      ScrollBars      =   0
+   End
+   Begin VBCE.CommandButton btnApache 
+      Height          =   255
+      Left            =   2760
+      TabIndex        =   1
+      Top             =   840
+      Width           =   735
+      _cx             =   1296
+      _cy             =   450
+      BackColor       =   12632256
+      Caption         =   "Get"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Style           =   0
+   End
+   Begin VBCE.Label Label1 
+      Height          =   285
+      Left            =   120
+      TabIndex        =   5
+      Top             =   855
+      Width           =   1695
+      _cx             =   2990
+      _cy             =   503
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Apache: Temp for Zip:"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483640
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+   Begin VBCE.Label lblHeading 
+      Height          =   255
+      Left            =   120
+      TabIndex        =   4
+      Top             =   75
+      Width           =   1695
+      _cx             =   2990
+      _cy             =   450
+      AutoSize        =   0   'False
+      BackColor       =   -2147483643
+      BackStyle       =   1
+      BorderStyle     =   0
+      Caption         =   "Using Pocket SOAP"
+      Enabled         =   -1  'True
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   -2147483635
+      Alignment       =   0
+      UseMnemonic     =   -1  'True
+      WordWrap        =   0   'False
+   End
+End
+Attribute VB_Name = "frmPSOAP"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+'******************************************************************************
+' Implements the Pocket SOAP sample form
+'******************************************************************************
+' FileName:  PSOAP.ebf
+' Creator:   Christian Forsberg
+' Created:   2001-03-27
+'******************************************************************************
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+' 00.01.000 011112 SZF Modified for PocketSOAP 1.1
+' 00.02.000 030525 SZF Removed additional soaptoolkit.com demo page as its no longer up
+'******************************************************************************
+
+Option Explicit
+
+Private pTranslate As Variant
+
+Private Sub Form_Load()
+' Initialization.
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+  Dim mnuMain As MenuBarMenu
+  
+  ' Add Menu
+  Set mnuMain = mnuBar.Controls.AddMenu("Menu", "mnuMain")
+  mnuMain.Items.Add 1, "mnuMainOptions", "Options..."
+  mnuMain.Items.Add 2, "mnuMainAbout", "About..."
+  mnuMain.Items.Add 3, , , mbrMenuSeparator
+  mnuMain.Items.Add 4, "mnuMainExit", "Exit"
+    
+  ' Fill translate combo
+  cmbTranslate.AddItem "English to French"
+  cmbTranslate.AddItem "English to German"
+  cmbTranslate.AddItem "English to Italian"
+  cmbTranslate.AddItem "English to Portuguese"
+  cmbTranslate.AddItem "English to Spanish"
+  cmbTranslate.AddItem "French to English"
+  cmbTranslate.AddItem "German to English"
+  cmbTranslate.AddItem "Italian to English"
+  cmbTranslate.AddItem "Portuguese to English"
+  cmbTranslate.AddItem "Russian to English"
+  cmbTranslate.AddItem "Spanish to English"
+  cmbTranslate.ListIndex = 0
+  ' Create array
+  pTranslate = Array("en_fr", "en_de", "en_it", "en_pt", "en_es", "fr_en", "de_en", "it_en", "pt_en", "ru_en", "es_en")
+  
+  ' Create Pocket SOAP objects
+  SOAPInit
+
+End Sub
+
+Private Sub Label5_Click()
+
+End Sub
+
+Private Sub mnuBar_MenuClick(ByVal Item As MenuBarLib.Item)
+    
+' Act on menu choice.
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+  
+  ' Act on menu choices
+  Select Case Item.Key
+    Case "mnuMainOptions"
+      frmOptions.Show
+    Case "mnuMainAbout"
+      frmAbout.Show
+    Case "mnuMainExit"
+      App.End
+  End Select
+
+End Sub
+
+Private Sub btnApache_Click()
+
+' Call Apache SOAP sample (Temperature for Zip Code).
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+  Dim lavParam(1, 2) As Variant
+  Dim ls As String
+
+  ' Set parameters
+  lavParam(0, 0) = "zipcode": lavParam(0, 1) = txtZipCode.Text
+  
+  ' Make SOAP call
+  ls = SOAPCall("http://services.xmethods.net:80/soap/servlet/rpcrouter", _
+                "getTemp", lavParam, chkShowXML.Value = 1, _
+                "urn:xmethods-Temperature")
+  
+  ' Show result
+  MsgBox "Temperature = " & ls
+
+End Sub
+
+Private Sub btnMSTK2_Click()
+
+' Call MS SOAP TK2 sample (VBXML.COM Server Time).
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+  Dim ls As String
+  
+  ' Make SOAP call
+  ls = SOAPCall("http://www.vbxml.com/soapworkshop/services/time/time.asp", _
+                "GetServerTime", 0, chkShowXML.Value = 1, _
+                "http://www.vbxml.com/soapworkshop/services/time/")
+  
+  ' Show result
+  MsgBox "VBXML ServerTime = " & ls
+
+End Sub
+
+Private Sub btnDMPerl_Click()
+
+' Call DevelopMentor Perl SOAP sample (Add).
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+  Dim lavParam(2, 2) As Variant
+  Dim ls As String
+  Dim i As Integer
+
+  ' Set parameters
+  lavParam(0, 0) = "a": lavParam(0, 1) = txtA.Text
+  lavParam(1, 0) = "b": lavParam(1, 1) = txtB.Text
+  
+  ' Make SOAP call
+  ls = SOAPCall("http://soapl.develop.com/soap?class=SPTest", _
+                "add", lavParam, chkShowXML.Value = 1, "urn:soap-perl-test")
+  
+  ' Show result
+  MsgBox "Sum = " & ls
+  
+End Sub
+
+Private Sub btnSoapLite_Click()
+
+' Call SOAP::Lite SOAP sample (Translate).
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+  Dim lavParam(2, 2) As Variant
+  Dim ls As String
+  Dim i As Integer
+  
+  ' Set parameters
+  lavParam(0, 0) = "translationmode": lavParam(0, 1) = pTranslate(cmbTranslate.ListIndex)
+  lavParam(1, 0) = "sourcedata": lavParam(1, 1) = txtTranslate.Text
+  
+  ' Make SOAP call
+  ls = SOAPCall("http://services.xmethods.net/perl/soaplite.cgi", _
+                "BabelFish", lavParam, chkShowXML.Value = 1, "urn:xmethodsBabelFish")
+  
+  ' Show result
+  MsgBox "Translated = " & ls
+  
+End Sub
+
+Private Sub btn4s4c_Click()
+
+' Call 4s4c SOAP sample (Whois).
+' Known bugs:
+' Version   Date   Who Comment
+' 00.00.000 010327 CFO Created
+'******************************************************************************
+  Dim lavParam(1, 2) As Variant
+  Dim ls As String
+  Dim i As Integer
+  
+  ' Set parameters
+  lavParam(0, 0) = "name": lavParam(0, 1) = txtWhoIs.Text
+  
+  ' Make SOAP call
+  ls = SOAPCall("http://www.4s4c.com/services/4s4c.ashx", _
+                "whois", lavParam, chkShowXML.Value = 1, "http://www.pocketsoap.com/whois")
+  
+  ' Show result
+  txtWhoIsText.Text = ls
+  
+End Sub

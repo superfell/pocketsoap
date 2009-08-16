@@ -1,0 +1,25 @@
+HKCR
+{
+	pocketSOAP.QName.1 = s 'PocketSOAP QName Class'
+	{
+		CLSID = s '{5A2BDD61-1F23-4D26-9755-53483E53E01B}'
+	}
+	pocketSOAP.QName = s 'PocketSOAP QName Class'
+	{
+		CLSID = s '{5A2BDD61-1F23-4D26-9755-53483E53E01B}'
+		CurVer = s 'pocketSOAP.QName.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {5A2BDD61-1F23-4D26-9755-53483E53E01B} = s 'PocketSOAP QName Class'
+		{
+			ProgID = s 'pocketSOAP.QName.1'
+			VersionIndependentProgID = s 'pocketSOAP.QName'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{1259E267-74E3-4d78-B08E-DB9F9F785E04}'
+		}
+	}
+}
