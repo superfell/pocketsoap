@@ -12,7 +12,7 @@ under the License.
 The Original Code is pocketSOAP.
 
 The Initial Developer of the Original Code is Simon Fell.
-Portions created by Simon Fell are Copyright (C) 2000-2002
+Portions created by Simon Fell are Copyright (C) 2000-2002,2009
 Simon Fell. All Rights Reserved.
 
 Contributor(s):
@@ -21,6 +21,11 @@ Contributor(s):
 #include "stdafx.h"
 #include "PSOAP.h"
 #include "SerializerDate.h"
+#include "ParseHelpers.h"
+
+//
+BOOL VariantTimeToSystemTimeWithMilliseconds (/*input*/ double dVariantTime, /*output*/SYSTEMTIME *st);
+BOOL SystemTimeToVariantTimeWithMilliseconds (/*input*/ SYSTEMTIME st, /*output*/double *dVariantTime);
 
 /////////////////////////////////////////////////////////////////////////////
 // CSerializerDate
@@ -46,18 +51,23 @@ STDMETHODIMP CSerializerDate::Initialize( /*[in]*/ BSTR xmlType, /*[in]*/ BSTR x
 STDMETHODIMP CSerializerDate::Serialize( /*[in]*/ VARIANT * val, /*[in]*/ ISerializerContext * ctx, /*[in]*/ BSTR * dest ) 
 {
 	SYSTEMTIME st ;
-	if(val->vt & VT_BYREF)
-		VariantTimeToSystemTime(*val->pdate, &st) ;
-	else
-		VariantTimeToSystemTime(val->date, &st) ;
+	double dt = val->vt & VT_BYREF ? *val->pdate : val->date;
+	VariantTimeToSystemTimeWithMilliseconds(dt, &st) ;
+
 	WCHAR buff[30] ;
-	if ( wcscmp ( m_type , L"date" ) == 0 )
+	if ( wcscmp ( m_type , L"date" ) == 0 ) {
 		swprintf ( buff, L"%04d-%02d-%02d", st.wYear, st.wMonth, st.wDay ) ;
-	else if ( wcscmp ( m_type, L"time" ) ==0 )
-		swprintf ( buff, L"%02d:%02d:%02dZ", st.wHour, st.wMinute, st.wSecond ) ;
-	else
-		swprintf ( buff, L"%04d-%02d-%02dT%02d:%02d:%02dZ", st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond ) ;
-	
+	} else if ( wcscmp ( m_type, L"time" ) ==0 ) {
+		if (st.wMilliseconds != 0) 
+			swprintf ( buff, L"%02d:%02d:%02d.%03dZ", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds ) ;
+		else
+			swprintf ( buff, L"%02d:%02d:%02dZ", st.wHour, st.wMinute, st.wSecond ) ;
+	} else {
+		if (st.wMilliseconds != 0)
+			swprintf ( buff, L"%04d-%02d-%02dT%02d:%02d:%02d.%03dZ", st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, st.wMilliseconds ) ;
+		else
+			swprintf ( buff, L"%04d-%02d-%02dT%02d:%02d:%02dZ", st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond ) ;
+	}
 	CComBSTR bstrDate(buff) ;
 	*dest = bstrDate.Detach() ;
 
@@ -109,8 +119,9 @@ HRESULT CSerializerDate::extractTime ( const WCHAR * p, SYSTEMTIME &tm, long &of
 		p = wcschr(p,':') ;
 		if ( p && *++p )
 		{
-			tm.wSecond = (unsigned short)_wtoi(p) ;
-			const WCHAR * pOffsetStart = p ;
+			tm.wSecond = (unsigned short)_wtoi(p);
+			tm.wMilliseconds = parseMilliseconds(p);
+			const WCHAR * pOffsetStart = p;
 			p = wcschr(p, '-') ;
 			if ( p )
 				dir =1 ;
@@ -130,13 +141,13 @@ HRESULT CSerializerDate::extractTime ( const WCHAR * p, SYSTEMTIME &tm, long &of
 	return E_INVALID_LEX_REP ;
 }
 
-HRESULT CSerializerDate::SystemTimeToVariant ( SYSTEMTIME &tm, long offsetMins, VARIANT * dest )
+HRESULT CSerializerDate::SystemTimeToVariantWithOffset ( SYSTEMTIME &tm, long offsetMins, VARIANT * dest )
 {
 	CComVariant vdate ;
 	vdate.vt = VT_DATE ;
-	SystemTimeToVariantTime(&tm, &vdate.date) ;
+	SystemTimeToVariantTimeWithMilliseconds(tm, &vdate.date) ;
 	// now apply the offset
-	double offset = offsetMins / ( 24 * 60.0f ) ;
+	double offset = offsetMins / ( 24.0f * 60.0f ) ;
 	vdate.date += offset ;
 	return vdate.Detach(dest) ;
 }
@@ -157,7 +168,7 @@ HRESULT CSerializerDate::parseDateTime( BSTR charData, VARIANT * dest )
 			if ( p && *++p )
 			{
 				if ( SUCCEEDED(extractTime(p, tm, offsetMins )))
-					return SystemTimeToVariant ( tm, offsetMins, dest ) ;
+					return SystemTimeToVariantWithOffset ( tm, offsetMins, dest ) ;
 			}
 		}
 	}
@@ -175,7 +186,7 @@ HRESULT CSerializerDate::parseDate ( BSTR charData, VARIANT * dest )
 	SYSTEMTIME tm = {0} ;
 	const WCHAR * p = 0 ;
 	if(SUCCEEDED(extractDate ( charData, &p, tm )))
-		return SystemTimeToVariant ( tm, 0, dest ) ;
+		return SystemTimeToVariantWithOffset ( tm, 0, dest ) ;
 
 	return AtlReportError ( GetObjectCLSID(), OLESTR("Invalid date string, unable to convert to date"), IID_NULL, E_INVALID_LEX_REP ) ;
 }
@@ -186,7 +197,7 @@ HRESULT CSerializerDate::parseTime ( BSTR charData, VARIANT * dest )
 	long offsetMins ;
 	if(SUCCEEDED(extractTime(charData, tm, offsetMins)))
 	{
-		if(SUCCEEDED(SystemTimeToVariant ( tm, offsetMins, dest )))
+		if(SUCCEEDED(SystemTimeToVariantWithOffset ( tm, offsetMins, dest )))
 		{
 			dest->date -= (long)(dest->date) ;
 			return S_OK ;
@@ -247,4 +258,79 @@ STDMETHODIMP CSerializerDate::End()
 {
 	m_node.Release();
 	return S_OK ;
+}
+
+// VariantTime <-> SystemTime has trouble with milliseconds
+//		see http://support.microsoft.com/kb/297463
+//
+//
+// variant/system time conversions with millisecond support
+// see http://www.codeproject.com/KB/datetime/SysTimeToVarTimeWMillisec.aspx
+//
+
+#define ONETHOUSANDMILLISECONDS  .0000115740740740
+/*
+A variant time is stored as an 8-byte real value (double), representing a date between January 1, 1753 
+and December 31, 2078,inclusive. The value 2.0 represents January 1, 1900; 3.0 represents January 2, 1900, and so on. 
+Adding 1 to the value increments the date by a day. The fractional part of the value represents the time of day. 
+Therefore, 2.5 represents noon on January 1, 1900; 3.25 represents 6:00 A.M. on January 2, 1900, and so on. 
+so 0.5 represents 12 hours ie 12*60*60 seconds, hence 1 second = .0000115740740740
+*/
+
+BOOL VariantTimeToSystemTimeWithMilliseconds (/*input*/ double dVariantTime, /*output*/SYSTEMTIME *st)
+{
+    BOOL retVal = TRUE;
+
+    double halfsecond = ONETHOUSANDMILLISECONDS / 2.0; 
+    // ONETHOUSANDMILLISECONDS is equal to 0.0000115740740740
+
+    // this takes care of rounding problem with 
+    if(!VariantTimeToSystemTime(dVariantTime - halfsecond, st))
+		return FALSE;
+
+    // extracts the fraction part
+    double fraction = dVariantTime - (int) dVariantTime; 
+
+    double hours; 
+    hours = fraction = (fraction - (int)fraction) * 24;
+
+    double minutes;
+    minutes = (hours - (int)hours) * 60;
+
+    double seconds;
+    seconds = (minutes - (int)minutes) * 60;
+
+    double milliseconds;
+    milliseconds = (seconds - (int)seconds) * 1000;
+
+    milliseconds = milliseconds + 0.5; // rounding off millisecond to the 
+                                       // nearest millisecond 
+
+    if (milliseconds < 1.0 || milliseconds > 999.0) //Fractional 
+                          // calculations may yield in results like
+        milliseconds = 0; // 0.00001 or 999.9999 which should actually 
+                          // be zero (slightly above or below limits 
+                          // are actually zero)
+    if (milliseconds) 
+        st->wMilliseconds = (WORD) milliseconds;
+    else  // if there is 0 milliseconds, then we don't have the problem !!
+        retVal = VariantTimeToSystemTime(dVariantTime, st); // 
+
+    return retVal;
+}
+
+BOOL SystemTimeToVariantTimeWithMilliseconds (/*input*/ SYSTEMTIME st, /*output*/double *dVariantTime)
+{
+    WORD wMilliSeconds = st.wMilliseconds; // save the milli second information
+
+    st.wMilliseconds = 0; // pass 0 milliseconds to the function and get  
+                          // the converted value without milliseconds
+    double dWithoutms;
+    if (!SystemTimeToVariantTime(&st, &dWithoutms))
+		return FALSE;
+
+    // manually convert the millisecond information into variant 
+    // fraction and add it to system converted value
+    *dVariantTime = dWithoutms + (ONETHOUSANDMILLISECONDS * wMilliSeconds / 1000.0);
+    return TRUE;
 }

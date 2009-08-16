@@ -54,8 +54,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,5,4,2917
- PRODUCTVERSION 1,5,4,0
+ FILEVERSION 1,5,5,2819
+ PRODUCTVERSION 1,5,5,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -73,15 +73,15 @@ BEGIN
             VALUE "Comments", "PocketSOAP\0"
             VALUE "CompanyName", "Simon Fell\0"
             VALUE "FileDescription", "SOAP Client for Windows\0"
-            VALUE "FileVersion", "1, 5, 4, 2917\0"
+            VALUE "FileVersion", "1, 5, 5, 2819\0"
             VALUE "InternalName", "PSOAP\0"
-            VALUE "LegalCopyright", "Copyright © 2000-2006 Simon Fell\0"
+            VALUE "LegalCopyright", "Copyright © 2000-2009 Simon Fell\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OLESelfRegister", "\0"
             VALUE "OriginalFilename", "PSOAP32.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "PocketSOAP\0"
-            VALUE "ProductVersion", "1, 5, 4, 0\0"
+            VALUE "ProductVersion", "1, 5, 5, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END

@@ -613,7 +613,9 @@ DEP_CPP_COPYH=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\copyHelpers.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -639,7 +641,9 @@ DEP_CPP_COPYH=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\copyHelpers.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -651,7 +655,9 @@ DEP_CPP_COPYH=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\copyHelpers.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -663,7 +669,9 @@ DEP_CPP_COPYH=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\copyHelpers.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -799,9 +807,11 @@ DEP_CPP_ENVEL=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\EnvWriter.h"\
 	"..\pSOAP_Core\expatpp.h"\
@@ -851,9 +861,11 @@ DEP_CPP_ENVEL=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\EnvWriter.h"\
 	"..\pSOAP_Core\expatpp.h"\
@@ -876,9 +888,11 @@ DEP_CPP_ENVEL=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\EnvWriter.h"\
 	"..\pSOAP_Core\expatpp.h"\
@@ -901,8 +915,11 @@ DEP_CPP_ENVEL=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\common\stringHelpers.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\EnvWriter.h"\
 	"..\pSOAP_Core\expatpp.h"\
@@ -1053,9 +1070,11 @@ DEP_CPP_ENVWR=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\EnvWriter.h"\
 	"..\pSOAP_Core\expatpp.h"\
@@ -1101,9 +1120,11 @@ DEP_CPP_ENVWR=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\EnvWriter.h"\
 	"..\pSOAP_Core\expatpp.h"\
@@ -1124,9 +1145,11 @@ DEP_CPP_ENVWR=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\EnvWriter.h"\
 	"..\pSOAP_Core\expatpp.h"\
@@ -1147,8 +1170,11 @@ DEP_CPP_ENVWR=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\common\stringHelpers.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\EnvWriter.h"\
 	"..\pSOAP_Core\expatpp.h"\
@@ -1254,7 +1280,9 @@ DEP_CPP_EXPAT=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -1280,7 +1308,9 @@ DEP_CPP_EXPAT=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -1292,7 +1322,9 @@ DEP_CPP_EXPAT=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -1304,7 +1336,9 @@ DEP_CPP_EXPAT=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -1420,8 +1454,10 @@ DEP_CPP_FIXUP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
 	"..\pSOAP_Core\idMgr.h"\
@@ -1462,8 +1498,10 @@ DEP_CPP_FIXUP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
 	"..\pSOAP_Core\idMgr.h"\
@@ -1482,8 +1520,10 @@ DEP_CPP_FIXUP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
 	"..\pSOAP_Core\idMgr.h"\
@@ -1502,8 +1542,10 @@ DEP_CPP_FIXUP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
 	"..\pSOAP_Core\idMgr.h"\
@@ -1511,6 +1553,7 @@ DEP_CPP_FIXUP=\
 	"..\pSOAP_Core\psParser.h"\
 	"..\pSOAP_Core\reportErrorImpl.h"\
 	"..\pSOAP_Core\StdAfx.h"\
+	"..\pSOAP_Core\tags.h"\
 	".\pocketpc.h"\
 	".\pSOAP.h"\
 	
@@ -1868,6 +1911,7 @@ DEP_CPP_HTTPT=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
@@ -1903,6 +1947,7 @@ DEP_CPP_HTTPT=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
@@ -1920,6 +1965,7 @@ DEP_CPP_HTTPT=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
@@ -1937,11 +1983,14 @@ DEP_CPP_HTTPT=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\common\stringHelpers.h"\
 	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\HTTPTransport.h"\
 	"..\pSOAP_Core\StdAfx.h"\
+	"..\pSOAP_Core\tags.h"\
 	".\pocketpc.h"\
 	".\pSOAP.h"\
 	
@@ -2034,7 +2083,9 @@ DEP_CPP_INTER=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\InterfaceFinder.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -2062,7 +2113,9 @@ DEP_CPP_INTER=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\InterfaceFinder.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -2075,7 +2128,9 @@ DEP_CPP_INTER=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\InterfaceFinder.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -2088,7 +2143,9 @@ DEP_CPP_INTER=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\InterfaceFinder.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -2193,8 +2250,10 @@ DEP_CPP_NAMES=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\idMgr.h"\
 	"..\pSOAP_Core\Namespaces.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -2227,8 +2286,10 @@ DEP_CPP_NAMES=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\idMgr.h"\
 	"..\pSOAP_Core\Namespaces.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -2243,8 +2304,10 @@ DEP_CPP_NAMES=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\idMgr.h"\
 	"..\pSOAP_Core\Namespaces.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -2259,8 +2322,10 @@ DEP_CPP_NAMES=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\idMgr.h"\
 	"..\pSOAP_Core\Namespaces.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -2283,6 +2348,153 @@ DEP_CPP_NAMES=\
 	"..\pSOAP_Core\tags.h"\
 	".\pocketpc.h"\
 	".\pSOAP.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\pSOAP_Core\ParseHelpers.cpp
+
+!IF  "$(CFG)" == "pSOAP - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_PARSE=\
+	"..\..\3rdparty\dispimpl2.h"\
+	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
+	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
+	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
+	"..\pSOAP_Core\StdAfx.h"\
+	".\pocketpc.h"\
+	
+
+!ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE SH3) Debug"
+
+DEP_CPP_PARSE=\
+	"..\..\3rdparty\dispimpl2.h"\
+	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
+	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
+	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
+	"..\pSOAP_Core\StdAfx.h"\
+	".\pocketpc.h"\
+	
+
+!ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE ARM) Debug"
+
+DEP_CPP_PARSE=\
+	"..\..\3rdparty\dispimpl2.h"\
+	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
+	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
+	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
+	"..\pSOAP_Core\StdAfx.h"\
+	".\pocketpc.h"\
+	
+
+!ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE x86em) Debug"
+
+DEP_CPP_PARSE=\
+	"..\..\3rdparty\dispimpl2.h"\
+	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
+	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
+	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
+	"..\pSOAP_Core\StdAfx.h"\
+	".\pocketpc.h"\
+	
+
+!ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE MIPS) Release MinDependency"
+
+DEP_CPP_PARSE=\
+	"..\..\3rdparty\dispimpl2.h"\
+	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
+	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
+	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
+	"..\pSOAP_Core\StdAfx.h"\
+	".\pocketpc.h"\
+	
+
+!ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE ARM) Release MinDependency"
+
+DEP_CPP_PARSE=\
+	"..\..\3rdparty\dispimpl2.h"\
+	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
+	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
+	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
+	"..\pSOAP_Core\StdAfx.h"\
+	".\pocketpc.h"\
+	
+
+!ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE x86em) Release MinDependency"
+
+DEP_CPP_PARSE=\
+	"..\..\3rdparty\dispimpl2.h"\
+	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
+	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
+	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
+	"..\pSOAP_Core\StdAfx.h"\
+	".\pocketpc.h"\
+	
+
+!ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE SH3) Release MinDependency"
+
+DEP_CPP_PARSE=\
+	"..\..\3rdparty\dispimpl2.h"\
+	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
+	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
+	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
+	"..\pSOAP_Core\StdAfx.h"\
+	".\pocketpc.h"\
+	
+
+!ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE x86) Release MinDependency"
+
+DEP_CPP_PARSE=\
+	"..\..\3rdparty\dispimpl2.h"\
+	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
+	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
+	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
+	"..\pSOAP_Core\StdAfx.h"\
+	".\pocketpc.h"\
+	
+
+!ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE x86) Debug"
+
+DEP_CPP_PARSE=\
+	"..\..\3rdparty\dispimpl2.h"\
+	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
+	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
+	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
+	"..\pSOAP_Core\StdAfx.h"\
+	".\pocketpc.h"\
 	
 
 !ENDIF 
@@ -2354,7 +2566,9 @@ DEP_CPP_POCKE=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
 	
@@ -2380,7 +2594,9 @@ DEP_CPP_POCKE=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
 	
@@ -2392,7 +2608,9 @@ DEP_CPP_POCKE=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
 	
@@ -2592,8 +2810,10 @@ DEP_CPP_PSOAP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
@@ -2619,6 +2839,7 @@ DEP_CPP_PSOAP=\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
 	"..\pSOAP_Core\TransportBase.h"\
+	"..\pSOAP_Core\xsdLong.h"\
 	".\pocketpc.h"\
 	".\pSOAP.h"\
 	".\pSOAP_i.c"\
@@ -2659,6 +2880,7 @@ DEP_CPP_PSOAP=\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
 	"..\pSOAP_Core\TransportBase.h"\
+	"..\pSOAP_Core\xsdLong.h"\
 	".\pocketpc.h"\
 	".\pSOAP.h"\
 	".\pSOAP_i.c"\
@@ -2670,8 +2892,10 @@ DEP_CPP_PSOAP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
@@ -2697,6 +2921,7 @@ DEP_CPP_PSOAP=\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
 	"..\pSOAP_Core\TransportBase.h"\
+	"..\pSOAP_Core\xsdLong.h"\
 	".\pocketpc.h"\
 	".\pSOAP.h"\
 	".\pSOAP_i.c"\
@@ -2708,8 +2933,10 @@ DEP_CPP_PSOAP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
@@ -2735,6 +2962,7 @@ DEP_CPP_PSOAP=\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
 	"..\pSOAP_Core\TransportBase.h"\
+	"..\pSOAP_Core\xsdLong.h"\
 	".\pocketpc.h"\
 	".\pSOAP.h"\
 	".\pSOAP_i.c"\
@@ -2746,8 +2974,10 @@ DEP_CPP_PSOAP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
@@ -2771,7 +3001,9 @@ DEP_CPP_PSOAP=\
 	"..\pSOAP_Core\SerializerSimple.h"\
 	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\StdAfx.h"\
+	"..\pSOAP_Core\tags.h"\
 	"..\pSOAP_Core\TransportBase.h"\
+	"..\pSOAP_Core\xsdLong.h"\
 	".\pocketpc.h"\
 	".\pSOAP.h"\
 	".\pSOAP_i.c"\
@@ -3157,8 +3389,10 @@ DEP_CPP_PSPAR=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
@@ -3205,8 +3439,10 @@ DEP_CPP_PSPAR=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
@@ -3228,8 +3464,10 @@ DEP_CPP_PSPAR=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
@@ -3251,8 +3489,10 @@ DEP_CPP_PSPAR=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\Envelope.h"\
 	"..\pSOAP_Core\expatpp.h"\
 	"..\pSOAP_Core\fixupMgr.h"\
@@ -3364,7 +3604,9 @@ DEP_CPP_QNAME=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\QName.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -3392,7 +3634,9 @@ DEP_CPP_QNAME=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\QName.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -3405,7 +3649,9 @@ DEP_CPP_QNAME=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\QName.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -3418,7 +3664,9 @@ DEP_CPP_QNAME=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\QName.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -3519,8 +3767,10 @@ DEP_CPP_RAWTC=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\rawtcp.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\TransportBase.h"\
@@ -3551,8 +3801,10 @@ DEP_CPP_RAWTC=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\rawtcp.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\TransportBase.h"\
@@ -3566,8 +3818,10 @@ DEP_CPP_RAWTC=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\rawtcp.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\TransportBase.h"\
@@ -3581,8 +3835,10 @@ DEP_CPP_RAWTC=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\rawtcp.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\TransportBase.h"\
@@ -3698,8 +3954,10 @@ DEP_CPP_SERIA=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\copyHelpers.h"\
 	"..\pSOAP_Core\reportErrorImpl.h"\
 	"..\pSOAP_Core\SerializerArray.h"\
@@ -3736,8 +3994,10 @@ DEP_CPP_SERIA=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\copyHelpers.h"\
 	"..\pSOAP_Core\reportErrorImpl.h"\
 	"..\pSOAP_Core\SerializerArray.h"\
@@ -3754,8 +4014,10 @@ DEP_CPP_SERIA=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\copyHelpers.h"\
 	"..\pSOAP_Core\reportErrorImpl.h"\
 	"..\pSOAP_Core\SerializerArray.h"\
@@ -3772,8 +4034,10 @@ DEP_CPP_SERIA=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\copyHelpers.h"\
 	"..\pSOAP_Core\reportErrorImpl.h"\
 	"..\pSOAP_Core\SerializerArray.h"\
@@ -3880,7 +4144,9 @@ DEP_CPP_SERIAL=\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
 	"..\..\Common\Base64.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\serializerb64.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -3910,7 +4176,9 @@ DEP_CPP_SERIAL=\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
 	"..\..\Common\Base64.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\serializerb64.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -3924,7 +4192,9 @@ DEP_CPP_SERIAL=\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
 	"..\..\Common\Base64.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\serializerb64.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -3938,7 +4208,9 @@ DEP_CPP_SERIAL=\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
 	"..\..\Common\Base64.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\serializerb64.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4032,7 +4304,10 @@ DEP_CPP_SERIALI=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
 	"..\pSOAP_Core\SerializerDate.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4048,6 +4323,7 @@ DEP_CPP_SERIALI=\
 	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
 	"..\pSOAP_Core\SerializerDate.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4060,7 +4336,10 @@ DEP_CPP_SERIALI=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
 	"..\pSOAP_Core\SerializerDate.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4073,7 +4352,10 @@ DEP_CPP_SERIALI=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
 	"..\pSOAP_Core\SerializerDate.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4086,7 +4368,10 @@ DEP_CPP_SERIALI=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
+	"..\pSOAP_Core\ParseHelpers.h"\
 	"..\pSOAP_Core\SerializerDate.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4196,11 +4481,14 @@ DEP_CPP_SERIALIZ=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\reportErrorImpl.h"\
 	"..\pSOAP_Core\SerializerFactory.h"\
 	"..\pSOAP_Core\SerializerSimple.h"\
+	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
 	".\pocketpc.h"\
@@ -4233,11 +4521,14 @@ DEP_CPP_SERIALIZ=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\reportErrorImpl.h"\
 	"..\pSOAP_Core\SerializerFactory.h"\
 	"..\pSOAP_Core\SerializerSimple.h"\
+	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
 	".\pocketpc.h"\
@@ -4250,11 +4541,14 @@ DEP_CPP_SERIALIZ=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\reportErrorImpl.h"\
 	"..\pSOAP_Core\SerializerFactory.h"\
 	"..\pSOAP_Core\SerializerSimple.h"\
+	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
 	".\pocketpc.h"\
@@ -4267,11 +4561,14 @@ DEP_CPP_SERIALIZ=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\reportErrorImpl.h"\
 	"..\pSOAP_Core\SerializerFactory.h"\
 	"..\pSOAP_Core\SerializerSimple.h"\
+	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
 	".\pocketpc.h"\
@@ -4368,7 +4665,9 @@ DEP_CPP_SERIALIZE=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerHexBin.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4396,7 +4695,9 @@ DEP_CPP_SERIALIZE=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerHexBin.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4409,7 +4710,9 @@ DEP_CPP_SERIALIZE=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerHexBin.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4422,7 +4725,9 @@ DEP_CPP_SERIALIZE=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerHexBin.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4515,7 +4820,9 @@ DEP_CPP_SERIALIZER=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerNode.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4543,7 +4850,9 @@ DEP_CPP_SERIALIZER=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerNode.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4556,7 +4865,9 @@ DEP_CPP_SERIALIZER=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerNode.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4569,7 +4880,9 @@ DEP_CPP_SERIALIZER=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerNode.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4666,7 +4979,9 @@ DEP_CPP_SERIALIZERN=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerNull.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
@@ -4696,7 +5011,9 @@ DEP_CPP_SERIALIZERN=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerNull.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
@@ -4710,7 +5027,9 @@ DEP_CPP_SERIALIZERN=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerNull.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
@@ -4724,7 +5043,9 @@ DEP_CPP_SERIALIZERN=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerNull.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	"..\pSOAP_Core\tags.h"\
@@ -4819,7 +5140,9 @@ DEP_CPP_SERIALIZERP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerPB.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4847,7 +5170,9 @@ DEP_CPP_SERIALIZERP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerPB.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4860,7 +5185,9 @@ DEP_CPP_SERIALIZERP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerPB.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4873,7 +5200,9 @@ DEP_CPP_SERIALIZERP=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerPB.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4966,7 +5295,9 @@ DEP_CPP_SERIALIZERQ=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerQName.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -4994,7 +5325,9 @@ DEP_CPP_SERIALIZERQ=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerQName.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -5007,7 +5340,9 @@ DEP_CPP_SERIALIZERQ=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerQName.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -5020,7 +5355,9 @@ DEP_CPP_SERIALIZERQ=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerQName.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -5117,8 +5454,10 @@ DEP_CPP_SERIALIZERS=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerSimple.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -5147,8 +5486,10 @@ DEP_CPP_SERIALIZERS=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerSimple.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -5161,8 +5502,10 @@ DEP_CPP_SERIALIZERS=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerSimple.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -5175,8 +5518,10 @@ DEP_CPP_SERIALIZERS=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
 	"..\..\Common\stringBuff.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SerializerSimple.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
@@ -5278,7 +5623,9 @@ DEP_CPP_SOAPN=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\SOAPNodes.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -5310,7 +5657,9 @@ DEP_CPP_SOAPN=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\SOAPNodes.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -5325,7 +5674,9 @@ DEP_CPP_SOAPN=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\SOAPNodes.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -5340,7 +5691,9 @@ DEP_CPP_SOAPN=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\SOAPNodes.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -5441,7 +5794,9 @@ DEP_CPP_SOAPNO=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\SOAPNodes.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -5471,7 +5826,9 @@ DEP_CPP_SOAPNO=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\SOAPNodes.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -5485,7 +5842,9 @@ DEP_CPP_SOAPNO=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\SOAPNodes.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -5499,7 +5858,9 @@ DEP_CPP_SOAPNO=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\SOAPNode.h"\
 	"..\pSOAP_Core\SOAPNodes.h"\
 	"..\pSOAP_Core\StdAfx.h"\
@@ -5590,7 +5951,9 @@ DEP_CPP_STDAF=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
 	
@@ -5616,7 +5979,9 @@ DEP_CPP_STDAF=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
 	
@@ -5628,7 +5993,9 @@ DEP_CPP_STDAF=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
 	
@@ -5640,7 +6007,9 @@ DEP_CPP_STDAF=\
 	"..\..\3rdparty\dispimpl2.h"\
 	"..\..\3rdparty\expat\xmlparse\xmlparse.h"\
 	"..\..\3rdparty\expat\xmltok\xmltok.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\sfDispImpl.h"\
+	"..\..\pocketHTTP\win32\pocketHTTP.h"\
 	"..\pSOAP_Core\StdAfx.h"\
 	".\pocketpc.h"\
 	
@@ -5712,6 +6081,8 @@ NODEP_CPP_STRIN=\
 !ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE MIPS) Release MinDependency"
 
 DEP_CPP_STRIN=\
+	"..\..\Common\ConvertUTF.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
 	
@@ -5734,6 +6105,8 @@ NODEP_CPP_STRIN=\
 !ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE x86em) Release MinDependency"
 
 DEP_CPP_STRIN=\
+	"..\..\Common\ConvertUTF.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
 	
@@ -5744,6 +6117,8 @@ NODEP_CPP_STRIN=\
 !ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE SH3) Release MinDependency"
 
 DEP_CPP_STRIN=\
+	"..\..\Common\ConvertUTF.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
 	
@@ -5754,6 +6129,8 @@ NODEP_CPP_STRIN=\
 !ELSEIF  "$(CFG)" == "pSOAP - Win32 (WCE x86) Release MinDependency"
 
 DEP_CPP_STRIN=\
+	"..\..\Common\ConvertUTF.h"\
+	"..\..\Common\hrtrace.h"\
 	"..\..\Common\stringBuff.h"\
 	"..\..\common\stringHelpers.h"\
 	
@@ -5988,6 +6365,10 @@ SOURCE=..\pSOAP_Core\InterfaceFinder.h
 # Begin Source File
 
 SOURCE=..\pSOAP_Core\Namespaces.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\pSOAP_Core\ParseHelpers.h
 # End Source File
 # Begin Source File
 
