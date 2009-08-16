@@ -1,9 +1,0 @@
-; pocketHTTP.def : Declares the module parameters.
-
-LIBRARY      "pocketHTTP.DLL"
-
-EXPORTS
-	DllCanUnloadNow     PRIVATE
-	DllGetClassObject   PRIVATE
-	DllRegisterServer   PRIVATE
-	DllUnregisterServer	PRIVATE

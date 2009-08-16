@@ -1,1 +1,0 @@
-The DocGen Wizard allows you to generate reference docs for your object models -- it "weaves" together API documentation (provided in an XML file) with API elements defined in the IDL file, to produce a folder full of HTML files.

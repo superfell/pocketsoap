@@ -1,3 +1,0 @@
-<mappings name="interopLab">
-	<mapping name="interopTest2" methodURI='http://soapinterop.org/' progid='soap.ilabimpl' iid='{D4072A77-A4E6-4ff0-BC58-F3CAA5933841}' />
-</mappings>
