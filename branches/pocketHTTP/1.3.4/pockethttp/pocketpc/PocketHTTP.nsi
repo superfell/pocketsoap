@@ -3,13 +3,13 @@
 
 !include "MUI.nsh"
 
-!define PHTTP_BUILD  		"1.3.3" 
+!define PHTTP_BUILD  		"1.3.4"
 
 ; The name of the installer
 Name "PocketHTTP for PocketPC"
 
 ; The file to write
-OutFile "PocketHTTP_ppc_133.exe"
+OutFile "PocketHTTP_ppc_134.exe"
 
 ; do CRC check
 CRCCheck on
