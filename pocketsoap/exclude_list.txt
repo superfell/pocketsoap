@@ -1,8 +1,0 @@
-; exclude_list.txt
-samples/pstemp/pstemp.gxd/*.*
-3rdparty/beepcore-c/*.*
-3rdparty/*.obj
-3rdparty/*.pdb
-3rdparty/*.exp
-3rdparty/*.idb
-3rdparty/*.ilk

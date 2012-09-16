@@ -1,9 +1,0 @@
-<soapenv:Envelope
-xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<soapenv:Body xmlns="urn:com.lmtas.ras.dataservice.service">
-<loginRes xmlns="">
-<teamList>Login Info is here</teamList>
-</loginRes>
-</soapenv:Body></soapenv:Envelope>

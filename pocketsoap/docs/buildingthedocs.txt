@@ -1,7 +1,0 @@
-You'll Need
-
-1) DocGen, unfortuanly this requires Gen<X> which was a comercial product from Developmentor, they stopped selling/supporting it, there was talk of open sourcing it, but nothing has materialized so far.
-2) SED, the standard unix SED utility ported to windows
-3) The HTML Help Workshop see http://msdn.microsoft.com/library/default.asp?url=/library/en-us/htmlhelp/html/vsconwhatis.asp
-4) a lot of paitence and some good luck!.
-
