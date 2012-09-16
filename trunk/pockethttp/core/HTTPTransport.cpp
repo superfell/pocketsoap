@@ -44,7 +44,7 @@ for null m_connection...
 
 static const UINT	DEF_HTTP_PORT  = 80 ;
 static const UINT	DEF_HTTPS_PORT = 443 ;
-const char * const	USER_AGENT_STRING = "PocketHTTP/1.3.2" ;	// todo : get version from VersionInfo
+const char * const	USER_AGENT_STRING = "PocketHTTP/1.3.4" ;	// todo : get version from VersionInfo
 
 const long CHTTPTransport::REQUEST_SIZE_NOT_KNOWN = -1 ;
 
