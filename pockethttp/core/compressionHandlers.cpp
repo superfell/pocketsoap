@@ -178,6 +178,11 @@ HRESULT inflateHandler::Read ( BYTE *pvx, DWORD cb, DWORD * pcbRead )
 	
 	// update the output count
 	*pcbRead = cb - m_stream.avail_out ;
+
+	// we may of done a read which generated no output, so go again
+	if ((cb > 0) && (*pcbRead == 0) && (zlibErr == Z_OK))
+		return inflateHandler::Read(pvx, cb, pcbRead);
+
 	return S_OK ;
 }
 
