@@ -314,6 +314,14 @@ public:
 			{
 				MoveMemory(m_sendBuff, pExtraBuffer->pvBuffer, pExtraBuffer->cbBuffer);
 				m_cbRead = pExtraBuffer->cbBuffer;
+				
+				/* Citing MSDN:
+				 * Sometimes an application will read data from the remote party, attempt 
+				 * to decrypt it by using DecryptMessage (Schannel), and discover that 
+				 * DecryptMessage (Schannel) succeeded but the output buffers are empty. 
+				 * This is normal behavior, and applications must be able to deal with it.
+				 */
+				if (pDataBuffer && pDataBuffer->cbBuffer == 0) continue;
 			}
 			else
 			{
